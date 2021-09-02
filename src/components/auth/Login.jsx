@@ -4,22 +4,33 @@ import userLogin from '../../requests/userLogin';
 
 const Login = ({ open, handleClose, setSessionToken }) => {
     const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState();
     const [password, setPassword] = useState('');
+    const [passwordError, setPasswordError] = useState();
 
     const handleLogin = async (e) => {
         try {
             const { status, json } = await userLogin({
-                user: {
-                    email: email,
-                    password: password
-                }
-            })
-            console.log(json)
-            if(status === 200) {
+                email: email,
+                password: password,
+            });
+            // successful login
+            if (status === 200) {
+                // clear the errors if there are any
+                setEmailError(undefined);
+                setPasswordError(undefined);
+
+                // set the session token, clear the form fields and then close the modal
                 setSessionToken(json.sessionToken);
-                handleClose();
                 setEmail('');
                 setPassword('');
+                handleClose();
+            }
+            // failed login
+            if (status === 409) {
+                // set the errors
+                setEmailError(json.emailMessage);
+                setPasswordError(json.passwordMessage);
             }
         } catch (error) {
             console.log(error);
@@ -56,28 +67,39 @@ const Login = ({ open, handleClose, setSessionToken }) => {
                             width: '800',
                             maxWidth: '100%',
                         },
+                        textAlign: 'center'
                     }}
                     noValidate
                     autocomplete="off"
                 >
-                    <Typography variant="h4" component="h2">
+                    <Typography
+                        variant="h4"
+                        component="h2"
+                        sx={{  mb: 2 }}
+                    >
                         Login
                     </Typography>
                     <div>
                         <TextField
-                            label="email"
+                            label="Email Address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             fullWidth
+                            required
+                            error={emailError !== undefined}
+                            helperText={emailError}
                         />
                     </div>
                     <div>
                         <TextField
-                            label="password"
+                            label="Password"
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             fullWidth
+                            required
+                            error={passwordError !== undefined}
+                            helperText={passwordError}
                         />
                     </div>
                     <div>

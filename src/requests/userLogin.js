@@ -1,7 +1,9 @@
 const userLogin = async (user) => {
             const response = await fetch('http://localhost:3000/user/login', {
                 method: 'POST',
-                body: JSON.stringify(user),
+                body: JSON.stringify({
+                    user: user
+                }),
                 headers: new Headers({
                     'Content-Type': 'application/json',
                 })  

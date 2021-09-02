@@ -1,37 +1,46 @@
 import React, { useState } from 'react'
 import { Modal, Box, TextField, Typography, Button } from '@material-ui/core';
+import userRegister from '../../requests/userRegister';
 
 const Register = ({ open, handleClose, setSessionToken }) => {
     const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState();
     const [username, setUsername] = useState('')
+    const [usernameError, setUsernameError] = useState();
     const [password, setPassword] = useState('');
 
     const handleRegister = async (e) => {
         try {
-            const response = await fetch('http://localhost:3000/user/register', {
-                method: 'POST',
-                body: JSON.stringify({
-                    user: {
-                        email: email,
-                        username: username,
-                        password: password,
-                    },
-                }),
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                })  
+            const { status, json } = await userRegister({
+                email: email,
+                username: username,
+                password: password
             })
-            .then(res => res.json());
-            console.log(response);
-            setSessionToken(response.sessionToken);
-            handleClose();
+            // successful registration
+            if(status === 200) {
+                // clear any existing errors
+                setEmailError(undefined);
+                setUsernameError(undefined);
+
+                // set the session token and clear the form fields and close the modal
+                setSessionToken(json.sessionToken);
+                setEmail('');
+                setUsername('');
+                setPassword('');
+                handleClose();
+            }
+            // failed registration
+            if(status === 409) {
+                // set the errors
+                setEmailError(json.emailMessage);
+                setUsernameError(json.usernameMessage);
+            }
         } catch (error) {
             console.log(error);
         }
     }
     return (
-        <Modal
-        open={open}
+        <Modal open={open}
         onClose={handleClose}
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
@@ -56,6 +65,7 @@ const Register = ({ open, handleClose, setSessionToken }) => {
                     component='form'
                     sx={{
                         '& .MuiTextField-root': { m: 1, width: '800', maxWidth: '100%' },
+                        textAlign: 'center'
                         
                     }}
                     noValidate
@@ -66,23 +76,27 @@ const Register = ({ open, handleClose, setSessionToken }) => {
                     </Typography>
                     <div>
                         <TextField
-                            label='email'
+                            label='Email Address'
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                             fullWidth
+                            error={emailError !== undefined}
+                            helperText={emailError}
                         />
                     </div>
                     <div>
                         <TextField
-                            label='username'
+                            label='Username'
                             value={username}
                             onChange={e => setUsername(e.target.value)}
                             fullWidth
+                            error={usernameError !== undefined}
+                            helperText={usernameError}
                         />
                     </div>
                     <div>
                         <TextField
-                            label='password'
+                            label='Password'
                             type='password'
                             value={password}
                             onChange={e => setPassword(e.target.value)}

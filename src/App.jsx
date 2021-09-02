@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Hello World</h1>
+      <h1>ClickNCook</h1>
       <Login open={loginIsOpen} handleClose={handleLoginClose} setSessionToken={setSessionToken}/>
       <Register open={registerIsOpen} handleClose={handleRegisterClose} setSessionToken={setSessionToken}/>
       <Button variant='contained' onClick={handleLoginOpen}>Login</Button>
