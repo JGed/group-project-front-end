@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "@material-ui/core/styles"
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
+import { Container, Grid } from "@material-ui/core";
 import Register from "../auth/Register";
 import Login from "../auth/Login";
 
