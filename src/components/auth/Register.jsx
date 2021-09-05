@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Modal, Box, TextField, Typography, Button } from '@material-ui/core';
+import { Box, TextField, Typography, Button } from '@material-ui/core';
 import userRegister from '../../requests/userRegister';
 
-const Register = ({ open, handleClose, setSessionToken }) => {
+const Register = ({ closeModal, setSessionToken }) => {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState();
     const [username, setUsername] = useState('')
@@ -27,7 +27,7 @@ const Register = ({ open, handleClose, setSessionToken }) => {
                 setEmail('');
                 setUsername('');
                 setPassword('');
-                handleClose();
+                closeModal();
             }
             // failed registration
             if(status === 409) {
@@ -40,11 +40,6 @@ const Register = ({ open, handleClose, setSessionToken }) => {
         }
     }
     return (
-        <Modal open={open}
-        onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
-        >
             <Box 
                 sx={{
                     position: 'absolute',
@@ -112,9 +107,11 @@ const Register = ({ open, handleClose, setSessionToken }) => {
                             Register
                         </Button>
                     </div>
+                    <div>
+                        <Button variant='contained' fullWidth onClick={closeModal}>Close</Button>
+                    </div>
                 </Box>
             </Box>
-        </Modal>
     )
 }
 

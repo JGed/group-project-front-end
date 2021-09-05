@@ -1,38 +1,84 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Typography, Modal } from '@material-ui/core';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import CreateRecipe from './components/CreateRecipe';
 
 function App() {
-  const [loginIsOpen, setLoginIsOpen] = useState(false);
-  const [registerIsOpen, setRegisterIsOpen] = useState(false);
-  const [sessionToken, setSessionToken] = useState(undefined);
-  const handleLoginOpen = () => {setLoginIsOpen(true)}
-  const handleLoginClose = () => {setLoginIsOpen(false)};
-  const handleRegisterOpen = () => {setRegisterIsOpen(true)}
-  const handleRegisterClose = () => {setRegisterIsOpen(false)};
-  useEffect(() => {
-    const storedToken = localStorage.getItem('sessionToken');
-    if(storedToken !== undefined) {
-      setSessionToken(storedToken);
+
+    const [sessionToken, setSessionToken] = useState(undefined);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalComponent, setModalComponent] = useState();
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem('sessionToken');
+        if (storedToken !== undefined) {
+            setSessionToken(storedToken);
+        }
+    }, []);
+    useEffect(() => {
+        localStorage.setItem('sessionToken', sessionToken);
+    }, [sessionToken]);
+
+    const openModal = () => setModalIsOpen(true);
+    const closeModal = () => setModalIsOpen(false);
+
+    const handleLoginClick = (e) => {
+        setModalComponent('Login');
+        openModal();
+    };
+    const handleRegisterClick = (e) => {
+        setModalComponent('Register');
+        openModal();
+    };
+    const handleLogoutClick = (e) => {
+        setSessionToken(undefined);
+    };
+    const handleCreateRecipeClick = (e) => {
+      setModalComponent('CreateRecipe');
+      openModal();
     }
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('sessionToken', sessionToken)
-    console.log(sessionToken)
-  }, [sessionToken])
-
-  return (
-    <div className="App">
-      <h1>ClickNCook</h1>
-      <Login open={loginIsOpen} handleClose={handleLoginClose} setSessionToken={setSessionToken}/>
-      <Register open={registerIsOpen} handleClose={handleRegisterClose} setSessionToken={setSessionToken}/>
-      <Button variant='contained' onClick={handleLoginOpen}>Login</Button>
-      <Button variant='contained' onClick={handleRegisterOpen}>Register</Button>
-    </div>
-  );
+    const renderModalComponent = (component) => {
+        switch (component) {
+            case 'Login':
+                return <Login closeModal={closeModal} setSessionToken={setSessionToken} />;
+            case 'Register':
+                return <Register closeModal={closeModal} setSessionToken={setSessionToken} />;
+            case 'CreateRecipe':
+                return <CreateRecipe closeModal={closeModal} sessionToken={sessionToken} />
+            default:
+                return <></>;
+        }
+    };
+    return (
+        <div className="App">
+            <h1>ClickNCook</h1>
+            <Modal
+                open={modalIsOpen}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                {
+                  <div>
+                    {renderModalComponent(modalComponent)}
+                  </div>
+                }
+            </Modal>
+            {sessionToken ?
+            <Button variant="contained" onClick={handleLogoutClick}>Logout</Button>
+            :
+            <>
+            <Button variant="contained" onClick={handleLoginClick}>Login</Button>
+            <Button variant="contained" onClick={handleRegisterClick}>Register</Button>
+            </>
+            }
+            {sessionToken ? <Button variant='contained' onClick={handleCreateRecipeClick}>Create Recipe</Button> : <></>}
+            <Typography>
+                You are logged {sessionToken ? 'in' : 'out'}.
+            </Typography>
+        </div>
+    );
 }
 
 export default App;
