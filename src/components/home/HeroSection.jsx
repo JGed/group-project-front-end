@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { styled } from "@material-ui/core/styles"
-import { Container, Grid } from "@material-ui/core";
-import Register from "../auth/Register";
-import Login from "../auth/Login";
-
-const Logo = styled('div')({
-    color: 'black',
-    padding: 8,
-    width: 100,
-    height: 100,
-    marginTop: 10,
-    textAlign: 'center'
-});
+import { Container, Box, Typography } from "@material-ui/core";
+import bgImage from "../../assets/images/hero_background3.jpg";
 
 const HeroSection = (props) => {
   return (
-    <Container maxWidth="false">
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <Logo>ClickNCook</Logo>
-        </Grid>
-        <Grid item xs={6}>
-          <Register />
-          <Login />
-        </Grid>
-      </Grid>
+    <Container
+      maxWidth="false"
+      sx={{
+        minHeight: 500,
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: '50% 20%',
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: 'column'
+      }}
+    >
+      <Box
+        sx={{
+          color: "white",
+          fontFamily: "'Fredoka One', cursive;",
+          fontSize: 70,
+        }}
+      >
+        ClickNCook
+      </Box>
+      <Typography variant="h3">Yummm.....what's clicking?</Typography>
     </Container>
   );
 };

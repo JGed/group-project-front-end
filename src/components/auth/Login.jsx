@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-
-
-const Login = (props) => {
-    return ( <div>
-        
-    </div>  );
-}
- 
-export default Login;
-=======
 import React, { useState } from 'react';
 import { Modal, Box, TextField, Typography, Button } from '@material-ui/core';
 import userLogin from '../../requests/userLogin';
@@ -130,4 +118,4 @@ const Login = ({ open, handleClose, setSessionToken }) => {
 };
 
 export default Login;
->>>>>>> ea225529008d4f571757c80a44984fff4afec32d
+
