@@ -1,19 +1,30 @@
 import { useState } from 'react';
-import { Box, TextField, Button } from '@material-ui/core';
+import { Box, TextField, Button, Switch, FormControlLabel } from '@material-ui/core';
 import createMyRecipe from '../requests/createMyRecipe';
 
 const CreateRecipe = ({ closeModal, sessionToken }) => {
     const [recipe, setRecipe] = useState({
         name: '',
-        description: '',
+        directions: '',
         servings: '',
         cookTime: '',
         photoURL: '',
-        category: ''
+        category: '',
+        isPublic: false
     });
     const [message, setMessage] = useState('');
+    const handleChange = field => e => {
+        console.log(field, e.target.value)
+        console.log(field, e.target.checked)
+        setRecipe({
+            ...recipe,
+            [field]: e.target.value || e.target.checked
+        })
+        console.log(recipe)
+    }
 
     const handleCreateRecipeClick = async (e) => {
+        e.preventDefault();
         try {
             const { status, json } = await createMyRecipe(recipe, sessionToken);
             setMessage(json.message);
@@ -44,6 +55,7 @@ const CreateRecipe = ({ closeModal, sessionToken }) => {
         >
             <Box
                 component="form"
+                onSubmit={handleCreateRecipeClick}
                 sx={{
                     '& .MuiTextField-root': {
                         m: 1,
@@ -59,25 +71,15 @@ const CreateRecipe = ({ closeModal, sessionToken }) => {
                     <TextField
                         label="name"
                         value={recipe.name}
-                        onChange={(e) => setRecipe(curr => {
-                            return {
-                                ...curr, 
-                                name: e.target.value
-                            }
-                        })}
+                        onChange={handleChange('name')}
                         fullWidth
                     />
                 </div>
                 <div>
                     <TextField
-                        label="description"
+                        label="directions"
                         value={recipe.directions}
-                        onChange={(e) => setRecipe(curr => {
-                            return {
-                                ...curr, 
-                                directions: e.target.value
-                            }
-                        })}
+                        onChange={handleChange('directions')}
                         fullWidth
                     />
                 </div>
@@ -85,12 +87,7 @@ const CreateRecipe = ({ closeModal, sessionToken }) => {
                     <TextField
                         label="category"
                         value={recipe.category}
-                        onChange={(e) => setRecipe(curr => {
-                            return {
-                                ...curr, 
-                                category: e.target.value
-                            }
-                        })}
+                        onChange={handleChange('category')}
                         fullWidth
                     />
                 </div>
@@ -98,12 +95,7 @@ const CreateRecipe = ({ closeModal, sessionToken }) => {
                     <TextField
                         label="servings"
                         value={recipe.servings}
-                        onChange={(e) => setRecipe(curr => {
-                            return {
-                                ...curr, 
-                                servings: e.target.value
-                            }
-                        })}
+                        onChange={handleChange('servings')}
                         fullWidth
                     />
                 </div>
@@ -111,12 +103,7 @@ const CreateRecipe = ({ closeModal, sessionToken }) => {
                     <TextField
                         label="cook time"
                         value={recipe.cookTime}
-                        onChange={(e) => setRecipe(curr => {
-                            return {
-                                ...curr, 
-                                cookTime: e.target.value
-                            }
-                        })}
+                        onChange={handleChange('cookTime')}
                         fullWidth
                     />
                 </div>
@@ -124,18 +111,23 @@ const CreateRecipe = ({ closeModal, sessionToken }) => {
                     <TextField
                         label="photo url"
                         value={recipe.photoURL}
-                        onChange={(e) => setRecipe(curr => {
-                            return {
-                                ...curr, 
-                                photoURL: e.target.value
-                            }
-                        })}
+                        onChange={handleChange('photoURL')}
                         fullWidth
                     />
                 </div>
                 <div>
-                    <Button variant='contained' fullWidth onClick={handleCreateRecipeClick}>Create Recipe</Button>
-                    <Button variant='contained' fullWidth onClick={closeModal}>Close</Button>
+                    <FormControlLabel
+                    label='Public'
+                    control={<Switch
+                        name='isPublic'
+                        checked={recipe.isPublic}
+                        onChange={handleChange('isPublic')} 
+                        />}
+                    />
+                </div>
+                <div>
+                    <Button variant='contained' fullWidth type='submit'>Create Recipe</Button>
+                    <Button variant='contained' fullWidth type='button' onClick={closeModal}>Close</Button>
                 </div>
                 {message}
             </Box>

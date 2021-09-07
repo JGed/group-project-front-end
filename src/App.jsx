@@ -24,20 +24,12 @@ function App() {
     const openModal = () => setModalIsOpen(true);
     const closeModal = () => setModalIsOpen(false);
 
-    const handleLoginClick = (e) => {
-        setModalComponent('Login');
-        openModal();
-    };
-    const handleRegisterClick = (e) => {
-        setModalComponent('Register');
-        openModal();
-    };
-    const handleLogoutClick = (e) => {
+    const handleLogout = (e) => {
         setSessionToken(undefined);
     };
-    const handleCreateRecipeClick = (e) => {
-      setModalComponent('CreateRecipe');
-      openModal();
+    const handleClick = name => e => {
+        setModalComponent(name);
+        openModal();
     }
     const renderModalComponent = (component) => {
         switch (component) {
@@ -66,14 +58,14 @@ function App() {
                 }
             </Modal>
             {sessionToken ?
-            <Button variant="contained" onClick={handleLogoutClick}>Logout</Button>
+            <Button variant="contained" onClick={handleLogout}>Logout</Button>
             :
             <>
-            <Button variant="contained" onClick={handleLoginClick}>Login</Button>
-            <Button variant="contained" onClick={handleRegisterClick}>Register</Button>
+            <Button variant="contained" onClick={handleClick('Login')}>Login</Button>
+            <Button variant="contained" onClick={handleClick('Register')}>Register</Button>
             </>
             }
-            {sessionToken ? <Button variant='contained' onClick={handleCreateRecipeClick}>Create Recipe</Button> : <></>}
+            {sessionToken ? <Button variant='contained' onClick={handleClick('CreateRecipe')}>Create Recipe</Button> : <></>}
             <Typography>
                 You are logged {sessionToken ? 'in' : 'out'}.
             </Typography>
