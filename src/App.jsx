@@ -27,10 +27,12 @@ function App() {
     const handleLogout = (e) => {
         setSessionToken(undefined);
     };
+
     const handleClick = name => e => {
         setModalComponent(name);
         openModal();
     }
+
     const renderModalComponent = (component) => {
         switch (component) {
             case 'Login':
@@ -43,6 +45,7 @@ function App() {
                 return <></>;
         }
     };
+
     return (
         <div className="App">
             <h1>ClickNCook</h1>
