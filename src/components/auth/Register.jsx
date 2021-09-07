@@ -101,6 +101,7 @@ const Register = ({ closeModal, setSessionToken }) => {
                     <div>
                         <Button 
                             variant='contained' 
+                            color='secondary'
                             fullWidth
                             onClick={handleRegister}
                         >
@@ -108,7 +109,7 @@ const Register = ({ closeModal, setSessionToken }) => {
                         </Button>
                     </div>
                     <div>
-                        <Button variant='contained' fullWidth onClick={closeModal}>Close</Button>
+                        <Button variant='contained' color='secondary' fullWidth onClick={closeModal}>Close</Button>
                     </div>
                 </Box>
             </Box>

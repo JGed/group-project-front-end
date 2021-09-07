@@ -99,6 +99,7 @@ const Login = ({ closeModal, setSessionToken }) => {
                     <div>
                         <Button
                             variant="contained"
+                            color='secondary'
                             fullWidth
                             onClick={handleLogin}
                         >
@@ -106,7 +107,7 @@ const Login = ({ closeModal, setSessionToken }) => {
                         </Button>
                     </div>
                     <div>
-                        <Button variant='contained' fullWidth onClick={closeModal}>Close</Button>
+                        <Button variant='contained' color='secondary' fullWidth onClick={closeModal}>Close</Button>
                     </div>
                 </Box>
             </Box>

@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Grid, Box, Typography } from "@material-ui/core";
-import globalTheme from "../../assets/styles/globalStyles";
 
 const Footer = (props) => {
   return (
@@ -8,7 +7,7 @@ const Footer = (props) => {
       maxWidth="false"
       sx={{
         height: 100,
-        backgroundColor: globalTheme.palette.neutral.main,
+        backgroundColor: 'neutral.main',
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

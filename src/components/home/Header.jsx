@@ -4,6 +4,7 @@ import Login from "../auth/Login";
 import Register from "../auth/Register";
 import Mascot from "../../assets/images/clickncook_mascot.png"
 import {useSession} from '../../context/sessionContext'
+
 const Header = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalComponent, setModalComponent] = useState();
@@ -62,10 +63,10 @@ const Header = (props) => {
                 </div>
               }
           </Modal>
-          <Button variant="contained" onClick={handleClick('Login')}>
+          <Button variant="contained" color='secondary' onClick={handleClick('Login')}>
             Login
           </Button>
-          <Button variant="contained" onClick={handleClick('Register')}>
+          <Button variant="outlined" color='secondary' onClick={handleClick('Register')}>
             Register
           </Button>
         </Grid>
