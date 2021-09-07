@@ -14,8 +14,6 @@ const CreateRecipe = ({ closeModal, sessionToken }) => {
     });
     const [message, setMessage] = useState('');
     const handleChange = field => e => {
-        console.log(field, e.target.value)
-        console.log(field, e.target.checked)
         setRecipe({
             ...recipe,
             [field]: e.target.value || e.target.checked
@@ -28,12 +26,9 @@ const CreateRecipe = ({ closeModal, sessionToken }) => {
         try {
             const { status, json } = await createMyRecipe(recipe, sessionToken);
             setMessage(json.message);
-            console.log('status: ', status);
-            console.log('json: ', json);
         }
         catch(error) {
             setMessage('Recipe cannot be created at this time.  Please try again later.')
-            console.log(error);
         }
     };
     return (
