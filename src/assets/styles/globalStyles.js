@@ -8,8 +8,6 @@ const globalTheme = createTheme({
       styleOverrides: {
         root: {
           fontSize: "1rem",
-          backgroundColor: "#C20000",
-          color: "white",
           borderRadius: 25,
           paddingLeft: 20,
           paddingRight: 20,
@@ -17,25 +15,31 @@ const globalTheme = createTheme({
           marginRight: 5,
           textTransform: "capitalize",
           boxShadow: "none",
-          maxWidth: 200
+          maxWidth: 200,
         },
       },
     },   
-
   },
   palette: {
     primary: {
+      // 
       main: "#FFFF17",
     },
     secondary: {
       main: "#C20000",
+      light: '#FF4747',
+      dark: '#7A0000'
     },
     tertiary: {
       main: "#34741B",
+      light: '#5AC62F',
+      dark: '#1E4210'
     },
+      // 
     neutral: {
       main: "#DAEBFB",
     },
+      // 
     info: {
       main: "#2B2728",
     },

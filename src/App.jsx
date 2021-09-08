@@ -27,7 +27,7 @@ function App() {
     <ThemeProvider theme={globalTheme}>
     <SessionProvider sessionToken={sessionToken} setSessionToken={setSessionToken}>
       <div>
-        {sessionToken === localStorage.getItem('token') ? <RecipeIndex token={sessionToken}/> : <HomeIndex setSessionToken={setSessionToken}/> }
+        {sessionToken ? <RecipeIndex token={sessionToken}/> : <HomeIndex setSessionToken={setSessionToken}/> }
         <Footer />
       </div>
     </SessionProvider>
