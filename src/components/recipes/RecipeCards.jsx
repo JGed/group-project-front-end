@@ -16,7 +16,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-
+import globalTheme from '../../assets/styles/globalStyles';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
+    transition: globalTheme.transitions.create("transform", {
+      duration: globalTheme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
