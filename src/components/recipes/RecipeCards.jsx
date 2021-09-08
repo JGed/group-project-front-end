@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-<<<<<<< HEAD
-import { makeStyles } from "@mui/styles";
-=======
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
->>>>>>> ce813ba286c4fc4643fdbd3969a3dd18533a6533
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
