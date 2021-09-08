@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Box, TextField, Typography, Button } from '@material-ui/core';
 import userLogin from '../../requests/userLogin';
-
-const Login = ({ closeModal, setSessionToken }) => {
+import { useSession } from '../../context/sessionContext';
+const Login = ({ closeModal }) => {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState();
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState();
+    const { setSessionToken } = useSession();
 
     const handleLogin = async (e) => {
         try {

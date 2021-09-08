@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { Box, TextField, Typography, Button } from '@material-ui/core';
 import userRegister from '../../requests/userRegister';
-
-const Register = ({ closeModal, setSessionToken }) => {
+import { useSession } from '../../context/sessionContext';
+const Register = ({ closeModal }) => {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState();
     const [username, setUsername] = useState('')
     const [usernameError, setUsernameError] = useState();
     const [password, setPassword] = useState('');
-
+    const { setSessionToken } = useSession();
     const handleRegister = async (e) => {
         try {
             const { status, json } = await userRegister({
