@@ -3,11 +3,11 @@ import { Container, Box, Button, Grid, Modal } from "@material-ui/core";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
 import Mascot from "../../assets/images/clickncook_mascot.png"
-import {useSession} from '../../context/sessionContext'
+import { useSession } from '../../context/sessionContext'
+
 const Header = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalComponent, setModalComponent] = useState();
-  const { setSessionToken } = useSession();
 
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
@@ -19,9 +19,9 @@ const Header = (props) => {
   const renderModalComponent = (component) => {
       switch (component) {
           case 'Login':
-              return <Login closeModal={closeModal} setSessionToken={setSessionToken} />;
+              return <Login closeModal={closeModal} />;
           case 'Register':
-              return <Register closeModal={closeModal} setSessionToken={setSessionToken} />;
+              return <Register closeModal={closeModal} />;
           default:
               return <></>;
       }
@@ -62,10 +62,10 @@ const Header = (props) => {
                 </div>
               }
           </Modal>
-          <Button variant="contained" onClick={handleClick('Login')}>
+          <Button variant="contained" color='secondary' onClick={handleClick('Login')}>
             Login
           </Button>
-          <Button variant="contained" onClick={handleClick('Register')}>
+          <Button variant="outlined" color='secondary' onClick={handleClick('Register')}>
             Register
           </Button>
         </Grid>
