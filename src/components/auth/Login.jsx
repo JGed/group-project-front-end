@@ -78,6 +78,7 @@ const Login = ({ closeModal }) => {
                         <TextField
                             label="Email Address"
                             value={email}
+                            color='info'
                             onChange={(e) => setEmail(e.target.value)}
                             fullWidth
                             required
@@ -89,6 +90,7 @@ const Login = ({ closeModal }) => {
                         <TextField
                             label="Password"
                             type="password"
+                            color='info'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             fullWidth
