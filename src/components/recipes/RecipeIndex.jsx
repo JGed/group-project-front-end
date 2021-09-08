@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { Typography, Button, ButtonGroup, Container } from "@material-ui/core";
 import RecipeCards from './RecipeCards';
@@ -24,5 +25,23 @@ const RecipeIndex = () => {
       <RecipeCards />   
     </div>
   );
+=======
+import { Button, Typography } from '@material-ui/core';
+import React, { useState, useEffect } from "react";
+import { useSession } from '../../context/sessionContext';
+
+const RecipeIndex = (props) => {
+  const { setSessionToken } = useSession();
+
+  const handleLogout = e => {
+    setSessionToken(undefined);
+  }
+  return <div>
+    <Typography variant='h1'>
+      This is the RecipeIndex
+    </Typography>
+    <Button color='secondary' variant='contained' onClick={handleLogout} >Logout</Button>
+    </div>;
+>>>>>>> f091995a8bcb0956436449eaf643fedc359cdd98
 };
 export default RecipeIndex;
