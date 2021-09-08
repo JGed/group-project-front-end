@@ -17,7 +17,10 @@ const globalTheme = createTheme({
           marginRight: 5,
           textTransform: "capitalize",
           boxShadow: "none",
-          maxWidth: 200
+          maxWidth: 200,
+          '&:hover': {
+            backgroundColor: '#7A0000',            
+          },
         },
       },
     },   
