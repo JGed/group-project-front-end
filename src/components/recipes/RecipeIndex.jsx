@@ -13,7 +13,7 @@ const RecipeIndex = (props) => {
   }
   return <div>
     <Typography variant='h1'>
-      This is the RecipeIndex
+      ClickNCook
     </Typography>
     <Navbar />
     <Button color='secondary' variant='contained' onClick={handleLogout} >Logout</Button>
