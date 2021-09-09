@@ -24,19 +24,12 @@ const HotRecipesTitle = styled(Box)(({ theme }) => ({
 }));
 
 const HotRecipes = (props) => {
-  
   return (
     <div>
       <Container
         maxWidth="false"
         sx={{
           minHeight: 100,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: 5,
-          marginBottom: 5,
         }}
       >
         <Box>

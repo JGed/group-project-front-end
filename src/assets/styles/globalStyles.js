@@ -4,6 +4,18 @@ const pageFont = "'Archivo', sans-serif";
 
 const globalTheme = createTheme({
   components: {
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 5,
+          marginBottom: 5,
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -18,28 +30,28 @@ const globalTheme = createTheme({
           maxWidth: 200,
         },
       },
-    },   
+    },
   },
   palette: {
     primary: {
-      // 
+      //
       main: "#FFFF17",
     },
     secondary: {
       main: "#C20000",
-      light: '#FF4747',
-      dark: '#7A0000'
+      light: "#FF4747",
+      dark: "#7A0000",
     },
     tertiary: {
       main: "#34741B",
-      light: '#5AC62F',
-      dark: '#1E4210'
+      light: "#5AC62F",
+      dark: "#1E4210",
     },
-      // 
+    //
     neutral: {
       main: "#DAEBFB",
     },
-      // 
+    //
     info: {
       main: "#2B2728",
     },
@@ -62,7 +74,7 @@ const globalTheme = createTheme({
       fontSize: 25,
       fontWeight: 800,
       marginBottom: 20,
-      // color: "white",      
+      // color: "white",
     },
   },
 });
