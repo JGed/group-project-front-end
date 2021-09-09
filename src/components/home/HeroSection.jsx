@@ -10,11 +10,7 @@ const HeroSection = (props) => {
         minHeight: 500,
         backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
-        backgroundPosition: '50% 20%',
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: 'column'
+        backgroundPosition: "50% 20%",
       }}
     >
       <Box
