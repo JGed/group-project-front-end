@@ -1,20 +1,36 @@
 import React, { useState } from "react";
-import { Modal, TextField, Button, Checkbox, green } from "material-ui/core";
-
-const useStyles = makeStyles({
-  field: {
-    marginTop: 20,
-    marginBottom: 20,
-    display: "block",
-  },
-});
+import {
+  Modal,
+  TextField,
+  Button,
+  FormControl,
+  Checkbox,
+  green,
+  Container,
+  InputAdornment,
+  FormControlLabel,
+} from "@material-ui/core";
 
 const RecipeCreate = (props) => {
+  const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [directions, setDirections] = useState("");
   const [cookTime, setCookTime] = useState("");
-  const [servingSize, setServingSize] = useState("");
+  const [servings, setServings] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
+  const [isPublic, setIsPublic] = useState("");
+  const [checked, setChecked] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("http://localhost:3000/recipe", {
@@ -39,46 +55,29 @@ const RecipeCreate = (props) => {
         setName("");
         setDirections("");
         setCookTime("");
-        setServingSize("");
+        setServings("");
+        setPhotoURL("");
+        setIsPublic("");
+        setCategory("");
         props.fetchWorkouts();
       });
   };
-  //   setCurrency(event.target.value);
-  // };
-  // const GreenCheckbox = withStyles({
-  //   root: {
-  //     color: green[400],
-  //     "&$checked": {
-  //       color: green[600],
-  //     },
-  //   },
-  //   checked: {},
-  // })((props) => <Checkbox color="default" {...props} />);
 
   const foodCategories = [
     { value: "Breakfast", label: "Breakfast" },
     { value: "Lunch", label: "Lunch" },
     { value: "Dinner", label: "Dinner" },
   ];
-  // function CheckboxLabels() {
-  //   const [state, setState] = React.useState({
-  //     checkedG: true,
-  //   });
-
-  //   const handleChange = (event) => {
-  //     setState({ ...state, [event.target.name]: event.target.checked });
-  //   };
 
   return (
     <div>
-      <Modal open={open} onClose={handleClose}>
+      <Modal>
         <h2>New Recipe</h2>
-        <form novalidate autoComplete="off" onSubmit={handleSubmit}>
+        <form novalidate autoComplete="off">
           <TextField
             select
             label="Category"
             value={foodCategories}
-            onChange={handleChange}
             SelectProps={{
               native: true,
             }}
@@ -109,7 +108,6 @@ const RecipeCreate = (props) => {
             onChange={(e) => setCookTime(e.target.value)}
             label="Cook Time"
             id="Cook Time"
-            className={classes.field}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">Min</InputAdornment>
@@ -117,10 +115,9 @@ const RecipeCreate = (props) => {
             }}
           />
           <TextField
-            onChange={(e) => setServingSize(e.target.value)}
+            onChange={(e) => setServings(e.target.value)}
             label="Serving Size"
-            id="filled-start-adornment"
-            className={classes.field}
+            id="ServingSize"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">1</InputAdornment>
@@ -128,19 +125,37 @@ const RecipeCreate = (props) => {
             }}
             variant="filled"
           />
-          <FormControlLabel
-            control={
-              <GreenCheckbox
-                checked={state.checkedG}
-                onChange={handleChange}
-                name="publicCheck"
-              />
-            }
+          <Checkbox
+            defaultChecked
+            color="primary"
+            inputProps={{ "aria-label": "secondary checkbox" }}
             label="Make Recipe Public?"
           />
-          <Button variant="contained">Create recipe</Button>
+          <div>
+            //{" "}
+            <Button variant="contained" fullWidth type="submit">
+              Create Recipe
+            </Button>
+            //{" "}
+            <Button
+              variant="contained"
+              fullWidth
+              type="button"
+              onClick={handleClose}
+            >
+              Close
+            </Button>
+          </div>
         </form>
       </Modal>
+      <Button
+        type="button"
+        color="primary"
+        variant="contained"
+        onClick={handleOpen}
+      >
+        Add a recipe
+      </Button>
     </div>
   );
 };
