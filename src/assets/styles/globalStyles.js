@@ -15,7 +15,6 @@ const globalTheme = createTheme({
           marginRight: 5,
           textTransform: "capitalize",
           boxShadow: "none",
-          maxWidth: 200,
         },
       },
     },   
@@ -38,10 +37,12 @@ const globalTheme = createTheme({
       // 
     neutral: {
       main: "#DAEBFB",
+      light: '#EDF5FD'
     },
       // 
     info: {
       main: "#2B2728",
+      light: '#D8D4D5'
     },
   },
   typography: {

@@ -1,14 +1,28 @@
 import React, { useState } from 'react';
-import { Box, TextField, Typography, Button } from '@material-ui/core';
+import {
+    Box,
+    TextField,
+    Typography,
+    Button,
+    Stack,
+    DialogTitle,
+    IconButton,
+    DialogContent,
+} from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import userLogin from '../../requests/userLogin';
 import { useSession } from '../../context/sessionContext';
-const Login = ({ closeModal }) => {
+const Login = ({ closeModal, setModalComponent }) => {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState();
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState();
     const { setSessionToken } = useSession();
 
+    const onClose = (e) => {
+        setModalComponent('');
+        closeModal();
+    };
     const handleLogin = async (e) => {
         try {
             const { status, json } = await userLogin({
@@ -38,84 +52,102 @@ const Login = ({ closeModal }) => {
         }
     };
     return (
+        <Box
+            sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                bgcolor: 'neutral.light',
+                border: '2px solid #000',
+                boxShadow: 24,
+                p: 4,
+            }}
+        >
             <Box
+                component="form"
                 sx={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: '800',
-                    height: '800',
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    bgcolor: 'background.paper',
-                    border: '2px solid #000',
-                    boxShadow: 24,
-                    p: 4,
+                    '& .MuiTextField-root': {
+                        m: 2,
+                        width: '40ch',
+                        maxWidth: '100%',
+                    },
+                    textAlign: 'center',
                 }}
+                noValidate
+                autocomplete="off"
             >
-                <Box
-                    component="form"
-                    sx={{
-                        '& .MuiTextField-root': {
-                            m: 1,
-                            width: '800',
-                            maxWidth: '100%',
-                        },
-                        textAlign: 'center'
-                    }}
-                    noValidate
-                    autocomplete="off"
-                >
-                    <Typography
-                        variant="h4"
-                        component="h2"
-                        sx={{  mb: 2 }}
+                <DialogTitle id="modal-title" variant="h2">
+                    Login
+                    <IconButton
+                        aria-label="close"
+                        onClick={onClose}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: 'info.main',
+                        }}
                     >
-                        Login
-                    </Typography>
-                    <div>
-                        <TextField
-                            label="Email Address"
-                            value={email}
-                            color='info'
-                            onChange={(e) => setEmail(e.target.value)}
-                            fullWidth
-                            required
-                            error={emailError !== undefined}
-                            helperText={emailError}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            label="Password"
-                            type="password"
-                            color='info'
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            fullWidth
-                            required
-                            error={passwordError !== undefined}
-                            helperText={passwordError}
-                        />
-                    </div>
-                    <div>
-                        <Button
-                            variant="contained"
-                            color='secondary'
-                            fullWidth
-                            onClick={handleLogin}
-                        >
-                            Login
-                        </Button>
-                    </div>
-                    <div>
-                        <Button variant='contained' color='secondary' fullWidth onClick={closeModal}>Close</Button>
-                    </div>
-                </Box>
+                        <CloseIcon />
+                    </IconButton>
+                </DialogTitle>
+                <DialogContent>
+                    <Stack spacing={3}>
+                        <div>
+                            <TextField
+                                label="Email Address"
+                                value={email}
+                                color="info"
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                error={emailError !== undefined}
+                                helperText={emailError}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                label="Password"
+                                type="password"
+                                color="info"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                error={passwordError !== undefined}
+                                helperText={passwordError}
+                            />
+                        </div>
+                        <div>
+                            <Button
+                                sx={{ width: '40ch' }}
+                                id="modal-description"
+                                variant="contained"
+                                color="secondary"
+                                onClick={handleLogin}
+                            >
+                                Login
+                            </Button>
+                        </div>
+                        <div>
+                            <Typography>
+                                Don't have an account with us?{' '}
+                                <Button
+                                    color="secondary"
+                                    onClick={() =>
+                                        setModalComponent('Register')
+                                    }
+                                >
+                                    Register
+                                </Button>
+                            </Typography>
+                        </div>
+                    </Stack>
+                </DialogContent>
             </Box>
+        </Box>
     );
 };
 
 export default Login;
-

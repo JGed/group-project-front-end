@@ -7,6 +7,7 @@ const RecipeIndex = (props) => {
 
   const handleLogout = e => {
     setSessionToken(undefined);
+
   }
   return <div>
     <Typography variant='h1'>

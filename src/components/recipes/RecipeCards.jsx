@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
