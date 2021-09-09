@@ -8,6 +8,12 @@ const Header = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalComponent, setModalComponent] = useState();
 
+  const [hover, setHover] = useState(false);
+  const [hover2, setHover2] = useState(false);
+
+  const onHover = e => setHover(curr => !curr);
+  const onHover2 = e => setHover2(curr => !curr);
+
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
   const handleClick = name => e => {
@@ -61,10 +67,10 @@ const Header = (props) => {
                 </div>
               }
           </Modal>
-          <Button variant="outlined" color='secondary'  sx={{ border: 2 }} onClick={handleClick('Register')}>
+          <Button variant={hover ? 'contained' : 'outlined'} onMouseEnter={onHover} onMouseLeave={onHover} color='secondary'  sx={{ border: 2, borderColor: 'secondary.main', '&:hover': {color: 'tertiary.light', borderColor: 'tertiary.light'}}} onClick={handleClick('Register')}>
             Register
           </Button>
-          <Button variant="contained" color='secondary'  onClick={handleClick('Login')}>
+          <Button variant="contained" color={hover2 ? 'tertiary' : 'secondary'} onMouseEnter={onHover2} onMouseLeave={onHover2} sx={{ border: 2, borderColor: 'secondary.main', '&:hover': {color: 'secondary.light', borderColor: 'secondary.light'}}} onClick={handleClick('Login')}>
             Login
           </Button>
         </Grid>

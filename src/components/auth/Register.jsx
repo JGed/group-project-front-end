@@ -5,23 +5,23 @@ import {
     Typography,
     Button,
     Alert,
-    Container,
     Popper,
-    Paper,
     DialogTitle,
     DialogContent,
     IconButton,
     Stack,
-    Fade,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import userRegister from '../../requests/userRegister';
 import { useSession } from '../../context/sessionContext';
-
-const hasCapital = (str) => {
+import { BoxContainerSx, BoxFormSx } from './componentSx';
+import  { useTheme } from '@material-ui/core/styles'
+import { useMediaQuery } from '@material-ui/core';
+import PasswordRequirements from './PasswordRequirements';
+export const hasCapital = (str) => {
     return /[A-Z]/.test(str);
 };
-const hasNumber = (str) => {
+export const hasNumber = (str) => {
     return /[0-9]/.test(str);
 };
 const passwordIsValid = (pass) => {
@@ -36,13 +36,18 @@ const Register = ({ closeModal, setModalComponent }) => {
 
     const [password, setPassword] = useState('');
     const [passwordIsFocused, setPasswordIsFocused] = useState(false);
-    const [isDisabled, setIsDisabled] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(true);
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
+    // reference for the input inside the textfield component for the password
+    // use to anchor popper to textfield
     const inputRef = useRef();
 
     const { setSessionToken } = useSession();
 
     useEffect(() => {
+        // is the password is valid
         setIsDisabled(!passwordIsValid(password));
     }, [password]);
 
@@ -76,37 +81,16 @@ const Register = ({ closeModal, setModalComponent }) => {
                 setUsernameError(json.usernameMessage);
             }
         } catch (error) {
-            console.log(error);
+
         }
     };
 
-    console.log(inputRef);
-    console.log(document.activeElement);
     return (
         <Box
-            sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                maxWidth: '100%',
-                maxHeight: '100%',
-                bgcolor: 'neutral.light',
-                border: '2px solid #000',
-                boxShadow: 24,
-                p: 4,
-            }}
-        >
+            sx={BoxContainerSx}>
             <Box
                 component="form"
-                sx={{
-                    '& .MuiTextField-root': {
-                        m: 2,
-                        width: '40ch',
-                        maxWidth: '100%',
-                    },
-                    textAlign: 'center',
-                }}
+                sx={BoxFormSx}
                 noValidate
                 autocomplete="off"
             >
@@ -159,7 +143,7 @@ const Register = ({ closeModal, setModalComponent }) => {
                                 color="info"
                                 required
                                 value={password}
-                                ref={inputRef}
+                                inputRef={inputRef}
                                 onFocus={() => setPasswordIsFocused(true)}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
@@ -168,51 +152,11 @@ const Register = ({ closeModal, setModalComponent }) => {
                                     passwordIsFocused
                                 }
                                 anchorEl={inputRef.current}
-                                placement={'right'}
+                                placement={isSmallScreen ? 'top' : 'right'}
+                                modifiers={[{name: 'preventOverflow', enabled: false}]}
                                 disablePortal
                             >
-                                        <Box
-                                            sx={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                justifyContent: 'space-between',
-                                                backgroundColor: 'info.main',
-                                                padding: 1,
-                                                m: 1
-                                            }}
-                                        >
-                                            <Typography color="neutral.light">
-                                                Password Requirements:
-                                            </Typography>
-                                            <Alert
-                                                severity={
-                                                    password.length > 7
-                                                        ? 'success'
-                                                        : 'error'
-                                                }
-                                            >
-                                                contains 8 characters
-                                            </Alert>
-                                            <Alert
-                                                sx={{ my: 1 }}
-                                                severity={
-                                                    hasCapital(password)
-                                                        ? 'success'
-                                                        : 'error'
-                                                }
-                                            >
-                                                contains a capital letter
-                                            </Alert>
-                                            <Alert
-                                                severity={
-                                                    hasNumber(password)
-                                                        ? 'success'
-                                                        : 'error'
-                                                }
-                                            >
-                                                contains a number
-                                            </Alert>
-                                        </Box>
+                                <PasswordRequirements password={password} />
                             </Popper>
                         </div>
                         <div>

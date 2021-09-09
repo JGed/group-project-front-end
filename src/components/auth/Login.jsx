@@ -12,6 +12,8 @@ import {
 import CloseIcon from '@material-ui/icons/Close';
 import userLogin from '../../requests/userLogin';
 import { useSession } from '../../context/sessionContext';
+import { BoxContainerSx, BoxFormSx } from './componentSx'
+
 const Login = ({ closeModal, setModalComponent }) => {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState();
@@ -52,30 +54,10 @@ const Login = ({ closeModal, setModalComponent }) => {
         }
     };
     return (
-        <Box
-            sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                maxWidth: '100%',
-                maxHeight: '100%',
-                bgcolor: 'neutral.light',
-                border: '2px solid #000',
-                boxShadow: 24,
-                p: 4,
-            }}
-        >
+        <Box sx={BoxContainerSx}>
             <Box
                 component="form"
-                sx={{
-                    '& .MuiTextField-root': {
-                        m: 2,
-                        width: '40ch',
-                        maxWidth: '100%',
-                    },
-                    textAlign: 'center',
-                }}
+                sx={BoxFormSx}
                 noValidate
                 autocomplete="off"
             >
