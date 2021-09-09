@@ -6,7 +6,7 @@ import Header from './Header';
 const HomeIndex = (props) => {
   return (
     <div>
-      <Header token={props.token}/>  
+      <Header />  
       <HeroSection />
       <HotRecipes />
     </div>

@@ -9,25 +9,36 @@ import { SessionProvider } from './context/sessionContext'
 function App() {
   const [sessionToken, setSessionToken] = useState(undefined);
 
+
   useEffect(() => {
-      document.title = 'ClickNCook';
+    document.title = 'ClickNCook';
     const storedToken = localStorage.getItem("sessionToken");
-    if (storedToken !== undefined) {
+    if (storedToken !== 'undefined') {
       setSessionToken(storedToken);
     }
   }, []);
 
+  const updateToken = newToken => {
+    if(newToken) {
+      localStorage.setItem('sessionToken', newToken);
+    }
+    else {
+      localStorage.clear();
+    }
+    setSessionToken(newToken);
+  }
+
   useEffect(() => {
-    localStorage.setItem("sessionToken", sessionToken);
-    console.log(sessionToken);
-  }, [sessionToken]);
+    console.log('stored token: ', localStorage.getItem('sessionToken'));
+    console.log('sessionToken: ', sessionToken)
+  })
 
 
   return (
     <ThemeProvider theme={globalTheme}>
-    <SessionProvider sessionToken={sessionToken} setSessionToken={setSessionToken}>
+    <SessionProvider sessionToken={sessionToken} setSessionToken={updateToken}>
       <div>
-        {sessionToken ? <RecipeIndex token={sessionToken}/> : <HomeIndex setSessionToken={setSessionToken}/> }
+        {sessionToken ? <RecipeIndex /> : <HomeIndex /> }
         <Footer />
       </div>
     </SessionProvider>
