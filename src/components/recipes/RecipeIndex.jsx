@@ -1,5 +1,7 @@
 import { Button, Typography } from '@material-ui/core';
 import React, { useState, useEffect } from "react";
+import Navbar from "./NavBar";
+
 import { useSession } from '../../context/sessionContext';
 
 const RecipeIndex = (props) => {
@@ -12,6 +14,7 @@ const RecipeIndex = (props) => {
     <Typography variant='h1'>
       This is the RecipeIndex
     </Typography>
+    <Navbar />
     <Button color='secondary' variant='contained' onClick={handleLogout} >Logout</Button>
     </div>;
 };
