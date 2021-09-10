@@ -3,12 +3,12 @@ import {
   Modal,
   TextField,
   Button,
-  FormControl,
   Checkbox,
-  green,
-  Container,
   InputAdornment,
+  Box,
+  Switch,
   FormControlLabel,
+  MenuItem,
 } from "@material-ui/core";
 
 const RecipeCreate = (props) => {
@@ -20,10 +20,11 @@ const RecipeCreate = (props) => {
   const [photoURL, setPhotoURL] = useState("");
   const [isPublic, setIsPublic] = useState("");
   const [checked, setChecked] = React.useState(true);
-  const [open, setOpen] = React.useState(false);
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
+  const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -31,7 +32,8 @@ const RecipeCreate = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleSubmit = (e) => {
+
+  const handleCreateRecipeClick = (e) => {
     e.preventDefault();
     fetch("http://localhost:3000/recipe", {
       method: "post",
@@ -68,13 +70,54 @@ const RecipeCreate = (props) => {
     { value: "Lunch", label: "Lunch" },
     { value: "Dinner", label: "Dinner" },
   ];
-
   return (
     <div>
-      <Modal>
-        <h2>New Recipe</h2>
-        <form novalidate autoComplete="off">
+      <Button
+        type="button"
+        color="primary"
+        variant="contained"
+        onClick={handleOpen}
+      >
+        Add a recipe
+      </Button>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "800",
+            height: "800",
+            maxWidth: "100%",
+            maxHeight: "100%",
+            bgcolor: "background.paper",
+            border: "2px solid #000",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Box
+            component="form"
+            onSubmit={handleCreateRecipeClick}
+            sx={{ display: "flex", flexWrap: "wrap" }}
+          ></Box>
+          <h2>New Recipe</h2>
           <TextField
+            sx={{ m: 1, width: "25ch" }}
+            onChange={(e) => setName(e.target.value)}
+            variant="filled"
+            label="Enter name of recipe"
+            required
+          ></TextField>
+          <TextField
+            sx={{ m: 1, width: "25ch" }}
             select
             label="Category"
             value={foodCategories}
@@ -91,12 +134,8 @@ const RecipeCreate = (props) => {
             ))}
           </TextField>
           <TextField
-            onChange={(e) => setName(e.target.value)}
-            variant="filled"
-            label="Enter name of recipe"
-            required
-          ></TextField>
-          <TextField
+            fullWidth
+            sx={{ m: 1 }}
             onChange={(e) => setDirections(e.target.value)}
             variant="filled"
             label="Enter directions"
@@ -105,38 +144,38 @@ const RecipeCreate = (props) => {
             required
           ></TextField>
           <TextField
+            sx={{ m: 1, width: "25ch" }}
             onChange={(e) => setCookTime(e.target.value)}
             label="Cook Time"
             id="Cook Time"
             InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">Min</InputAdornment>
+              endAdornment: (
+                <InputAdornment position="end">Mins</InputAdornment>
               ),
             }}
           />
           <TextField
+            sx={{ m: 1, width: "25ch" }}
             onChange={(e) => setServings(e.target.value)}
             label="Serving Size"
             id="ServingSize"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">1</InputAdornment>
-              ),
-            }}
             variant="filled"
           />
-          <Checkbox
+          <FormControlLabel
+            value="TRUE"
+            control={<Checkbox />}
+            label="Make recipe public?"
+            labelPlacement="bottom"
+            sx={{ display: "flex", alignItems: "flex-center" }}
             defaultChecked
-            color="primary"
             inputProps={{ "aria-label": "secondary checkbox" }}
-            label="Make Recipe Public?"
           />
+          <br />
           <div>
-            //{" "}
             <Button variant="contained" fullWidth type="submit">
               Create Recipe
             </Button>
-            //{" "}
+
             <Button
               variant="contained"
               fullWidth
@@ -146,16 +185,8 @@ const RecipeCreate = (props) => {
               Close
             </Button>
           </div>
-        </form>
+        </Box>
       </Modal>
-      <Button
-        type="button"
-        color="primary"
-        variant="contained"
-        onClick={handleOpen}
-      >
-        Add a recipe
-      </Button>
     </div>
   );
 };

@@ -6,12 +6,8 @@ import Header from "./Header";
 const HomeIndex = (props) => {
   return (
     <div>
-<<<<<<< HEAD
       <div class="homeNav"></div>
       <Header token={props.token} />
-=======
-      <Header />  
->>>>>>> aef3efd28b0df6e2137898f274255a87ba14e745
       <HeroSection />
       <HotRecipes />
     </div>

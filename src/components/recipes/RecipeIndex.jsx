@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
 import { Button, Typography } from "@material-ui/core";
-import { useSession } from "../../context/sessionContext";
+import React, { useState, useEffect } from "react";
+import Navbar from "./NavBar";
 import RecipeCreate from "./RecipeCreate";
+
+import { useSession } from "../../context/sessionContext";
 
 const RecipeIndex = (props) => {
   const { setSessionToken } = useSession();
@@ -12,8 +14,12 @@ const RecipeIndex = (props) => {
   return (
     <div>
       <Typography variant="h1">This is the RecipeIndex</Typography>
-
+      <Navbar />
       <RecipeCreate />
+      <br />
+      <Button color="secondary" variant="contained" onClick={handleLogout}>
+        Logout
+      </Button>
     </div>
   );
 };
