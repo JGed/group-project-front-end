@@ -11,8 +11,6 @@ const globalTheme = createTheme({
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          marginTop: 5,
-          marginBottom: 5,
         },
       },
     },
