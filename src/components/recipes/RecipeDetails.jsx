@@ -52,7 +52,7 @@ const RecipeDetails = () => {
                     </Grid>
                 </Grid>
             ) : (
-                <Grid container sx={{ height: '90vh' }} spacing={4}>
+                <Grid container sx={{ height: '90vh', backgroundColor: 'red' }} spacing={4}>
                     <Grid item md={12} lg={5}>
                         {
                             //This grid is for the picture
