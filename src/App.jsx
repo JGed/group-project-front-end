@@ -6,6 +6,8 @@ import RecipeIndex from './components/recipes/RecipeIndex';
 import Footer from "./components/home/Footer";
 import "./App.css";
 import { SessionProvider } from './context/sessionContext'
+import RecipeDetails from './components/recipes/RecipeDetails';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 function App() {
   const [sessionToken, setSessionToken] = useState(undefined);
 
@@ -38,7 +40,16 @@ function App() {
     <ThemeProvider theme={globalTheme}>
     <SessionProvider sessionToken={sessionToken} setSessionToken={updateToken}>
       <div>
-        {sessionToken ? <RecipeIndex /> : <HomeIndex /> }
+        <Router>
+          <Switch>
+            <Route exact path='/'>
+              {sessionToken ? <RecipeIndex /> : <HomeIndex /> }
+            </Route>
+            <Route exact path='/recipe/:id'>
+              <RecipeDetails />
+            </Route>
+          </Switch>
+        </Router>
         <Footer />
       </div>
     </SessionProvider>
