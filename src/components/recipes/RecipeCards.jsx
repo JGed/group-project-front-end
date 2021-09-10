@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Card, CardContent, CardMedia, Typography, CardActionArea, Container } from "@mui/material";
-
-const RecipeCards = () => {
+import { Card, CardContent, CardMedia, Typography, CardActionArea, Container } from "@material-ui/core";
+import { Link } from 'react-router-dom'
+const RecipeCards = ({ recipe }) => {
   return (
     <Container
       maxWidth="false"
@@ -11,6 +11,7 @@ const RecipeCards = () => {
     >
       <Card sx={{ maxWidth: 345 }}>
         <CardActionArea>
+        <Link to={`/recipe/${recipe.id}`}>
           <CardMedia
             component="img"
             height="140"
@@ -27,6 +28,7 @@ const RecipeCards = () => {
               with the mussels, if you like.
             </Typography>
           </CardContent>
+          </Link>
         </CardActionArea>
       </Card>
     </Container>
