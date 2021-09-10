@@ -1,26 +1,24 @@
-import { Button, Typography } from '@material-ui/core';
-import React, { useState, useEffect } from 'react';
-import { useSession } from '../../context/sessionContext';
-import RecipeDetails from './RecipeDetails';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-const RecipeIndex = (props) => {
-    const { setSessionToken } = useSession();
+import React, { useState, useEffect } from "react";
+import { Typography, Button, ButtonGroup, Container } from "@material-ui/core";
+import NavBar from "./NavBar";
+import RecipeCards from "./RecipeCards";
 
-    const handleLogout = (e) => {
-        setSessionToken(undefined);
-    };
-    return (
-        <div>
-            <Typography variant="h1">This is the RecipeIndex</Typography>
-            <Button
-                color="secondary"
-                variant="contained"
-                onClick={handleLogout}
-            >
-                Logout
-            </Button>
-        </div>
-    );
+const RecipeIndex = (props) =>  {
+  
+  return (
+    <div>
+      <NavBar />      
+      <Container className="homeMain">
+        <Typography variant="h2" color="textPrimary" sx={{mt: 5}}>
+          Good Morning! What are we cooking today?{" "}
+        </Typography>        
+        <Button type="submit" color="secondary" variant="contained">
+          Add a recipe
+        </Button>
+      </Container>
+      <RecipeCards recipe={{id: 4}}/>      
+    </div>
+  );
 };
 
 export default RecipeIndex;
