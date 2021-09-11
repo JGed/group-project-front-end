@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Typography, Button, ButtonGroup, Container } from "@material-ui/core";
+import React from "react";
+import { Box, Typography, Button, Container } from "@material-ui/core";
 import NavBar from "./NavBar";
 import RecipeCards from "./RecipeCards";
 
 const RecipeIndex = (props) =>  {
   
   return (
-    <div>
+    <Box sx={{minHeight: '90vh'}}>
       <NavBar />      
       <Container className="homeMain">
         <Typography variant="h2" color="textPrimary" sx={{mt: 5}}>
@@ -17,7 +17,7 @@ const RecipeIndex = (props) =>  {
         </Button>
       </Container>
       <RecipeCards recipe={{id: 4}}/>      
-    </div>
+    </Box>
   );
 };
 

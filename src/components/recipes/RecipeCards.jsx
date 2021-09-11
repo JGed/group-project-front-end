@@ -19,7 +19,7 @@ const RecipeCards = ({ recipe }) => {
         >
             <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea>
-                    <Link to={`/recipe/${recipe.id}`}>
+                    <Link className='router-card' to={`/recipe/${recipe.id}`}>
                         <CardMedia
                             component="img"
                             height="140"

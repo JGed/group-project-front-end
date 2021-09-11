@@ -10,12 +10,15 @@ import {
 import Toolbar from "@material-ui/core/Toolbar";
 import { useSession } from "../../context/sessionContext";
 import fetchMyRecipes from "../../requests/fetchMyRecipes";
+import { Link, useHistory } from 'react-router-dom';
 
 const NavBar = () => {
   const { setSessionToken } = useSession();
 
+  const history = useHistory();
   const handleLogout = (e) => {
     setSessionToken(undefined);
+    history.push('/');
   };
 
   return (
@@ -27,22 +30,23 @@ const NavBar = () => {
           minHeight: 100,
         }}
       >
-        <Grid container spacing={2} maxWidth="xl" alignItems="center">
+        <Grid container spacing={2} maxWidth="xl" >
           <Grid item xs={6}>
-            <Button variant="text" color="primary" onClick={fetchMyRecipes}>
-              Breakfast
+            <Button variant="text" color="primary" sx={{cursor: 'default'}} disableRipple>
+              <Link className='router-button' to='/category/breakfast'>Breakfast</Link>
             </Button>
-            <Button variant="text" color="primary">
-              Lunch
+            <Button variant="text" color="primary" sx={{cursor: 'default'}} disableRipple>
+              <Link className='router-button' to='/category/lunch'>Lunch</Link>
             </Button>
-            <Button variant="text" color="primary">
-              Dinner
+            <Button variant="text" color="primary"  sx={{cursor: 'default'}} disableRipple>
+              <Link className='router-button' to='/category/dinner'>Dinner</Link>
             </Button>
           </Grid>
           <Grid item xs={6} sx={{ textAlign: "right" }}>
             <Button
               color="secondary"
               variant="contained"
+              sx={{border: 2, borderColor: '#fff'}}
               onClick={handleLogout}
             >
               Logout

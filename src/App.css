@@ -2,7 +2,25 @@
 * {
     scrollbar-width: thin;
 }
+
 html {
     padding: 0;
     margin: 0;
+}
+.router-button {
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid;
+    cursor: pointer;
+}
+.router-link {
+    text-decoration: none;
+    color: #105493;
+    border-bottom: 1px solid #105493;
+    cursor: pointer;
+}
+.router-card {
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
 }

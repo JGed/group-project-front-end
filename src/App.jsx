@@ -48,6 +48,10 @@ function App() {
             <Route exact path='/recipe/:id'>
               <RecipeDetails />
             </Route>
+            <Route exact path='/category/:cat'>
+              {//TODO  component which will grab all public recipes that match the category will go here
+              }
+            </Route>
           </Switch>
         </Router>
         <Footer />

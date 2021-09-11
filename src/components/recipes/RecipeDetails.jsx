@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useSession } from '../../context/sessionContext';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, Box } from '@material-ui/core';
 import fetchRecipeById from '../../requests/fetchRecipeById';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { useTheme } from '@material-ui/core/styles';
+import NavBar from './NavBar';
 const RecipeDetails = () => {
     const [recipe, setRecipe] = useState({});
     const { id } = useParams();
     const [error, setError] = useState(false);
     const [message, setMessage] = useState('');
 
+    const [loaded, setLoaded] = useState(false);
+
+    const theme = useTheme();
     const { sessionToken } = useSession();
 
     useEffect(() => {
@@ -43,35 +48,74 @@ const RecipeDetails = () => {
 
     return (
         <>
-            {error ? (
-                <Grid container sx={{textAlign: 'center'}}>
-                    <Grid item xs={12} sx={{pt: 5}}>
-                        <Typography variant='h3'>
-                            {message}
-                        </Typography>
+            <NavBar />
+                {error ? (
+                    <Grid container sx={{ textAlign: 'center' }}>
+                        <Grid item xs={12} sx={{ pt: 5 }}>
+                            <Typography variant="h3">{message}</Typography>
+                        </Grid>
                     </Grid>
-                </Grid>
-            ) : (
-                <Grid container sx={{ height: '90vh', backgroundColor: 'red' }} spacing={4}>
-                    <Grid item md={12} lg={5}>
-                        {
-                            //This grid is for the picture
-                        }
-                        <img src={recipe.photoURL} alt='food' />
+                ) : (
+                    <Grid
+                        container
+                        sx={{
+                            minHeight: '90vh',
+                            backgroundColor: 'neutral.light',
+                        }}
+                    >
+                        <Grid
+                            item
+                            md={12}
+                            lg={5}
+                            sx={{
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                padding: 5,
+                            }}
+                        >
+                            {
+                                //This grid is for the picture
+                            }
+                            <img
+                                style={
+                                    loaded
+                                        ? { maxWidth: '100%' }
+                                        : { display: 'none' }
+                                }
+                                src={recipe.photoURL}
+                                alt="food"
+                                onLoad={() => setLoaded(true)}
+                            />
+                        </Grid>
+                        <Grid item md={12} lg={6} sx={{color: 'secondary.dark', px: 2} }>
+                            <Box sx={{py: 8, }}>
+                            <Typography variant="h1">{recipe.name}</Typography>
+                            </Box>
+                            <Typography>Created by: <Link className='router-link' to={`/user/${recipe.owner}`}>{recipe.owner}</Link></Typography>
+                            <br />
+                            <Typography>
+                                Category:{' '}
+                                <Link
+                                    className="router-link"
+                                    to={`/category/${recipe.category}`}
+                                >
+                                    {recipe.category}
+                                </Link>
+                            </Typography>
+                            <br />
+                            <Typography>
+                                Cook Time: {recipe.cookTime}
+                            </Typography>
+                            <br />
+                            <Typography>Servings: {recipe.servings}</Typography>
+                            <br />
+                            <Typography>
+                                Directions: {recipe.directions}
+                            </Typography>
+                            <br />
+                        </Grid>
                     </Grid>
-                    <Grid item md={12} lg={7}>
-                        <Typography variant='h1'>{recipe.name}</Typography>
-                        <Typography>Category: {recipe.category}</Typography>
-                        <br />
-                        <Typography>Directions: {recipe.directions}</Typography>
-                        <br />
-                        <Typography>Cook Time: {recipe.cookTime}</Typography>
-                        <br />
-                        <Typography>Servings: {recipe.servings}</Typography>
-                        <br />
-                    </Grid>
-                </Grid>
-            )}
+                )}
         </>
     );
 };
