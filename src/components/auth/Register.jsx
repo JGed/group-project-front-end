@@ -4,7 +4,6 @@ import {
     TextField,
     Typography,
     Button,
-    Alert,
     Popper,
     DialogTitle,
     DialogContent,
@@ -54,6 +53,7 @@ const Register = ({ closeModal, setModalComponent }) => {
     const onClose = (e) => {
         closeModal();
     };
+
     const handleRegister = async (e) => {
         try {
             const { status, json } = await userRegister({

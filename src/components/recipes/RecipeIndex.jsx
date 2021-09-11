@@ -16,7 +16,7 @@ const RecipeIndex = (props) =>  {
           Add a recipe
         </Button>
       </Container>
-      <RecipeCards />      
+      <RecipeCards recipe={{id: 4}}/>      
     </div>
   );
 };
