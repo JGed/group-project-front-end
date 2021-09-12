@@ -10,6 +10,7 @@ import RecipeDetails from './components/recipes/RecipeDetails';
 import Profile from './components/Profile';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import RecipeCategory from './components/RecipeCategory';
+import RecipeUser from './components/RecipeUser';
 function App() {
   const [sessionToken, setSessionToken] = useState(undefined);
 
@@ -48,6 +49,7 @@ function App() {
             <Route exact path='/users/:username'>
               {//TODO component for showing the public recipes created by the given user
               }
+              <RecipeUser />
             </Route>
             <Route exact path ='/profile'>
               {// TODO component to show a recipes created by the signed in user,  this component will have update and delete button shown for recipes.

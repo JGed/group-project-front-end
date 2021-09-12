@@ -1,74 +1,126 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './recipes/NavBar';
-import { Box, Button, Typography } from '@material-ui/core';
+import {
+    Box,
+    Button,
+    Typography,
+    Card,
+    CardMedia,
+    CardContent,
+    Grid,
+} from '@material-ui/core';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import fetchMyRecipes from '../requests/fetchMyRecipes';
 import deleteMyRecipe from '../requests/deleteMyRecipe';
 import { useSession } from '../context/sessionContext';
 const Profile = () => {
-    const [recipes, setRecipes] = useState([])
+    const [recipes, setRecipes] = useState([]);
     const { sessionToken } = useSession();
-    const handleDeleteClick = recipe => async e => {
+    const handleDeleteClick = (recipe) => async (e) => {
         try {
-            const { status, json } = await deleteMyRecipe(recipe, sessionToken);
-            if(status === 200) {
-                setRecipes(recipes.filter(el => el.id !== recipe.id))
+            const { status } = await deleteMyRecipe(recipe, sessionToken);
+            if (status === 200) {
+                setRecipes(recipes.filter((el) => el.id !== recipe.id));
+            } else {
             }
-            else {
-                console.log('status: ', status);
-                console.log('json: ', json);
-            }
-        }
-        catch(err) {
-
-        }
-    }
+        } catch (err) {}
+    };
     useEffect(() => {
         (async () => {
             try {
                 const { status, json } = await fetchMyRecipes(sessionToken);
-                console.log(json);
-                console.log(status);
-                if(status === 200) {
+                if (status === 200) {
                     setRecipes(json);
                 }
-            }
-            catch(err) {
-
-            }
-
-        })()
-    }, [sessionToken, recipes])
+            } catch (err) {}
+        })();
+    }, [sessionToken, recipes]);
     return (
         <>
             <NavBar />
             <Box
-                container
                 sx={{
                     minHeight: '90vh',
                     backgroundColor: 'neutral.light',
-                    p: 5,
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    alignItems: 'space-between',
-                    justifyContent: 'center'
+                    pt: 5,
+                    px: 10,
                 }}
-                spacing={2}
             >
-                {recipes.map(recipe => (
-                    <Box key={recipe.id} sx={{m: 2, border: 1, height: '200px', width: '400px', overflow: 'hidden'}}>
-                        <Box sx={{textAlign: 'center', py: 2, height: '100%'}}>
-                            <Typography variant='h2'>
-                                {recipe.name}
-                            </Typography>
-                            <Typography>
-                                Created On: {recipe.createdAt.split('T')[0]}
-                            </Typography>
-                            <br />
-                            <Button variant='contained' color='tertiary' sx={{color: '#fff'}}>Edit Recipe</Button>
-                            <Button variant='contained' color='secondary' onClick={handleDeleteClick(recipe)}>Delete Recipe</Button>
-                        </Box>
-                    </Box>
-                ))}
+                <Typography variant='h2' color='secondary.dark' align='center' gutterBottom>
+                    Good Morning!  What are we cooking Today?
+                </Typography>
+                <Box sx={{display: 'flex', justifyContent: 'center'}}>
+                    <Button variant='contained' color='secondary'>Add A Recipe</Button>
+                </Box>
+                <Typography variant='h3' color='secondary.dark' align='center' sx={{pt: 2}}>
+                    Your Recipes:
+                </Typography>
+                <Grid container spacing={2} sx={{ pt: 4, px: 6 }}>
+                    {recipes.map((recipe) => (
+                        <Grid
+                            item
+                            container
+                            key={recipe.id}
+                            xs={12}
+                            md={6}
+                            lg={3}
+                            sx={{ mb: 4, justifyContent: 'center' }}
+                        >
+                            <Card sx={{ width: 350, height: 300 }}>
+                                <CardMedia
+                                    component="img"
+                                    height="180"
+                                    image={recipe.photoURL}
+                                    alt={recipe.name}
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h4" noWrap>
+                                        {recipe.name}
+                                    </Typography>
+                                    <Grid container>
+                                        <Grid
+                                            item
+                                            xs={3}
+                                            container
+                                            sx={{
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                            }}
+                                        >
+                                            <VisibilityIcon />
+                                            <Typography variant='h6'>
+                                               &nbsp;{recipe.views}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid
+                                            item
+                                            container
+                                            xs={9}
+                                            sx={{ justifyContent: 'flex-end' }}
+                                        >
+                                            <Button
+                                                variant="contained"
+                                                color="primary"
+                                                onClick={(e) => null}
+                                            >
+                                                Edit
+                                            </Button>
+                                            <Button
+                                                variant="contained"
+                                                color="secondary"
+                                                onClick={handleDeleteClick(
+                                                    recipe
+                                                )}
+                                            >
+                                                Delete
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    ))}
+                </Grid>
             </Box>
         </>
     );

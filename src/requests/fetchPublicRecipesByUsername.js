@@ -1,5 +1,5 @@
 const fetchPublicRecipesByUsername = async (username) => {
-    const response = await fetch(`http://localhost:3000/owner/${username}`, {
+    const response = await fetch(`http://localhost:3000/recipe/owner/${username}`, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json',

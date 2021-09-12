@@ -5,19 +5,11 @@ import {
     CardMedia,
     Typography,
     CardActionArea,
-    Container,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 const RecipeCards = ({ recipe }) => {
     return (
-        <Container
-            maxWidth="false"
-            sx={{
-                minHeight: 100,
-                marginTop: 10,
-            }}
-        >
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ width: 350, height: 300 }}>
                 <CardActionArea>
                     <Link className='router-card' to={`/recipe/${recipe.id}`}>
                         <CardMedia
@@ -44,7 +36,6 @@ const RecipeCards = ({ recipe }) => {
                     </Link>
                 </CardActionArea>
             </Card>
-        </Container>
     );
 };
 

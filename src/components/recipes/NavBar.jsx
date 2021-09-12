@@ -21,7 +21,7 @@ const NavBar = () => {
   };
 
   return (
-    <Container maxWidth="false">
+    <Container maxWidth="false" disableGutters>
       <Toolbar
         sx={{
           backgroundColor: "secondary.main",
@@ -29,7 +29,7 @@ const NavBar = () => {
           minHeight: 100,
         }}
       >
-        <Grid container spacing={2} maxWidth="xl" >
+        <Grid container spacing={2} >
           <Grid item xs={6}>
             <Button variant="text" color="primary" sx={{cursor: 'default'}} disableRipple>
               <Link className='router-button' to='/category/breakfast'>Breakfast</Link>
@@ -41,7 +41,7 @@ const NavBar = () => {
               <Link className='router-button' to='/category/dinner'>Dinner</Link>
             </Button>
           </Grid>
-          <Grid item xs={6} sx={{ textAlign: "right" }}>
+          <Grid item container xs={6} sx={{ justifyContent: "flex-end" }}>
             <Button
               color="secondary"
               variant="contained"

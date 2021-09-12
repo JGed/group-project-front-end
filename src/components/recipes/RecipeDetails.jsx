@@ -41,7 +41,6 @@ const RecipeDetails = () => {
                     'Uh-oh something went wrong. Try refreshing to view this page'
                 );
                 setError(true);
-                console.log(err);
             }
         })();
     }, [id, sessionToken]);
@@ -65,6 +64,7 @@ const RecipeDetails = () => {
                     >
                         <Grid
                             item
+                            container
                             md={12}
                             lg={5}
                             sx={{
@@ -91,7 +91,7 @@ const RecipeDetails = () => {
                             <Box sx={{py: 8, }}>
                             <Typography variant="h1">{recipe.name}</Typography>
                             </Box>
-                            <Typography>Created by: <Link className='router-link' to={`/user/${recipe.owner}`}>{recipe.owner}</Link></Typography>
+                            <Typography>Created by: <Link className='router-link' to={`/users/${recipe.owner}`}>{recipe.owner}</Link></Typography>
                             <br />
                             <Typography>
                                 Category:{' '}
