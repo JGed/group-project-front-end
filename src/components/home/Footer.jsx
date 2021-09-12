@@ -12,7 +12,6 @@ const Footer = (props) => {
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "column",
-        marginTop: 4,
       }}
     >
       <Grid container spacing={2} maxWidth="xl" alignItems="center">

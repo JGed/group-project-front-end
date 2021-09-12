@@ -1,7 +1,12 @@
+
+import React from "react";
+import { Box, Typography, Button, Container } from "@material-ui/core";
+
 import React, { useState, useEffect } from "react";
 import { Typography, Button, ButtonGroup, Container } from "@material-ui/core";
 import { useSession } from "../../context/sessionContext";
 import fetchPublicRecipes from "../../requests/fetchPublicRecipes";
+
 import NavBar from "./NavBar";
 import RecipeCards from "./RecipeCards";
 
@@ -40,8 +45,11 @@ const RecipeIndex = (props) => {
   }, [sessionToken]);
 
   return (
-    <div>
-      <NavBar />
+
+    <Box sx={{minHeight: '90vh'}}>
+      <NavBar />      
+
+
       <Container className="homeMain">
         <Typography variant="h2" color="textPrimary" sx={{ mt: 5 }}>
           Good Morning! What are we cooking today?{" "}
@@ -50,8 +58,11 @@ const RecipeIndex = (props) => {
           Add a recipe
         </Button>
       </Container>
+   
+    </Box>
+
       <RecipeCards recipes={recipes} />
-    </div>
+  
   );
 };
 
