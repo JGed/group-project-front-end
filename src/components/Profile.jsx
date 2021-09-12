@@ -55,7 +55,7 @@ const Profile = () => {
                 spacing={2}
             >
                 {recipes.map(recipe => (
-                    <Box key={recipe.id} sx={{m: 2, border: 1, height: '200px', width: '400px'}}>
+                    <Box key={recipe.id} sx={{m: 2, border: 1, height: '200px', width: '400px', overflow: 'hidden'}}>
                         <Box sx={{textAlign: 'center', py: 2, height: '100%'}}>
                             <Typography variant='h2'>
                                 {recipe.name}

@@ -44,11 +44,7 @@ function App() {
             <Route exact path='/recipe/:id'>
               <RecipeDetails />
             </Route>
-            <Route exact path='/category/:cat'>
-              {//TODO  component which will grab all public recipes that match the category will go here
-              }
-              <RecipeCategory />
-            </Route>
+            <Route exact path='/category/:cat' render={(props) => <RecipeCategory key={props.match.params.cat} />} />
             <Route exact path='/users/:username'>
               {//TODO component for showing the public recipes created by the given user
               }

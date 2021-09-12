@@ -38,7 +38,7 @@ const RecipeDetails = () => {
                 }
             } catch (err) {
                 setMessage(
-                    'Uh-oh something on our end went wrong. Try refreshing to view this page'
+                    'Uh-oh something went wrong. Try refreshing to view this page'
                 );
                 setError(true);
                 console.log(err);

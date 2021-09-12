@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import { useSession } from "../../context/sessionContext";
-import fetchMyRecipes from "../../requests/fetchMyRecipes";
 import { Link, useHistory } from 'react-router-dom';
 
 const NavBar = () => {
