@@ -7,7 +7,9 @@ import Footer from "./components/home/Footer";
 import "./App.css";
 import { SessionProvider } from './context/sessionContext'
 import RecipeDetails from './components/recipes/RecipeDetails';
+import Profile from './components/Profile';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import RecipeCategory from './components/RecipeCategory';
 function App() {
   const [sessionToken, setSessionToken] = useState(undefined);
 
@@ -30,12 +32,6 @@ function App() {
     setSessionToken(newToken);
   }
 
-  useEffect(() => {
-    console.log('stored token: ', localStorage.getItem('sessionToken'));
-    console.log('sessionToken: ', sessionToken)
-  })
-
-
   return (
     <ThemeProvider theme={globalTheme}>
     <SessionProvider sessionToken={sessionToken} setSessionToken={updateToken}>
@@ -51,6 +47,16 @@ function App() {
             <Route exact path='/category/:cat'>
               {//TODO  component which will grab all public recipes that match the category will go here
               }
+              <RecipeCategory />
+            </Route>
+            <Route exact path='/users/:username'>
+              {//TODO component for showing the public recipes created by the given user
+              }
+            </Route>
+            <Route exact path ='/profile'>
+              {// TODO component to show a recipes created by the signed in user,  this component will have update and delete button shown for recipes.
+              }
+              <Profile />
             </Route>
           </Switch>
         </Router>
