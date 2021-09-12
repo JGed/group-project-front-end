@@ -1,7 +1,7 @@
 import { Button, Typography } from '@material-ui/core';
 import React, { useState, useEffect } from "react";
 import Navbar from "./NavBar";
-
+import RecipeCards from "./RecipeCards";
 import { useSession } from '../../context/sessionContext';
 
 const RecipeIndex = (props) => {
@@ -16,6 +16,8 @@ const RecipeIndex = (props) => {
       ClickNCook
     </Typography>
     <Navbar />
+    <RecipeCards />
+
     <Button color='secondary' variant='contained' onClick={handleLogout} >Logout</Button>
     </div>;
 };
