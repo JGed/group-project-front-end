@@ -29,7 +29,7 @@ const HotRecipes = (props) => {
       <Container
         maxWidth="false"
         sx={{
-          minHeight: 100,
+          minHeight: 100, mt: 5
         }}
       >
         <Box>
