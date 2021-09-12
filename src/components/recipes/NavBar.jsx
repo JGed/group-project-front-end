@@ -9,7 +9,12 @@ import {
 } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import { useSession } from "../../context/sessionContext";
+
 import { Link, useHistory } from 'react-router-dom';
+
+import fetchMyRecipes from "../../requests/fetchMyRecipes";
+import Mascot from "../../assets/images/clickncook_mascot.png";
+
 
 const NavBar = () => {
   const { setSessionToken } = useSession();
@@ -31,9 +36,20 @@ const NavBar = () => {
       >
         <Grid container spacing={2} >
           <Grid item xs={6}>
-            <Button variant="text" color="primary" sx={{cursor: 'default'}} disableRipple>
+
+          <Box
+            component="img"
+            sx={{
+              width: 75,
+              maxHeight: { xs: 233, md: 167 },
+              maxWidth: { xs: 350, md: 250 },
+            }}
+            alt="Clickin the Chicken"
+            src={`${Mascot}`}
+          />
+             <Button variant="text" color="primary" sx={{cursor: 'default'}} disableRipple>
               <Link className='router-button' to='/category/breakfast'>Breakfast</Link>
-            </Button>
+             </Button>
             <Button variant="text" color="primary" sx={{cursor: 'default'}} disableRipple>
               <Link className='router-button' to='/category/lunch'>Lunch</Link>
             </Button>
