@@ -25,11 +25,11 @@ const HotRecipesTitle = styled(Box)(({ theme }) => ({
 
 const HotRecipes = (props) => {
   return (
-    <div>
       <Container
         maxWidth="false"
         sx={{
-          minHeight: 100, mt: 5
+          minHeight: 100, mt: 5,
+          pb: 5
         }}
       >
         <Box>
@@ -70,7 +70,6 @@ const HotRecipes = (props) => {
           </Grid>
         </Grid>
       </Container>
-    </div>
   );
 };
 

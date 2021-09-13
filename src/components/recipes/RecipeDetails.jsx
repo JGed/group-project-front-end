@@ -4,6 +4,7 @@ import { Grid, Typography, Box } from '@material-ui/core';
 import fetchRecipeById from '../../requests/fetchRecipeById';
 import { useParams, Link } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
+import MainContentContainer from '../common/MainContentContainer';
 import NavBar from './NavBar';
 const RecipeDetails = () => {
     const [recipe, setRecipe] = useState({});
@@ -46,8 +47,7 @@ const RecipeDetails = () => {
     }, [id, sessionToken]);
 
     return (
-        <>
-            <NavBar />
+        <MainContentContainer noPadding>
                 {error ? (
                     <Grid container sx={{ textAlign: 'center' }}>
                         <Grid item xs={12} sx={{ pt: 5 }}>
@@ -58,7 +58,6 @@ const RecipeDetails = () => {
                     <Grid
                         container
                         sx={{
-                            minHeight: '90vh',
                             backgroundColor: 'neutral.light',
                         }}
                     >
@@ -116,7 +115,7 @@ const RecipeDetails = () => {
                         </Grid>
                     </Grid>
                 )}
-        </>
+                </MainContentContainer>
     );
 };
 

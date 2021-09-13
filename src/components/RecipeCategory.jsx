@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import NavBar from './recipes/NavBar';
-import { Box, Grid, Card, CardActionArea, CardMedia, CardContent, Typography } from '@material-ui/core';
+import { useState, useEffect } from 'react';
+import { Typography } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import fetchRecipesByCategory from '../requests/fetchRecipesByCategory';
-import { Link } from 'react-router-dom';
+import RecipeCardArea from './common/RecipeCardArea';
+import RecipeCardContainer from './common/RecipeCardContainer';
+import RecipeCard from './common/RecipeCard';
+import MainContentContainer from './common/MainContentContainer';
+
 const RecipeCategory = () => {
     const [recipes, setRecipes] = useState([]);
     const { cat } = useParams();
@@ -19,50 +22,18 @@ const RecipeCategory = () => {
 
     return (
         <>
-            <NavBar />
-            <Box
-                sx={{
-                    minHeight: '90vh',
-                    backgroundColor: 'neutral.light',
-                    pt: 5,
-                    px: 10,
-                    justifyContent: 'center'
-                }}
-            >
-                <Grid container spacing={2} sx={{px: 6}}>
-                    {recipes.length > 0 && recipes.map((recipe) => (
-                        <Grid item container key={recipe.id} xs={12} md={6} lg={3} sx={{mb: 4, justifyContent: 'center'}}>
-                            <Card sx={{ width: 350, height: 300 }}>
-                <CardActionArea>
-                    <Link className='router-card' to={`/recipe/${recipe.id}`}>
-                        <CardMedia
-                            component="img"
-                            height="140"
-                            image="https://next.material-ui.com/static/images/cards/paella.jpg"
-                            alt="Shrimp and Chorizo Paella"
-                        />
-                        <CardContent>
-                            <Typography
-                                gutterBottom
-                                variant="h5"
-                                component="div"
-                            >
-                                Shrimp and Chorizo Paella
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                This impressive paella is a perfect party dish
-                                and a fun meal to cook together with your
-                                guests. Add 1 cup of frozen peas along with the
-                                mussels, if you like.
-                            </Typography>
-                        </CardContent>
-                    </Link>
-                </CardActionArea>
-            </Card>
-                        </Grid>
+            <MainContentContainer>
+                <Typography variant="h2" align="center" color="secondary.dark">
+                    {cat} recipes:
+                </Typography>
+                <RecipeCardArea>
+                    {recipes.map((recipe) => (
+                        <RecipeCardContainer key={recipe.id}>
+                            <RecipeCard recipe={recipe} />
+                        </RecipeCardContainer>
                     ))}
-                </Grid>
-            </Box>
+                </RecipeCardArea>
+            </MainContentContainer>
         </>
     );
 };

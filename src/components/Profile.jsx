@@ -13,6 +13,9 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import fetchMyRecipes from '../requests/fetchMyRecipes';
 import deleteMyRecipe from '../requests/deleteMyRecipe';
 import { useSession } from '../context/sessionContext';
+import RecipeCardArea from './common/RecipeCardArea';
+import RecipeCardContainer from './common/RecipeCardContainer';
+import MainContentContainer from './common/MainContentContainer';
 const Profile = () => {
     const [recipes, setRecipes] = useState([]);
     const { sessionToken } = useSession();
@@ -36,16 +39,7 @@ const Profile = () => {
         })();
     }, [sessionToken, recipes]);
     return (
-        <>
-            <NavBar />
-            <Box
-                sx={{
-                    minHeight: '90vh',
-                    backgroundColor: 'neutral.light',
-                    pt: 5,
-                    px: 10,
-                }}
-            >
+        <MainContentContainer>
                 <Typography variant='h2' color='secondary.dark' align='center' gutterBottom>
                     Good Morning!  What are we cooking Today?
                 </Typography>
@@ -55,16 +49,10 @@ const Profile = () => {
                 <Typography variant='h3' color='secondary.dark' align='center' sx={{pt: 2}}>
                     Your Recipes:
                 </Typography>
-                <Grid container spacing={2} sx={{ pt: 4, px: 6 }}>
+                <RecipeCardArea>
                     {recipes.map((recipe) => (
-                        <Grid
-                            item
-                            container
+                        <RecipeCardContainer
                             key={recipe.id}
-                            xs={12}
-                            md={6}
-                            lg={3}
-                            sx={{ mb: 4, justifyContent: 'center' }}
                         >
                             <Card sx={{ width: 350, height: 300 }}>
                                 <CardMedia
@@ -118,11 +106,10 @@ const Profile = () => {
                                     </Grid>
                                 </CardContent>
                             </Card>
-                        </Grid>
+                        </RecipeCardContainer>
                     ))}
-                </Grid>
-            </Box>
-        </>
+                </RecipeCardArea>
+        </MainContentContainer>
     );
 };
 

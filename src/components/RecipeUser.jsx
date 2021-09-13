@@ -12,6 +12,7 @@ import {
 import fetchPublicRecipesByUsername from '../requests/fetchPublicRecipesByUsername';
 import { useParams, Link } from 'react-router-dom';
 import RecipeCards from './recipes/RecipeCards';
+import MainContentContainer from './common/MainContentContainer';
 
 const RecipeUser = () => {
     const [recipes, setRecipes] = useState([]);
@@ -28,22 +29,12 @@ const RecipeUser = () => {
         })();
     }, [username]);
     return (
-        <>
-            <NavBar />
-            <Box
-                sx={{
-                    minHeight: '90vh',
-                    backgroundColor: 'neutral.light',
-                    pt: 5,
-                    px: 10,
-                }}
-            >
-                <Typography variant='h2' color='secondary.dark' align='center'>
-                    {username}'s recipes: 
-                </Typography>
-                <RecipeCards recipes={recipes} />
-            </Box>
-        </>
+        <MainContentContainer>
+            <Typography variant="h2" color="secondary.dark" align="center">
+                {username}'s recipes:
+            </Typography>
+            <RecipeCards recipes={recipes} />
+        </MainContentContainer>
     );
 };
 

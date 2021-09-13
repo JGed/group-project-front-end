@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Container, Grid } from '@material-ui/core';
+import { Box, Button, Grid } from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useSession } from '../../context/sessionContext';
 
@@ -17,11 +17,10 @@ const NavBar = () => {
     };
 
     return (
-        <Container maxWidth="false" disableGutters>
+        <Box sx={{flex: '0 1 auto'}}>
             <Toolbar
                 sx={{
                     backgroundColor: 'secondary.main',
-                    width: '100%',
                     minHeight: 100,
                 }}
             >
@@ -116,7 +115,7 @@ const NavBar = () => {
                     </Grid>
                 </Grid>
             </Toolbar>
-        </Container>
+        </Box>
     );
 };
 
