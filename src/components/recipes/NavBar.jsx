@@ -35,18 +35,21 @@ const NavBar = () => {
         }}
       >
         <Grid container spacing={2} >
-          <Grid item xs={6}>
-
+          <Grid item container xs={6}>
+            <Box sx={{display: 'flex', alignItems: 'center'}}>
+          <Link to='/'>
           <Box
             component="img"
             sx={{
-              width: 75,
+              width: 50,
               maxHeight: { xs: 233, md: 167 },
               maxWidth: { xs: 350, md: 250 },
             }}
             alt="Clickin the Chicken"
             src={`${Mascot}`}
           />
+          </Link>
+          </Box>
              <Button variant="text" color="primary" sx={{cursor: 'default'}} disableRipple>
               <Link className='router-button' to='/category/breakfast'>Breakfast</Link>
              </Button>
@@ -61,6 +64,7 @@ const NavBar = () => {
             <Button
               color="secondary"
               variant="contained"
+              size='small'
               sx={{border: 2, borderColor: '#fff'}}
               onClick={handleLogout}
             >
