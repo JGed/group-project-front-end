@@ -6,13 +6,14 @@ import {
   Checkbox,
   InputAdornment,
   Box,
-  Switch,
   FormControlLabel,
   MenuItem,
 } from "@material-ui/core";
+import { useSession } from "../../context/sessionContext";
+import createMyRecipe from "../../requests/createMyRecipe";
 
 const RecipeCreate = (props) => {
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = React.useState("");
   const [name, setName] = useState("");
   const [directions, setDirections] = useState("");
   const [cookTime, setCookTime] = useState("");
@@ -20,11 +21,16 @@ const RecipeCreate = (props) => {
   const [photoURL, setPhotoURL] = useState("");
   const [isPublic, setIsPublic] = useState("");
   const [checked, setChecked] = React.useState(true);
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
   const [open, setOpen] = React.useState(false);
-
+  const { sessionToken } = useSession();
+  const handleChange = (event) => {
+    setCategory(event.target.value);
+  };
+  const foodCategories = [
+    { value: "Breakfast", label: "Breakfast" },
+    { value: "Lunch", label: "Lunch" },
+    { value: "Dinner", label: "Dinner" },
+  ];
   const handleOpen = () => {
     setOpen(true);
   };
@@ -33,43 +39,61 @@ const RecipeCreate = (props) => {
     setOpen(false);
   };
 
-  const handleCreateRecipeClick = (e) => {
+  // const handleCreateRecipeClick = (e) => {
+  //   e.preventDefault();
+  //   fetch("http://localhost:3000/recipe", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       category: category,
+  //       name: name,
+  //       directions: directions,
+  //       cookTime: cookTime,
+  //       servings: servings,
+  //       isPublic: isPublic,
+  //       photoURL: photoURL,
+  //     }),
+  //     headers: new Headers({
+  //       "Content-Type": "application/json",
+  //       Authorization: sessionToken,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((logData) => {
+  //       console.log(logData);
+  //       setName("");
+  //       setDirections("");
+  //       setCookTime("");
+  //       setServings("");
+  //       setPhotoURL("");
+  //       setIsPublic("");
+  //       setCategory("");
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
+  const handleCreateRecipeClick = async (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/recipe", {
-      method: "post",
-      body: JSON.stringify({
-        category: category,
-        name: name,
-        directions: directions,
-        cookTime: cookTime,
-        servings: servings,
-        isPublic: isPublic,
-        photoURL: photoURL,
-      }),
-      headers: new Headers({
-        "Content-Type": "application/json",
-        Authorization: props.token,
-      }),
-    })
-      .then((res) => res.json())
-      .then((logData) => {
-        console.log(logData);
-        setName("");
-        setDirections("");
-        setCookTime("");
-        setServings("");
-        setPhotoURL("");
-        setIsPublic("");
-        setCategory("");
-        props.fetchWorkouts();
-      });
+    try {
+      const { status, json } = await createMyRecipe(
+        {
+          category: category,
+          name: name,
+          directions: directions,
+          cookTime: cookTime,
+          servings: servings,
+          isPublic: isPublic,
+          photoURL: photoURL,
+        },
+        sessionToken
+      );
+      console.log(status);
+      console.log(json);
+      // setMessage(json.message);
+    } catch (error) {
+      // setMessage(
+      //   "Recipe cannot be created at this time.  Please try again later."
+      // );
+    }
   };
-
-  const foodCategories = [
-    { value: "Breakfast", label: "Breakfast" },
-    { value: "Lunch", label: "Lunch" },
-    { value: "Dinner", label: "Dinner" },
-  ];
   return (
     <div>
       <Button
@@ -119,18 +143,16 @@ const RecipeCreate = (props) => {
           <TextField
             sx={{ m: 1, width: "25ch" }}
             select
-            label="Category"
-            value={foodCategories}
-            SelectProps={{
-              native: true,
-            }}
-            helperText="Please select your recipe category"
+            label="Select"
+            value={category}
+            onChange={handleChange}
+            helperText="Please select your category"
             variant="outlined"
           >
             {foodCategories.map((option) => (
-              <option key={option.value} value={option.value}>
+              <MenuItem key={option.value} value={option.value}>
                 {option.label}
-              </option>
+              </MenuItem>
             ))}
           </TextField>
           <TextField
@@ -172,7 +194,12 @@ const RecipeCreate = (props) => {
           />
           <br />
           <div>
-            <Button variant="contained" fullWidth type="submit">
+            <Button
+              variant="contained"
+              fullWidth
+              type="submit"
+              onClick={handleCreateRecipeClick}
+            >
               Create Recipe
             </Button>
 
@@ -190,4 +217,5 @@ const RecipeCreate = (props) => {
     </div>
   );
 };
+
 export default RecipeCreate;

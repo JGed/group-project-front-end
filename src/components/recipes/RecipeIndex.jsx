@@ -1,25 +1,21 @@
-import { Button, Typography } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
-import Navbar from "./NavBar";
+import { Typography, Button, ButtonGroup, Container } from "@material-ui/core";
+import NavBar from "./NavBar";
+import RecipeCards from "./RecipeCards";
 import RecipeCreate from "./RecipeCreate";
 
-import { useSession } from "../../context/sessionContext";
-
 const RecipeIndex = (props) => {
-  const { setSessionToken } = useSession();
-
-  const handleLogout = (e) => {
-    setSessionToken(undefined);
-  };
   return (
     <div>
-      <Typography variant="h1">This is the RecipeIndex</Typography>
-      <Navbar />
-      <RecipeCreate />
-      <br />
-      <Button color="secondary" variant="contained" onClick={handleLogout}>
-        Logout
-      </Button>
+      <NavBar />
+      <Container className="homeMain">
+        <Typography variant="h2" color="textPrimary" sx={{ mt: 5 }}>
+          Good Morning! What are we cooking today?{" "}
+        </Typography>
+        <RecipeCreate />
+        <br />
+      </Container>
+      <RecipeCards recipe={{ id: 4 }} />
     </div>
   );
 };

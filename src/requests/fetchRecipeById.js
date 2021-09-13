@@ -1,5 +1,5 @@
-const fetchRecipe = async (recipe, token) => {
-    const response = await fetch(`http://locahost:3000/recipe/${recipe.id}`, {
+const fetchRecipeById = async (id, token) => {
+    const response = await fetch(`http://localhost:3000/recipe/${id}`, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json',
@@ -13,4 +13,4 @@ const fetchRecipe = async (recipe, token) => {
     }
 }
 
-export default fetchRecipe;
+export default fetchRecipeById
