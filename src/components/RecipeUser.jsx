@@ -38,6 +38,9 @@ const RecipeUser = () => {
                     px: 10,
                 }}
             >
+                <Typography variant='h2' color='secondary.dark' align='center'>
+                    {username}'s recipes: 
+                </Typography>
                 <RecipeCards recipes={recipes} />
             </Box>
         </>

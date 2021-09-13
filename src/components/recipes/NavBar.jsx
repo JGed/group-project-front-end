@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Box, Button, Container, Grid } from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useSession } from '../../context/sessionContext';

@@ -11,6 +11,7 @@ import Profile from './components/Profile';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import RecipeCategory from './components/RecipeCategory';
 import RecipeUser from './components/RecipeUser';
+import GoToTop from './components/GoToTop';
 function App() {
   const [sessionToken, setSessionToken] = useState(undefined);
 
@@ -38,6 +39,7 @@ function App() {
     <SessionProvider sessionToken={sessionToken} setSessionToken={updateToken}>
       <div>
         <Router>
+          <GoToTop />
           <Switch>
             <Route exact path='/'>
               {sessionToken ? <RecipeIndex /> : <HomeIndex /> }
