@@ -1,14 +1,15 @@
-import React from 'react';
-import { Box, Button, Grid } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Box, Button, Grid, Modal } from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useSession } from '../../context/sessionContext';
-
+import Login from '../auth/Login';
+import Register from '../auth/Register';
 import { Link, useHistory } from 'react-router-dom';
 
 import Mascot from '../../assets/images/clickncook_mascot.png';
 
 const NavBar = () => {
-    const { setSessionToken } = useSession();
+    const { sessionToken, setSessionToken } = useSession();
 
     const history = useHistory();
     const handleLogout = (e) => {
@@ -16,8 +17,40 @@ const NavBar = () => {
         history.push('/');
     };
 
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalComponent, setModalComponent] = useState();
+
+
+
+    const openModal = () => setModalIsOpen(true);
+    const closeModal = () => setModalIsOpen(false);
+    const handleClick = (name) => (e) => {
+        setModalComponent(name);
+        openModal();
+    };
+
+    const renderModalComponent = (component) => {
+        switch (component) {
+            case 'Login':
+                return (
+                    <Login
+                        closeModal={closeModal}
+                        setModalComponent={setModalComponent}
+                    />
+                );
+            case 'Register':
+                return (
+                    <Register
+                        closeModal={closeModal}
+                        setModalComponent={setModalComponent}
+                    />
+                );
+            default:
+                return <></>;
+        }
+    };
     return (
-        <Box sx={{flex: '0 1 auto'}}>
+        <Box sx={{ flex: '0 1 auto' }}>
             <Toolbar
                 sx={{
                     backgroundColor: 'secondary.main',
@@ -103,14 +136,48 @@ const NavBar = () => {
                         }}
                     >
                         <Grid item>
-                            <Button
-                                color="secondary"
-                                variant="contained"
-                                sx={{ border: 2 }}
-                                onClick={handleLogout}
-                            >
-                                Logout
-                            </Button>
+                            {sessionToken ? (
+                                <Button
+                                    color="secondary"
+                                    variant="contained"
+                                    sx={{ border: 2, '&:hover': {color: 'secondary.main', backgroundColor: 'white'} }}
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </Button>
+                            ) : (
+                                <>
+                                    <Modal
+                                        open={modalIsOpen}
+                                        aria-labelledby="modal-title"
+                                        aria-describedby="modal-description"
+                                    >
+                                        {
+                                            <div>
+                                                {renderModalComponent(
+                                                    modalComponent
+                                                )}
+                                            </div>
+                                        }
+                                    </Modal>
+                                    <Button
+                                    color="secondary"
+                                    variant="contained"
+                                    sx={{ border: 2, '&:hover': {color: 'secondary.main', backgroundColor: 'white'} }}
+                                        onClick={handleClick('Login')}
+                                    >
+                                        Login
+                                    </Button>
+                                    <Button
+                                    color="secondary"
+                                    variant="contained"
+                                    sx={{ border: 2, '&:hover': {color: 'secondary.main', backgroundColor: 'white'} }}
+                                        onClick={handleClick('Register')}
+                                    >
+                                        Register
+                                    </Button>
+                                </>
+                            )}
                         </Grid>
                     </Grid>
                 </Grid>

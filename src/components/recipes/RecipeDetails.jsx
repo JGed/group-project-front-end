@@ -14,7 +14,6 @@ const RecipeDetails = () => {
 
     const [loaded, setLoaded] = useState(false);
 
-    const theme = useTheme();
     const { sessionToken } = useSession();
 
     useEffect(() => {

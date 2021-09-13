@@ -14,7 +14,6 @@ import RecipeCategory from './components/RecipeCategory';
 import RecipeUser from './components/RecipeUser';
 import GoToTop from './components/GoToTop';
 import NavBar from './components/recipes/NavBar';
-import MainContentContainer from './components/common/MainContentContainer';
 import { Redirect } from 'react-router-dom';
 import AppContainer from './components/common/AppContainer';
 function App() {

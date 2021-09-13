@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import NavBar from './recipes/NavBar';
+import { useEffect, useState } from 'react';
 import {
-    Box,
     Typography,
-    Card,
-    CardMedia,
-    CardContent,
-    Grid,
-    CardActionArea,
 } from '@material-ui/core';
 import fetchPublicRecipesByUsername from '../requests/fetchPublicRecipesByUsername';
-import { useParams, Link } from 'react-router-dom';
-import RecipeCards from './recipes/RecipeCards';
+import { useParams } from 'react-router-dom';
 import MainContentContainer from './common/MainContentContainer';
-
+import RecipeCardArea from './common/RecipeCardArea'
+import RecipeCard from './common/RecipeCard'
+import RecipCardContainer from './common/RecipeCardContainer'
 const RecipeUser = () => {
     const [recipes, setRecipes] = useState([]);
     const { username } = useParams();
@@ -33,7 +27,13 @@ const RecipeUser = () => {
             <Typography variant="h2" color="secondary.dark" align="center">
                 {username}'s recipes:
             </Typography>
-            <RecipeCards recipes={recipes} />
+            <RecipeCardArea>
+                {recipes.map(recipe => (
+                    <RecipCardContainer key={recipe.id}>
+                        <RecipeCard recipe={recipe} />
+                    </RecipCardContainer>
+                ))}
+            </RecipeCardArea>
         </MainContentContainer>
     );
 };
