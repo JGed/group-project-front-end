@@ -47,7 +47,8 @@ const globalTheme = createTheme({
     //
     neutral: {
       main: "#DAEBFB",
-      light: '#EDF5FD'
+      light: '#EDF5FD',
+      dark: '#105493'
     },
     //
     info: {

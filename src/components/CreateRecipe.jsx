@@ -18,7 +18,6 @@
 //             ...recipe,
 //             [field]: e.target.value || e.target.checked
 //         })
-//         console.log(recipe)
 //     }
 
 //     const handleCreateRecipeClick = async (e) => {
