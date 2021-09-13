@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 const RecipeCards = (props) => {
   return (
     <Container maxWidth="false" sx={{ mt: 10 }}>
-      <Grid container spacing={2} maxWidth="xl" alignItems="top">
-        {props.recipes.map((recipe) => {
+      <Grid container spacing={4}>
+        {props.recipes?.map((recipe) => {
           return (
-            <Grid item xs={12} lg={3} sm={6}>
+            <Grid item xs={12} lg={3} sm={6} sx={{mb: 4}}>
               <Card>
                 <CardActionArea>
                   <Link to={`/recipe/${recipe.id}`}>
@@ -19,7 +19,7 @@ const RecipeCards = (props) => {
                       alt={recipe.name}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
+                      <Typography gutterBottom variant="h5" component="div" noWrap>
                         {recipe.name}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">

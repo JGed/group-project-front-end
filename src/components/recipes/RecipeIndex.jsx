@@ -1,9 +1,5 @@
-
-import React from "react";
-import { Box, Typography, Button, Container } from "@material-ui/core";
-
+import { Box, Typography, ButtonGroup, Button, Container } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
-import { Typography, Button, ButtonGroup, Container } from "@material-ui/core";
 import { useSession } from "../../context/sessionContext";
 import fetchPublicRecipes from "../../requests/fetchPublicRecipes";
 
@@ -58,10 +54,9 @@ const RecipeIndex = (props) => {
           Add a recipe
         </Button>
       </Container>
-   
+      <RecipeCards recipes={recipes} />
     </Box>
 
-      <RecipeCards recipes={recipes} />
   
   );
 };
