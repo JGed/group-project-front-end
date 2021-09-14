@@ -14,11 +14,15 @@ import fetchMyRecipes from '../requests/fetchMyRecipes';
 import deleteMyRecipe from '../requests/deleteMyRecipe';
 import { useSession } from '../context/sessionContext';
 import RecipeCreate from '../components/recipes/RecipeCreate';
+import RecipeEdit from '../components/recipes/RecipeEdit';
 
 const Profile = () => {
     const [recipes, setRecipes] = useState([]);
     const { sessionToken } = useSession();
-    const [isOpen, setIsOpen] = useState(false);
+    const [createIsOpen, setCreateIsOpen] = useState(false);
+    const [editIsOpen, setEditIsOpen] = useState(false);
+    const [recipeToEdit, setRecipeToEdit] = useState();
+
     const handleDeleteClick = (recipe) => async (e) => {
         try {
             const { status } = await deleteMyRecipe(recipe, sessionToken);
@@ -28,6 +32,11 @@ const Profile = () => {
             }
         } catch (err) {}
     };
+    const handleEditClick = recipe => e => {
+        console.log(recipe)
+        setRecipeToEdit({ ...recipe })
+        setEditIsOpen(true);
+    }
     useEffect(() => {
         (async () => {
             try {
@@ -37,7 +46,7 @@ const Profile = () => {
                 }
             } catch (err) {}
         })();
-    }, [sessionToken, recipes]);
+    }, [sessionToken]);
     return (
         <>
             <NavBar />
@@ -53,12 +62,12 @@ const Profile = () => {
                     Good Morning!  What are we cooking Today?
                 </Typography>
                 <Box sx={{display: 'flex', justifyContent: 'center'}}>
-                    <Button variant='contained' color='secondary' onClick={() => setIsOpen(true)}>Add A Recipe</Button>
+                    <Button variant='contained' color='secondary' onClick={() => setCreateIsOpen(true)}>Add A Recipe</Button>
+                    <RecipeCreate open={createIsOpen} setOpen={setCreateIsOpen} />
                 </Box>
                 <Typography variant='h3' color='secondary.dark' align='center' sx={{pt: 2}}>
                     Your Recipes:
                 </Typography>
-                <RecipeCreate open={isOpen} setOpen={setIsOpen} />
                 <Grid container spacing={2} sx={{ pt: 4, px: 6 }}>
                     {recipes.map((recipe) => (
                         <Grid
@@ -105,7 +114,7 @@ const Profile = () => {
                                             <Button
                                                 variant="contained"
                                                 color="primary"
-                                                onClick={(e) => null}
+                                                onClick={handleEditClick(recipe)}
                                             >
                                                 Edit
                                             </Button>
@@ -125,6 +134,7 @@ const Profile = () => {
                         </Grid>
                     ))}
                 </Grid>
+                {recipeToEdit && <RecipeEdit open={editIsOpen} setOpen={setEditIsOpen}  recipe={recipeToEdit} />}
             </Box>
         </>
     );
