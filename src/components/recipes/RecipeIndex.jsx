@@ -8,11 +8,13 @@ import { useSession } from '../../context/sessionContext';
 import fetchPublicRecipes from '../../requests/fetchPublicRecipes';
 import MainContentContainer from '../common/MainContentContainer';
 import RecipeCards from './RecipeCards';
+import RecipeCreate from './RecipeCreate'
 
 const RecipeIndex = (props) => {
     const [recipes, setRecipes] = useState([]);
     const [error, setError] = useState(false);
     const [message, setMessage] = useState('');
+    const [open, setOpen] = useState(false);
     const { sessionToken } = useSession();
 
     useEffect(() => {
@@ -50,9 +52,10 @@ const RecipeIndex = (props) => {
                 <Typography variant="h2" color="textPrimary" sx={{ mt: 5 }}>
                     Good Morning! What are we cooking today?{' '}
                 </Typography>
-                <Button type="submit" color="secondary" variant="contained">
+                <Button type="submit" color="secondary" variant="contained" onClick={() => setOpen(true)}>
                     Add a recipe
                 </Button>
+                <RecipeCreate open={open} setOpen={setOpen} />
             </Container>
             <RecipeCards recipes={recipes} />
         </MainContentContainer>

@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom';
 const Profile = () => {
     const [recipes, setRecipes] = useState([]);
     const { sessionToken } = useSession();
+    const [isOpen, setIsOpen] = useState(false);
     const handleDeleteClick = (recipe) => async (e) => {
         try {
             const { status } = await deleteMyRecipe(recipe, sessionToken);
