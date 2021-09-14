@@ -157,7 +157,7 @@ const RecipeCreate = (props) => {
             type="submit"
             onClick={handleCreateRecipeClick}
           >
-            Create Recipe
+            Make Recipe
           </Button>
 
           <Button

@@ -59,6 +59,9 @@ const NavBar = () => {
             <Button variant="text" color="primary"  sx={{cursor: 'default'}} disableRipple>
               <Link className='router-button' to='/category/dinner'>Dinner</Link>
             </Button>
+            <Button variant="text" color="primary"  sx={{cursor: 'default'}} disableRipple>
+              <Link className='router-button' to='/category/dinner'>Dessert</Link>
+            </Button>
           </Grid>
           <Grid item container xs={6} sx={{ justifyContent: "flex-end" }}>
             <Button
