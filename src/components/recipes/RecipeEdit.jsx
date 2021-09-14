@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   TextField,
@@ -12,28 +12,32 @@ import {
 import { useSession } from "../../context/sessionContext";
 import updateMyRecipe from "../../requests/updateMyRecipe";
 
-const UpdateRecipe = (props) => {
-  const [editCategory, setEditCategory] = React.useState(props.recipe.category);
-  const [editName, setEditName] = useState(props.recipe.name);
-  const [editDirections, setEditDirections] = useState(props.recipe.directions);
-  const [editCookTime, setEditCookTime] = useState(props.recipe.cookTime);
-  const [editServings, setEditServings] = useState(props.recipe.servings);
-  const [editPhotoURL, setEditPhotoURL] = useState(props.recipe.photoURL);
-  const [editIsPublic, setEditIsPublic] = useState(props.recipe.isPublic);
-  const [editChecked, setEditChecked] = React.useState(props.checked);
-  const [open, setOpen] = React.useState(false);
+const RecipeEdit = (props) => {
+  const [category, setCategory] = useState(props.recipe.category);
+  const [name, setName] = useState(props.recipe.name);
+  const [directions, setDirections] = useState(props.recipe.directions);
+  const [cookTime, setCookTime] = useState(props.recipe.cookTime);
+  const [servings, setServings] = useState(props.recipe.servings);
+  const [photoURL, setPhotoURL] = useState(props.recipe.photoURL);
+  const [isPublic, setIsPublic] = useState(props.recipe.isPublic);
   const { sessionToken } = useSession();
+  useEffect(() => {
+    setCategory(props.recipe.category);
+    setName(props.recipe.name);
+    setDirections(props.recipe.directions);
+    setCookTime(props.recipe.cookTime);
+    setServings(props.recipe.servings);
+    setPhotoURL(props.recipe.photoURL);
+    setIsPublic(props.recipe.isPublic);
+  }, [props.recipe.category, props.recipe.name, props.recipe.directions, props.recipe.cookTime, props.recipe.servings, props.recipe.photoURL, props.recipe.isPublic])
   const handleChange = (event) => {
-    setEditCategory(event.target.value);
+    setCategory(event.target.value);
   };
   const foodCategories = [
-    { value: "Breakfast", label: "Breakfast" },
-    { value: "Lunch", label: "Lunch" },
-    { value: "Dinner", label: "Dinner" },
+    { value: "breakfast", label: "breakfast" },
+    { value: "lunch", label: "lunch" },
+    { value: "dinner", label: "dinner" },
   ];
-  const handleOpen = () => {
-    props.setOpen(true);
-  };
 
   const handleClose = () => {
     props.setOpen(false);
@@ -44,6 +48,7 @@ const UpdateRecipe = (props) => {
     try {
       const { status, json } = await updateMyRecipe(
         {
+          id: props.recipe.id,
           category: category,
           name: name,
           directions: directions,
@@ -54,8 +59,9 @@ const UpdateRecipe = (props) => {
         },
         sessionToken
       );
-      console.log(status);
-      console.log(json);
+      if(status === 200) {
+        handleClose();
+      }
     } catch (error) {}
   };
   return (
@@ -65,7 +71,7 @@ const UpdateRecipe = (props) => {
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
-      <Box
+      {props.open && <Box
         sx={{
           position: "absolute",
           top: "50%",
@@ -83,13 +89,13 @@ const UpdateRecipe = (props) => {
       >
         <Box
           component="form"
-          onSubmit={handleUpdateRecipe}
           sx={{ display: "flex", flexWrap: "wrap" }}
         ></Box>
         <h2>New Recipe</h2>
         <TextField
           sx={{ m: 1, width: "25ch" }}
-          onChange={(e) => setEditName(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           variant="filled"
           label="Enter name of recipe"
           required
@@ -98,6 +104,7 @@ const UpdateRecipe = (props) => {
           sx={{ m: 1, width: "25ch" }}
           select
           label="Select"
+          defaultValue={category}
           value={category}
           onChange={handleChange}
           helperText="Please select your category"
@@ -112,7 +119,8 @@ const UpdateRecipe = (props) => {
         <TextField
           fullWidth
           sx={{ m: 1 }}
-          onChange={(e) => setEditDirections(e.target.value)}
+          value={directions}
+          onChange={(e) => setDirections(e.target.value)}
           variant="filled"
           label="Enter directions"
           multiline
@@ -121,7 +129,8 @@ const UpdateRecipe = (props) => {
         ></TextField>
         <TextField
           sx={{ m: 1, width: "25ch" }}
-          onChange={(e) => setEditCookTime(e.target.value)}
+          value={cookTime}
+          onChange={(e) => setCookTime(e.target.value)}
           label="Cook Time"
           id="Cook Time"
           InputProps={{
@@ -130,16 +139,17 @@ const UpdateRecipe = (props) => {
         />
         <TextField
           sx={{ m: 1, width: "25ch" }}
-          onChange={(e) => setEditServings(e.target.value)}
+          value={servings}
+          onChange={(e) => setServings(e.target.value)}
           label="Serving Size"
           id="ServingSize"
           variant="filled"
         />
         <FormControlLabel
-          value=""
           control={
             <Checkbox
-              onChange={(e) => setEditIsPublic(e.target.checked)}
+              value={isPublic}
+              onChange={(e) => setIsPublic(e.target.checked)}
               checked={isPublic}
             />
           }
@@ -170,6 +180,7 @@ const UpdateRecipe = (props) => {
           </Button>
         </div>
       </Box>
+    }
     </Modal>
   );
 };

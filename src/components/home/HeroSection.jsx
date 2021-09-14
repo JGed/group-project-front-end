@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { Container, Box, Typography } from "@material-ui/core";
 import bgImage from "../../assets/images/hero_background3.jpg";
 

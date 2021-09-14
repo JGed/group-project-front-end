@@ -8,6 +8,7 @@ const Footer = (props) => {
       sx={{
         height: 100,
         backgroundColor: 'neutral.main',
+        flex: '0 1 auto',
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
