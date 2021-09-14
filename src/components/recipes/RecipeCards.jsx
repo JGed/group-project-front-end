@@ -1,5 +1,14 @@
 import * as React from "react";
-import { Card, CardContent, CardMedia, Typography, CardActionArea, Container, Grid } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  CardActionArea,
+  Container,
+  Grid,
+  Button,
+} from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const RecipeCards = (props) => {
@@ -8,7 +17,7 @@ const RecipeCards = (props) => {
       <Grid container spacing={4}>
         {props.recipes?.map((recipe) => {
           return (
-            <Grid item xs={12} lg={3} sm={6} sx={{mb: 4}}>
+            <Grid item xs={12} lg={3} sm={6} sx={{ mb: 4 }}>
               <Card>
                 <CardActionArea>
                   <Link to={`/recipe/${recipe.id}`}>
@@ -18,8 +27,14 @@ const RecipeCards = (props) => {
                       image={recipe.photoURL}
                       alt={recipe.name}
                     />
+
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="div" noWrap>
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                        noWrap
+                      >
                         {recipe.name}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
@@ -35,7 +50,6 @@ const RecipeCards = (props) => {
       </Grid>
     </Container>
   );
-
 };
 
 export default RecipeCards;
