@@ -13,9 +13,12 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import fetchMyRecipes from '../requests/fetchMyRecipes';
 import deleteMyRecipe from '../requests/deleteMyRecipe';
 import { useSession } from '../context/sessionContext';
+import RecipeCreate from '../components/recipes/RecipeCreate';
+
 const Profile = () => {
     const [recipes, setRecipes] = useState([]);
     const { sessionToken } = useSession();
+    const [isOpen, setIsOpen] = useState(false);
     const handleDeleteClick = (recipe) => async (e) => {
         try {
             const { status } = await deleteMyRecipe(recipe, sessionToken);
@@ -50,11 +53,12 @@ const Profile = () => {
                     Good Morning!  What are we cooking Today?
                 </Typography>
                 <Box sx={{display: 'flex', justifyContent: 'center'}}>
-                    <Button variant='contained' color='secondary'>Add A Recipe</Button>
+                    <Button variant='contained' color='secondary' onClick={() => setIsOpen(true)}>Add A Recipe</Button>
                 </Box>
                 <Typography variant='h3' color='secondary.dark' align='center' sx={{pt: 2}}>
                     Your Recipes:
                 </Typography>
+                <RecipeCreate open={isOpen} setOpen={setIsOpen} />
                 <Grid container spacing={2} sx={{ pt: 4, px: 6 }}>
                     {recipes.map((recipe) => (
                         <Grid
