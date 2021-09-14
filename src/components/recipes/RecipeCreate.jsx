@@ -20,8 +20,6 @@ const RecipeCreate = (props) => {
   const [servings, setServings] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const [isPublic, setIsPublic] = useState(false);
-  const [checked, setChecked] = React.useState(true);
-  const [open, setOpen] = React.useState(false);
   const { sessionToken } = useSession();
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -31,9 +29,6 @@ const RecipeCreate = (props) => {
     { value: "Lunch", label: "Lunch" },
     { value: "Dinner", label: "Dinner" },
   ];
-  const handleOpen = () => {
-    props.setOpen(true);
-  };
 
   const handleClose = () => {
     props.setOpen(false);
@@ -54,8 +49,12 @@ const RecipeCreate = (props) => {
         },
         sessionToken
       );
-      console.log(status);
-      console.log(json);
+      if(status === 200) {
+        handleClose();
+      }
+      if(status === 500) {
+        console.log(json);
+      }
     } catch (error) {}
   };
   return (
