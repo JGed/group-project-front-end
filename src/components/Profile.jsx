@@ -17,10 +17,16 @@ import RecipeCardArea from './common/RecipeCardArea';
 import RecipeCardContainer from './common/RecipeCardContainer';
 import MainContentContainer from './common/MainContentContainer';
 import { Link } from 'react-router-dom';
+import RecipeEdit from './recipes/RecipeEdit';
+import RecipeCreate from './recipes/RecipeCreate';
+
 const Profile = () => {
     const [recipes, setRecipes] = useState([]);
     const { sessionToken } = useSession();
-    const [isOpen, setIsOpen] = useState(false);
+    const [createIsOpen, setCreateIsOpen] = useState(false);
+    const [editIsOpen, setEditIsOpen] = useState(false);
+    const [recipeToEdit, setRecipeToEdit] = useState();
+
     const handleDeleteClick = (recipe) => async (e) => {
         try {
             const { status } = await deleteMyRecipe(recipe, sessionToken);
@@ -30,6 +36,14 @@ const Profile = () => {
             }
         } catch (err) {}
     };
+    const handleAddClick = e => {
+        setCreateIsOpen(true);
+    }
+    const handleEditClick = recipe => e => {
+        console.log(recipe)
+        setRecipeToEdit({ ...recipe })
+        setEditIsOpen(true);
+    }
     useEffect(() => {
         (async () => {
             try {
@@ -39,7 +53,7 @@ const Profile = () => {
                 }
             } catch (err) {}
         })();
-    }, [sessionToken, recipes]);
+    }, [sessionToken]);
     return (
         <MainContentContainer>
             <Typography
@@ -51,9 +65,10 @@ const Profile = () => {
                 Good Morning! What are we cooking Today?
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Button variant="contained" color="secondary">
+                <Button variant="contained" color="secondary" onClick={handleAddClick}>
                     Add A Recipe
                 </Button>
+                <RecipeCreate open={createIsOpen} setOpen={setCreateIsOpen} />
             </Box>
             <Typography
                 variant="h3"
@@ -110,7 +125,7 @@ const Profile = () => {
                                         <Button
                                             variant="contained"
                                             color="primary"
-                                            onClick={(e) => null}
+                                            onClick={handleEditClick(recipe)}
                                         >
                                             Edit
                                         </Button>
@@ -128,6 +143,7 @@ const Profile = () => {
                     </RecipeCardContainer>
                 ))}
             </RecipeCardArea>
+            {recipeToEdit && <RecipeEdit open={editIsOpen} setOpen={setEditIsOpen} recipe={recipeToEdit} />}
         </MainContentContainer>
     );
 };
