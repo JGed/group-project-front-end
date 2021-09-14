@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import HeroSection from "./HeroSection";
-import HotRecipes from "./HotRecipes";
-import Header from "./Header";
 import { useSession } from "../../context/sessionContext";
 import fetchPublicRecipes from "../../requests/fetchPublicRecipes";
+import HeroSection from "./HeroSection";
+import HotRecipes from "./HotRecipes";
+import MainContentContainer from "../common/MainContentContainer";
 
 const HomeIndex = (props) => {
   const [recipes, setRecipes] = useState([]);
@@ -38,13 +38,10 @@ const HomeIndex = (props) => {
     })();
   }, [sessionToken]);
   return (
-    <div>
-      <div class="homeNav"></div>
-      <Header token={props.token} />
+    <MainContentContainer noPadding>
       <HeroSection />
       <HotRecipes recipes={recipes} />
-    </div>
+    </MainContentContainer>
   );
 };
-
 export default HomeIndex;

@@ -17,8 +17,7 @@ const HotRecipes = (props) => {
     return b.views - a.views;
   });
   recipes = recipes.slice(0, 4);
-  return (
-    <div>
+  return (    
       <Container maxWidth="false" sx={{ mt: 5 }}>
         <Box>
           <Typography variant="h2">Top Recipes of the Week</Typography>
@@ -58,7 +57,6 @@ const HotRecipes = (props) => {
           })}
         </Grid>
       </Container>
-    </div>
   );
 };
 

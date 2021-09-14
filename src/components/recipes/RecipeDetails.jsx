@@ -3,17 +3,16 @@ import { useSession } from '../../context/sessionContext';
 import { Grid, Typography, Box } from '@material-ui/core';
 import fetchRecipeById from '../../requests/fetchRecipeById';
 import { useParams, Link } from 'react-router-dom';
-import { useTheme } from '@material-ui/core/styles';
-import NavBar from './NavBar';
+import MainContentContainer from '../common/MainContentContainer';
+import Timer from '../common/Timer';
+
 const RecipeDetails = () => {
     const [recipe, setRecipe] = useState({});
     const { id } = useParams();
     const [error, setError] = useState(false);
+    const [loaded, setLoaded] = useState(false);
     const [message, setMessage] = useState('');
 
-    const [loaded, setLoaded] = useState(false);
-
-    const theme = useTheme();
     const { sessionToken } = useSession();
 
     useEffect(() => {
@@ -24,9 +23,10 @@ const RecipeDetails = () => {
                     sessionToken
                 );
                 if (status === 200) {
-                    setRecipe(json.recipe);
+                    setRecipe({ ...json.recipe });
                     setMessage('');
                     setError(false);
+                    setLoaded(true);
                 }
                 if (status === 403) {
                     setMessage(json.message);
@@ -46,20 +46,20 @@ const RecipeDetails = () => {
     }, [id, sessionToken]);
 
     return (
-        <>
-            <NavBar />
-                {error ? (
-                    <Grid container sx={{ textAlign: 'center' }}>
-                        <Grid item xs={12} sx={{ pt: 5 }}>
-                            <Typography variant="h3">{message}</Typography>
-                        </Grid>
+        <MainContentContainer noPadding>
+            {error ? (
+                <Grid container sx={{ textAlign: 'center' }}>
+                    <Grid item xs={12} sx={{ pt: 5 }}>
+                        <Typography variant="h3">{message}</Typography>
                     </Grid>
-                ) : (
+                </Grid>
+            ) : (
+                loaded && (
                     <Grid
                         container
                         sx={{
-                            minHeight: '90vh',
                             backgroundColor: 'neutral.light',
+                            pb: 5
                         }}
                     >
                         <Grid
@@ -73,9 +73,6 @@ const RecipeDetails = () => {
                                 padding: 5,
                             }}
                         >
-                            {
-                                //This grid is for the picture
-                            }
                             <img
                                 style={
                                     loaded
@@ -87,11 +84,26 @@ const RecipeDetails = () => {
                                 onLoad={() => setLoaded(true)}
                             />
                         </Grid>
-                        <Grid item md={12} lg={6} sx={{color: 'secondary.dark', px: 2} }>
-                            <Box sx={{py: 8, }}>
-                            <Typography variant="h1">{recipe.name}</Typography>
+                        <Grid
+                            item
+                            md={12}
+                            lg={6}
+                            sx={{ color: 'secondary.dark', px: 2 }}
+                        >
+                            <Box sx={{ py: 8 }}>
+                                <Typography variant="h1">
+                                    {recipe.name}
+                                </Typography>
                             </Box>
-                            <Typography>Created by: <Link className='router-link' to={`/users/${recipe.owner}`}>{recipe.owner}</Link></Typography>
+                            <Typography>
+                                Created by:{' '}
+                                <Link
+                                    className="router-link"
+                                    to={`/users/${recipe.owner}`}
+                                >
+                                    {recipe.owner}
+                                </Link>
+                            </Typography>
                             <br />
                             <Typography>
                                 Category:{' '}
@@ -114,9 +126,13 @@ const RecipeDetails = () => {
                             </Typography>
                             <br />
                         </Grid>
+                        <Grid item xs={12}>
+                            <Timer recipe={recipe} />
+                        </Grid>
                     </Grid>
-                )}
-        </>
+                )
+            )}
+        </MainContentContainer>
     );
 };
 
