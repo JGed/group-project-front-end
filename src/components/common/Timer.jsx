@@ -21,7 +21,7 @@ const Timer = ({ recipe }) => {
                             setFinished(true);
                             return 0;
                         } else {
-                            setMins((currMins) => currMins - 1);
+                            setMins(mins - 1);
                             return 59;
                         }
                     }
