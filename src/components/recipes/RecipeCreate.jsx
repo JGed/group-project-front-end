@@ -25,9 +25,10 @@ const RecipeCreate = (props) => {
     setCategory(event.target.value);
   };
   const foodCategories = [
-    { value: "Breakfast", label: "Breakfast" },
-    { value: "Lunch", label: "Lunch" },
-    { value: "Dinner", label: "Dinner" },
+    { value: "breakfast", label: "breakfast" },
+    { value: "lunch", label: "lunch" },
+    { value: "dinner", label: "dinner" },
+    { value: 'dessert', label: 'dessert'}
   ];
 
   const handleClose = () => {

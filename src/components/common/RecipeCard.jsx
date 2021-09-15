@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 const RecipeCard = ({ recipe }) => {
     return (
         <Card sx={{ width: 350, height: 310 }}>
-            <CardActionArea>
+            <CardActionArea sx={{height: '100%'}}>
                 <Link className="router-card" to={`/recipe/${recipe.id}`}>
                     <CardMedia
                         component="img"
