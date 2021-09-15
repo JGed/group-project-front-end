@@ -10,6 +10,7 @@ import {
   CardActionArea,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import MainContentContainer from "../common/MainContentContainer";
 
 const HotRecipes = (props) => {
   let recipes = props.recipes;
@@ -18,7 +19,7 @@ const HotRecipes = (props) => {
   });
   recipes = recipes.slice(0, 4);
   return (    
-      <Container maxWidth="false" sx={{ mt: 5 }}>
+    <MainContentContainer>
         <Box>
           <Typography variant="h2">Top Recipes of the Week</Typography>
         </Box>
@@ -56,7 +57,7 @@ const HotRecipes = (props) => {
             );
           })}
         </Grid>
-      </Container>
+      </MainContentContainer>
   );
 };
 
