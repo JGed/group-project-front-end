@@ -12,7 +12,7 @@ import {
 import { useSession } from "../../context/sessionContext";
 import updateMyRecipe from "../../requests/updateMyRecipe";
 
-const UpdateRecipe = (props) => {
+const RecipeEdit = (props) => {
   const [editCategory, setEditCategory] = React.useState(props.recipe.category);
   const [editName, setEditName] = useState(props.recipe.name);
   const [editDirections, setEditDirections] = useState(props.recipe.directions);
@@ -30,6 +30,7 @@ const UpdateRecipe = (props) => {
     { value: "Breakfast", label: "Breakfast" },
     { value: "Lunch", label: "Lunch" },
     { value: "Dinner", label: "Dinner" },
+    { value: "Dessert", label: "Dessert" },
   ];
   const handleOpen = () => {
     props.setOpen(true);
