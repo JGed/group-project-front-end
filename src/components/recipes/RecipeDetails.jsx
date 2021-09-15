@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSession } from '../../context/sessionContext';
-import { Grid, Typography, Box } from '@material-ui/core';
+import { Grid, Typography, Box, Divider } from '@material-ui/core';
 import fetchRecipeById from '../../requests/fetchRecipeById';
 import { useParams, Link } from 'react-router-dom';
 import MainContentContainer from '../common/MainContentContainer';
@@ -59,15 +59,15 @@ const RecipeDetails = () => {
                         container
                         sx={{
                             backgroundColor: 'neutral.light',
-                            pb: 5
+                            pb: 5,
                         }}
                     >
                         <Grid
                             item
-                            container
                             md={12}
                             lg={5}
                             sx={{
+                                display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 padding: 5,
@@ -125,6 +125,9 @@ const RecipeDetails = () => {
                                 Directions: {recipe.directions}
                             </Typography>
                             <br />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Divider />
                         </Grid>
                         <Grid item xs={12}>
                             <Timer recipe={recipe} />

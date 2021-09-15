@@ -66,7 +66,7 @@ const globalTheme = createTheme({
     h2: {
       fontFamily: pageFont,
       fontSize: 40,
-      fontWeight: 800,
+      fontWeight: 400,
       marginBottom: 20,
     },
     h3: {

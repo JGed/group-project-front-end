@@ -42,10 +42,10 @@ const RecipeEdit = (props) => {
         setCategory(event.target.value);
     };
     const foodCategories = [
-        { value: 'breakfast', label: 'breakfast' },
-        { value: 'lunch', label: 'lunch' },
-        { value: 'dinner', label: 'dinner' },
-        { value: 'dessert', label: 'dessert' },
+        { value: 'breakfast', label: 'Breakfast' },
+        { value: 'lunch', label: 'Lunch' },
+        { value: 'dinner', label: 'Dinner' },
+        { value: 'dessert', label: 'Dessert' },
     ];
 
     const handleClose = () => {
