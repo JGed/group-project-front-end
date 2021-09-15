@@ -4,14 +4,13 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import HomeIndex from './components/home/HomeIndex';
 import RecipeIndex from './components/recipes/RecipeIndex';
 import Footer from './components/home/Footer';
-import { Box } from '@material-ui/core';
 import './App.css';
 import { SessionProvider } from './context/sessionContext';
 import RecipeDetails from './components/recipes/RecipeDetails';
-import Profile from './components/Profile';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import RecipeCategory from './components/RecipeCategory';
-import RecipeUser from './components/RecipeUser';
+import Profile from './components/home/Profile';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import RecipeCategory from './components/recipes/RecipeCategory';
+import RecipeUser from './components/recipes/RecipeUser';
 import GoToTop from './components/GoToTop';
 import NavBar from './components/recipes/NavBar';
 import { Redirect } from 'react-router-dom';
@@ -22,13 +21,14 @@ function App() {
     useEffect(() => {
         document.title = 'ClickNCook';
         const storedToken = localStorage.getItem('sessionToken');
-        if (storedToken !== 'undefined') {
+        if (storedToken) {
             setSessionToken(storedToken);
         }
     }, []);
 
     const updateToken = (newToken) => {
         if (newToken) {
+            console.log('newToken was true')
             localStorage.setItem('sessionToken', newToken);
         } else {
             localStorage.clear();

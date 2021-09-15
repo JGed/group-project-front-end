@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSession } from "../../context/sessionContext";
 import fetchPublicRecipes from "../../requests/fetchPublicRecipes";
 import HeroSection from "./HeroSection";
@@ -6,6 +6,7 @@ import HotRecipes from "./HotRecipes";
 import MainContentContainer from "../common/MainContentContainer";
 
 const HomeIndex = (props) => {
+  const unmounted = useRef(false);
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
@@ -14,27 +15,30 @@ const HomeIndex = (props) => {
     (async () => {
       try {
         const { status, json } = await fetchPublicRecipes(sessionToken);
-        console.log(json);
         if (status === 200) {
+        if(unmounted) return;
           setRecipes(json);
           setMessage("");
           setError(false);
         }
         if (status === 403) {
+        if(unmounted) return;
           setMessage(json.message);
           setError(true);
         }
         if (status === 404) {
+        if(unmounted) return;
           setMessage(json.message);
           setError(true);
         }
       } catch (err) {
+        if(unmounted) return;
         setMessage(
           "Uh-oh something on our end went wrong. Try refreshing to view this page"
         );
         setError(true);
-        console.log(err);
       }
+      return () => unmounted.current = true;
     })();
   }, [sessionToken]);
   return (

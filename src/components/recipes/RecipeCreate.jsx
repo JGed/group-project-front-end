@@ -124,7 +124,7 @@ const RecipeCreate = (props) => {
           onChange={(e) => setCookTime(e.target.value)}
           label="Cook Time"
           id="Cook Time"
-          InputProps={{
+          inputProps={{
             endAdornment: <InputAdornment position="end">Mins</InputAdornment>,
           }}
         />

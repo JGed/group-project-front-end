@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Typography } from '@material-ui/core';
 import { useParams, Redirect } from 'react-router-dom';
-import fetchRecipesByCategory from '../requests/fetchRecipesByCategory';
-import RecipeCardArea from './common/RecipeCardArea';
-import RecipeCardContainer from './common/RecipeCardContainer';
-import RecipeCard from './common/RecipeCard';
-import MainContentContainer from './common/MainContentContainer';
+import fetchRecipesByCategory from '../../requests/fetchRecipesByCategory';
+import RecipeCardArea from '../common/RecipeCardArea';
+import RecipeCardContainer from '../common/RecipeCardContainer';
+import RecipeCard from '../common/RecipeCard';
+import MainContentContainer from '../common/MainContentContainer';
 
 const RecipeCategory = () => {
     const [recipes, setRecipes] = useState([]);

@@ -15,6 +15,7 @@ const RecipeDetails = () => {
 
     const { sessionToken } = useSession();
 
+    
     useEffect(() => {
         (async () => {
             try {
@@ -60,6 +61,7 @@ const RecipeDetails = () => {
                         sx={{
                             backgroundColor: 'neutral.light',
                             pb: 5,
+                            flex: '1 1 auto'
                         }}
                     >
                         <Grid
@@ -116,7 +118,7 @@ const RecipeDetails = () => {
                             </Typography>
                             <br />
                             <Typography>
-                                Cook Time: {recipe.cookTime}
+                                Cook Time: {recipe.cookTime} mins
                             </Typography>
                             <br />
                             <Typography>Servings: {recipe.servings}</Typography>
@@ -129,7 +131,7 @@ const RecipeDetails = () => {
                         <Grid item xs={12}>
                             <Divider />
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sx={{}}>
                             <Timer recipe={recipe} />
                         </Grid>
                     </Grid>

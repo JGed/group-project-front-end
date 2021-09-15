@@ -10,15 +10,15 @@ import {
     CardActionArea,
 } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import fetchMyRecipes from '../requests/fetchMyRecipes';
-import deleteMyRecipe from '../requests/deleteMyRecipe';
-import { useSession } from '../context/sessionContext';
-import RecipeCardArea from './common/RecipeCardArea';
-import RecipeCardContainer from './common/RecipeCardContainer';
-import MainContentContainer from './common/MainContentContainer';
+import fetchMyRecipes from '../../requests/fetchMyRecipes';
+import deleteMyRecipe from '../../requests/deleteMyRecipe';
+import { useSession } from '../../context/sessionContext';
+import RecipeCardArea from '../common/RecipeCardArea';
+import RecipeCardContainer from '../common/RecipeCardContainer';
+import MainContentContainer from '../common/MainContentContainer';
 import { Link } from 'react-router-dom';
-import RecipeEdit from './recipes/RecipeEdit';
-import RecipeCreate from './recipes/RecipeCreate';
+import RecipeEdit from '../recipes/RecipeEdit';
+import RecipeCreate from '../recipes/RecipeCreate';
 
 const Profile = () => {
     const [recipes, setRecipes] = useState([]);
