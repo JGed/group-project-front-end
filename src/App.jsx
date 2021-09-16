@@ -15,6 +15,11 @@ import GoToTop from './components/GoToTop';
 import NavBar from './components/recipes/NavBar';
 import { Redirect } from 'react-router-dom';
 import AppContainer from './components/common/AppContainer';
+import seed from './requests/seeding'
+// ************************************************************
+import userRegister from './requests/userRegister';
+import createMyRecipe from './requests/createMyRecipe';
+// ************************************************************
 function App() {
     const [sessionToken, setSessionToken] = useState(undefined);
 
@@ -25,16 +30,20 @@ function App() {
             setSessionToken(storedToken);
         }
     }, []);
-
+    useEffect(() => {
+        seed();
+    }, [])
     const updateToken = (newToken) => {
         if (newToken) {
-            console.log('newToken was true')
             localStorage.setItem('sessionToken', newToken);
         } else {
             localStorage.clear();
         }
         setSessionToken(newToken);
     };
+    const mainPage = () => {
+        return sessionToken ? <RecipeIndex /> : [<HomeIndex />]
+    }
 
     return (
         <ThemeProvider theme={globalTheme}>
@@ -47,9 +56,7 @@ function App() {
                         <GoToTop />
                         <NavBar />
                         <Switch>
-                            <Route exact path="/">
-                                {sessionToken ? <RecipeIndex /> : <HomeIndex />}
-                            </Route>
+                            <Route exact path="/" render={() => sessionToken ? <RecipeIndex /> : <HomeIndex />} />
                             <Route exact path="/recipe/:id">
                                 <RecipeDetails />
                             </Route>
