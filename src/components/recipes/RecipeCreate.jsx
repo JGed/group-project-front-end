@@ -21,8 +21,6 @@ const RecipeCreate = (props) => {
   const [servings, setServings] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const [isPublic, setIsPublic] = useState(false);
-  const [checked, setChecked] = React.useState(true);
-  const [open, setOpen] = React.useState(false);
   const { sessionToken } = useSession();
   const [messageInfo, setMessageInfo] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -47,9 +45,6 @@ const RecipeCreate = (props) => {
     { value: "Dinner", label: "Dinner" },
     { value: "Dessert", label: "Dessert" },
   ];
-  const handleOpen = () => {
-    props.setOpen(true);
-  };
 
   const handleClose = () => {
     props.setOpen(false);

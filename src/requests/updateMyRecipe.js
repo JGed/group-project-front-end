@@ -1,5 +1,5 @@
 const updateMyRecipe = async (recipe, token) => {
-    const response = await fetch(`https//localhost:3000/recipe/${recipe.id}`, {
+    const response = await fetch(`http://localhost:3000/recipe/${recipe.id}`, {
         method: 'PUT',
         body: JSON.stringify({
             recipe: recipe
