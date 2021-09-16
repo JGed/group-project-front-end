@@ -32,17 +32,8 @@ const Header = (props) => {
       }
   };
   return (
-    <Container
-      maxWidth="false"
-      sx={{
-        minHeight: 100,
-        position: "absolute",
-        display: "flex",
-        justifyContent: "center",
-        marginTop: 1
-      }}
-    >
-      <Grid container spacing={2} maxWidth="xl" alignItems="center">
+    
+      <Grid container spacing={2} alignItems="center" sx={{minHeight: 100, position: "absolute", pl: 5, pr: 5, mt: 1}}>
         <Grid item xs={6}>
           <Box
             component="img"
@@ -75,7 +66,7 @@ const Header = (props) => {
           </Button>
         </Grid>
       </Grid>
-    </Container>
+    
   );
 };
 

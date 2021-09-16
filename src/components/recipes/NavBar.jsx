@@ -7,6 +7,7 @@ import Register from '../auth/Register';
 import { Link, useHistory } from 'react-router-dom';
 
 import Mascot from '../../assets/images/clickncook_mascot.png';
+import Avatar from '@material-ui/core/Avatar';
 
 const NavBar = () => {
     const { sessionToken, setSessionToken } = useSession();
@@ -29,53 +30,6 @@ const NavBar = () => {
         openModal();
     };
 
-<<<<<<< HEAD
-  return (
-    <Container maxWidth="false" disableGutters>
-      <Toolbar
-        sx={{
-          backgroundColor: "secondary.main",
-          width: "100%",
-          minHeight: 100,
-        }}
-      >
-        <Grid container spacing={2} >
-          <Grid item container xs={6}>
-            <Box sx={{display: 'flex', alignItems: 'center'}}>
-          <Link to='/'>
-          <Box
-            component="img"
-            sx={{
-              width: 50,
-              maxHeight: { xs: 233, md: 167 },
-              maxWidth: { xs: 350, md: 250 },
-            }}
-            alt="Clickin the Chicken"
-            src={`${Mascot}`}
-          />
-          </Link>
-          </Box>
-             <Button variant="text" color="primary" sx={{cursor: 'default'}} disableRipple>
-              <Link className='router-button' to='/category/breakfast'>Breakfast</Link>
-             </Button>
-            <Button variant="text" color="primary" sx={{cursor: 'default'}} disableRipple>
-              <Link className='router-button' to='/category/lunch'>Lunch</Link>
-            </Button>
-            <Button variant="text" color="primary"  sx={{cursor: 'default'}} disableRipple>
-              <Link className='router-button' to='/category/dinner'>Dinner</Link>
-            </Button>
-            <Button variant="text" color="primary"  sx={{cursor: 'default'}} disableRipple>
-              <Link className='router-button' to='/category/dinner'>Dessert</Link>
-            </Button>
-          </Grid>
-          <Grid item container xs={6} sx={{ justifyContent: "flex-end" }}>
-            <Button
-              color="secondary"
-              variant="contained"
-              size='small'
-              sx={{border: 2, borderColor: '#fff'}}
-              onClick={handleLogout}
-=======
     const renderModalComponent = (component) => {
         switch (component) {
             case 'Login':
@@ -103,7 +57,6 @@ const NavBar = () => {
                     backgroundColor: 'secondary.main',
                     minHeight: 100,
                 }}
->>>>>>> ed85ae6c7be7c25792465889e1880903c352d08d
             >
                 <Grid container spacing={2}>
                     <Grid item container xs={6}>
@@ -184,6 +137,7 @@ const NavBar = () => {
                         }}
                     >
                         <Grid item>
+                          <Avatar src="/broken-image.png" />
                             {sessionToken ? (
                                 <Button
                                     color="secondary"
