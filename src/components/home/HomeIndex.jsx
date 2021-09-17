@@ -42,7 +42,7 @@ const HomeIndex = (props) => {
                     setError(true);
                 }
             }
-            return () => (mounted = false);
+            return () => { mounted = false };
         })();
     }, [sessionToken]);
     return (

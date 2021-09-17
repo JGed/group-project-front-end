@@ -16,10 +16,7 @@ import NavBar from './components/recipes/NavBar';
 import { Redirect } from 'react-router-dom';
 import AppContainer from './components/common/AppContainer';
 import seed from './requests/seeding'
-// ************************************************************
-import userRegister from './requests/userRegister';
-import createMyRecipe from './requests/createMyRecipe';
-// ************************************************************
+const shouldSeed = false;
 function App() {
     const [sessionToken, setSessionToken] = useState(undefined);
 
@@ -31,7 +28,9 @@ function App() {
         }
     }, []);
     useEffect(() => {
-        seed();
+        if(shouldSeed) {
+            seed();
+        }
     }, [])
     const updateToken = (newToken) => {
         if (newToken) {
@@ -41,9 +40,6 @@ function App() {
         }
         setSessionToken(newToken);
     };
-    const mainPage = () => {
-        return sessionToken ? <RecipeIndex /> : [<HomeIndex />]
-    }
 
     return (
         <ThemeProvider theme={globalTheme}>
