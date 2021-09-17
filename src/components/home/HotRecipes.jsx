@@ -2,7 +2,6 @@ import React from "react";
 import {
   Box,
   Grid,
-  Container,
   Typography,
   Card,
   CardContent,
@@ -26,7 +25,7 @@ const HotRecipes = (props) => {
         <Grid container spacing={4} sx={{ mt: 0 }}>
           {recipes.map((recipe) => {
             return (
-              <Grid item xs={12} lg={3} sm={6} sx={{ mb: 10 }}>
+              <Grid key={recipe.id} item xs={12} lg={3} sm={6} sx={{ mb: 10 }}>
                 <Card>
                   <CardActionArea>
                     <Link to={`/recipe/${recipe.id}`}>
