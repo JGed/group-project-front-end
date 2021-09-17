@@ -6,7 +6,7 @@ import Login from '../auth/Login';
 import Register from '../auth/Register';
 import { Link, useHistory } from 'react-router-dom';
 
-import Mascot from '../../assets/images/clickncook_mascot.png';
+import Mascot from '../../assets/images/clickncook_logomark.svg';
 
 const NavBar = () => {
     const { sessionToken, setSessionToken } = useSession();
