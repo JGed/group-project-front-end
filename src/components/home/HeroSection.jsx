@@ -1,5 +1,6 @@
 import { Container, Box, Typography } from "@material-ui/core";
-import bgImage from "../../assets/images/hero_background3.jpg";
+import bgImage from "../../assets/images/hero_background4.jpg";
+import LogoType from "../../assets/images/clickncook_logotype.svg";
 
 const HeroSection = (props) => {
   return (
@@ -9,18 +10,15 @@ const HeroSection = (props) => {
         minHeight: 500,
         backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
-        backgroundPosition: "50% 20%",
+        backgroundPosition: "50% 50%",
       }}
     >
       <Box
-        sx={{
-          color: "white",
-          fontFamily: "'Fredoka One', cursive;",
-          fontSize: 70,
-        }}
-      >
-        ClickNCook
-      </Box>
+        component="img"
+        sx={{ width: 500 }}
+        alt="Clickin the Chicken"
+        src={`${LogoType}`}
+      />
       <Typography variant="h3">Yummm.....what's clicking?</Typography>
     </Container>
   );
