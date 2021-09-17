@@ -2,17 +2,17 @@ import {
     Card,
     CardActionArea,
     CardMedia,
+    Divider,
     CardContent,
     Typography,
-    Divider,
     Grid,
 } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Link } from 'react-router-dom';
 const RecipeCard = ({ recipe }) => {
     return (
-        <Card sx={{ width: 350, height: 310 }}>
-            <CardActionArea>
+        <Card sx={{ width: 350, height: 250 }}>
+            <CardActionArea sx={{height: '100%'}}>
                 <Link className="router-card" to={`/recipe/${recipe.id}`}>
                     <CardMedia
                         component="img"
@@ -23,11 +23,12 @@ const RecipeCard = ({ recipe }) => {
                     <CardContent>
                         <Grid container>
                             <Grid item xs={9}>
-                                <Typography variant="h5" component="div" noWrap>
+                                <Typography variant="h6" component="div" noWrap>
                                     {recipe.name}
                                 </Typography>
+                                <Divider />
                                 <Typography
-                                    variant="h6"
+                                    variant="subtitle1"
                                     color="text.secondary"
                                     noWrap
                                 >
@@ -49,10 +50,6 @@ const RecipeCard = ({ recipe }) => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Divider />
-                        <Typography variant="body2" color="text.secondary">
-                            {recipe.directions}
-                        </Typography>
                     </CardContent>
                 </Link>
             </CardActionArea>

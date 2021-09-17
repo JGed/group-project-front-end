@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import {
     Typography,
 } from '@material-ui/core';
-import fetchPublicRecipesByUsername from '../requests/fetchPublicRecipesByUsername';
+import fetchPublicRecipesByUsername from '../../requests/fetchPublicRecipesByUsername';
 import { useParams } from 'react-router-dom';
-import MainContentContainer from './common/MainContentContainer';
-import RecipeCardArea from './common/RecipeCardArea'
-import RecipeCard from './common/RecipeCard'
-import RecipCardContainer from './common/RecipeCardContainer'
+import MainContentContainer from '../common/MainContentContainer';
+import RecipeCardArea from '../common/RecipeCardArea'
+import RecipeCard from '../common/RecipeCard'
+import RecipCardContainer from '../common/RecipeCardContainer'
 const RecipeUser = () => {
     const [recipes, setRecipes] = useState([]);
     const { username } = useParams();

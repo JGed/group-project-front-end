@@ -13,7 +13,7 @@ const NavBar = () => {
 
     const history = useHistory();
     const handleLogout = (e) => {
-        setSessionToken(undefined);
+        setSessionToken();
         history.push('/');
     };
 
@@ -23,7 +23,10 @@ const NavBar = () => {
 
 
     const openModal = () => setModalIsOpen(true);
-    const closeModal = () => setModalIsOpen(false);
+    const closeModal = () => {
+        setModalIsOpen(false) ; 
+        setModalComponent('');
+    }
     const handleClick = (name) => (e) => {
         setModalComponent(name);
         openModal();
