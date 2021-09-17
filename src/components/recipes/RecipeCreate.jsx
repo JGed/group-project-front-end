@@ -40,10 +40,10 @@ const RecipeCreate = (props) => {
   };
   const { setSessionToken } = useSession();
   const foodCategories = [
-    { value: "Breakfast", label: "Breakfast" },
-    { value: "Lunch", label: "Lunch" },
-    { value: "Dinner", label: "Dinner" },
-    { value: "Dessert", label: "Dessert" },
+    { value: "breakfast", label: "Breakfast" },
+    { value: "lunch", label: "Lunch" },
+    { value: "dinner", label: "Dinner" },
+    { value: "dessert", label: "Dessert" },
   ];
 
   const handleClose = () => {
@@ -145,8 +145,7 @@ const RecipeCreate = (props) => {
           onChange={(e) => setCookTime(e.target.value)}
           label="Cook Time"
           id="Cook Time"
-          value={cookTime}
-          InputProps={{
+          inputProps={{
             endAdornment: <InputAdornment position="end">Mins</InputAdornment>,
           }}
         />

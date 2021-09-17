@@ -42,10 +42,10 @@ const RecipeEdit = (props) => {
     setCategory(event.target.value);
   };
   const foodCategories = [
-    { value: "Breakfast", label: "Breakfast" },
-    { value: "Lunch", label: "Lunch" },
-    { value: "Dinner", label: "Dinner" },
-    { value: "Dessert", label: "Dessert" },
+    { value: "breakfast", label: "Breakfast" },
+    { value: "lunch", label: "Lunch" },
+    { value: "dinner", label: "Dinner" },
+    { value: "dessert", label: "Dessert" },
   ];
 
   const handleClose = () => {
@@ -55,7 +55,7 @@ const RecipeEdit = (props) => {
   const handleUpdateRecipe = async (e) => {
     e.preventDefault();
     try {
-      const { status, json } = await updateMyRecipe(
+      const { status } = await updateMyRecipe(
         {
           id: props.recipe.id,
           category: category,

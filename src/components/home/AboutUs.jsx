@@ -1,38 +1,55 @@
 import React from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { Container, Box, Typography } from "@material-ui/core";
+import {
+  Container,
+  Box,
+  Typography,
+  Grid,
+  Paper,
+  Avatar,
+} from "@material-ui/core";
+import { styled } from "@mui/material/styles";
 
 import auImage from "../../assets/images/About_Us.jpg";
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+
 const AboutUs = () => {
   return (
-    <Container
-      maxWidth="false"
-      sx={{
-        minHeight: 500,
-        backgroundImage: `url(${auImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "50% 20%",
-      }}
-    >
-      <Box
+    <Container>
+      <Container
+        maxWidth="false"
         sx={{
-          color: "white",
-          fontFamily: "'Fredoka One', cursive;",
-          fontSize: 70,
+          minHeight: 400,
+          backgroundImage: `url(${auImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "50% 20%",
         }}
       >
-        ClickNCook
-      </Box>
-      <Typography variant="h3">Our Story</Typography>
-
+        <Box
+          sx={{
+            color: "Red",
+            fontFamily: "'Fredoka One', cursive;",
+            fontSize: 70,
+          }}
+        >
+          ClickNCook
+        </Box>
+        <Typography variant="h3">Our Story</Typography>
+      </Container>
       <Container>
-        <Box>
+        <Box sx={{ flexGrow: 1, overflow: "hidden", px: 3 }}>
           <h1>Our Motto:</h1>
-          <p>Great Food, is just a click away~</p>
+          <p>Great Food is just a click away~</p>
           <h2>Our Mission:</h2>
 
           <p>
-            To create a community of HomeCooks, Chefs, Foodies, Grillers and
+            To create a community of Home Cooks, Chefs, Foodies, Grillers, and
             Microwavers to unite and create their own recipes to share with the
             world.
           </p>
@@ -42,10 +59,40 @@ const AboutUs = () => {
             we are here to help spread the love and enjoyment of cooking to all
             of our users and help bring cooks of all levels together.
           </p>
+
           <h2>Who we Are?</h2>
-          <h3>The Design Team</h3>
-          <p>A Microwaver</p>
-          <p>A Griller</p>
+
+          <h4>The Web Design Team</h4>
+          <Grid container spacing={4} wrap="nowrap">
+            <Grid item xs={6}>
+              <Item>
+                <Avatar>JG</Avatar>
+                <p>A Microwaver</p>
+              </Item>
+            </Grid>
+
+            <Grid item xs={6}>
+              <Item>
+                <Avatar>PR</Avatar>
+                <p>A Griller</p>
+              </Item>
+            </Grid>
+
+            <Grid item xs={6}>
+              <Item>
+                <Avatar>KM</Avatar>
+                <p>A Foodie</p>
+              </Item>
+            </Grid>
+
+            <Grid item xs={6}>
+              <Item>
+                <Avatar>LS</Avatar>
+                <p>A Home Cook</p>
+              </Item>
+            </Grid>
+          </Grid>
+          <br />
         </Box>
       </Container>
     </Container>

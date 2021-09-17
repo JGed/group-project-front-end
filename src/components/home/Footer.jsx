@@ -6,9 +6,8 @@ import {
   Typography,
   Stack,
   Divider,
-  Link,
 } from "@material-ui/core";
-import { Link as RouterLink, MemoryRouter as Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Footer = (props) => {
   return (
@@ -33,11 +32,7 @@ const Footer = (props) => {
               divider={<Divider orientation="vertical" flexItem />}
               spacing={2}
             >
-              <Router>
-                <Link component={RouterLink} to="/AboutUs">
-                  About Us
-                </Link>
-              </Router>
+              <Link to="/aboutus">About Us</Link>
             </Stack>
           </Box>
         </Grid>

@@ -4,30 +4,35 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import HomeIndex from "./components/home/HomeIndex";
 import RecipeIndex from "./components/recipes/RecipeIndex";
 import Footer from "./components/home/Footer";
-import { Box } from "@material-ui/core";
 import "./App.css";
 import { SessionProvider } from "./context/sessionContext";
 import RecipeDetails from "./components/recipes/RecipeDetails";
-import Profile from "./components/Profile";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import RecipeCategory from "./components/RecipeCategory";
-import RecipeUser from "./components/RecipeUser";
+import Profile from "./components/home/Profile";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import RecipeCategory from "./components/recipes/RecipeCategory";
+import RecipeUser from "./components/recipes/RecipeUser";
 import GoToTop from "./components/GoToTop";
 import NavBar from "./components/recipes/NavBar";
 import { Redirect } from "react-router-dom";
 import AppContainer from "./components/common/AppContainer";
+import seed from "./requests/seeding";
 import AboutUs from "./components/home/AboutUs";
+const shouldSeed = false;
 function App() {
   const [sessionToken, setSessionToken] = useState(undefined);
 
   useEffect(() => {
     document.title = "ClickNCook";
     const storedToken = localStorage.getItem("sessionToken");
-    if (storedToken !== "undefined") {
+    if (storedToken) {
       setSessionToken(storedToken);
     }
   }, []);
-
+  useEffect(() => {
+    if (shouldSeed) {
+      seed();
+    }
+  }, []);
   const updateToken = (newToken) => {
     if (newToken) {
       localStorage.setItem("sessionToken", newToken);
@@ -48,9 +53,11 @@ function App() {
             <GoToTop />
             <NavBar />
             <Switch>
-              <Route exact path="/">
-                {sessionToken ? <RecipeIndex /> : <HomeIndex />}
-              </Route>
+              <Route
+                exact
+                path="/"
+                render={() => (sessionToken ? <RecipeIndex /> : <HomeIndex />)}
+              />
               <Route exact path="/recipe/:id">
                 <RecipeDetails />
               </Route>
@@ -67,18 +74,14 @@ function App() {
               <Route exact path="/profile">
                 <Profile />
               </Route>
+              <Route exact path="/aboutus">
+                <AboutUs />
+              </Route>
               <Route>
                 <Redirect to="/" />
               </Route>
             </Switch>
             <Footer />
-          </Router>
-          <Router>
-            <Switch>
-              <Route exact path="/about">
-                <AboutUs />
-              </Route>
-            </Switch>
           </Router>
         </AppContainer>
       </SessionProvider>

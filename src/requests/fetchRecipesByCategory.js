@@ -1,5 +1,5 @@
-const fetchRecipesByCategory = async (category) => {
-    const response = await fetch(`http://localhost:3000/recipe/category/${category}`, {
+const fetchRecipesByCategory = async (category, order) => {
+    const response = await fetch(`http://localhost:3000/recipe/category/${category}${order ? `?order=${order}` : ''}`, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json',
