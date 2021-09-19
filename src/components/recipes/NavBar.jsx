@@ -72,7 +72,7 @@ const NavBar = () => {
                                         maxWidth: { xs: 350, md: 250 },
                                     }}
                                     alt="Clickin the Chicken"
-                                    src={`${Mascot}`}
+                                    src={Mascot}
                                 />
                             </Link>
                         </Box>
