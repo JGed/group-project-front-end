@@ -1,4 +1,4 @@
-import { Modal, Box, Button,Container,  Typography } from '@material-ui/core';
+import { Modal, Box, Button, Container, Typography } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 
 const Timer = ({ recipe }) => {
@@ -42,11 +42,15 @@ const Timer = ({ recipe }) => {
 
     return (
         <Container>
-            <Typography variant='h3'>
+            <Typography variant="h3">
                 Time remaining: {mins} : {seconds.toString().padStart(2, '0')}
             </Typography>
             <Box>
-                <Button variant='contained' color='secondary' onClick={handleClick}>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleClick}
+                >
                     {isRunning ? 'Stop' : 'Start'}
                 </Button>
             </Box>
@@ -71,7 +75,7 @@ const Timer = ({ recipe }) => {
                     </Typography>
                 </Box>
             </Modal>
-            </Container>
+        </Container>
     );
 };
 

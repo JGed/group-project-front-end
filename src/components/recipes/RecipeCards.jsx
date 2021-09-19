@@ -7,7 +7,6 @@ import {
   CardActionArea,
   Container,
   Grid,
-  Button,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
@@ -17,7 +16,7 @@ const RecipeCards = (props) => {
       <Grid container spacing={4}>
         {props.recipes?.map((recipe) => {
           return (
-            <Grid item xs={12} lg={3} sm={6} sx={{ mb: 4 }}>
+            <Grid key={recipe.id} item xs={12} lg={3} sm={6} sx={{ mb: 4 }}>
               <Card>
                 <CardActionArea>
                   <Link to={`/recipe/${recipe.id}`}>
