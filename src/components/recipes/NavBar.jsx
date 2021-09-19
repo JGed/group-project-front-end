@@ -5,7 +5,7 @@ import { useSession } from '../../context/sessionContext';
 import Login from '../auth/Login';
 import Register from '../auth/Register';
 import { Link, useHistory } from 'react-router-dom';
-
+import IconButton from '@material-ui/core/IconButton';
 import Mascot from '../../assets/images/clickncook_mascot.png';
 import Avatar from '@material-ui/core/Avatar';
 
@@ -137,7 +137,14 @@ const NavBar = () => {
                         }}
                     >
                         <Grid item>
-                          <Avatar src="/broken-image.png" />
+                            <IconButton 
+                            //accept="image/*" id="contained-button-file" multiple type="file"
+                            onClick={() =>console.log("Hi!")}
+                            
+                            >
+                             
+                          <Avatar src="https://www.publicdomainpictures.net/pictures/90000/nahled/red-pot.jpg" />
+                          </IconButton>
                             {sessionToken ? (
                                 <Button
                                     color="secondary"
