@@ -1,44 +1,56 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Typography, Box, Select, MenuItem } from '@material-ui/core';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import fetchRecipesByCategory from '../../requests/fetchRecipesByCategory';
 import RecipeCardArea from '../common/RecipeCardArea';
 import RecipeCardContainer from '../common/RecipeCardContainer';
 import RecipeCard from '../common/RecipeCard';
 import MainContentContainer from '../common/MainContentContainer';
+import queryString from 'query-string';
 const orders = [
     {
         value: 'views',
-        label: 'Views',
+        label: 'views',
     },
     {
-        value: 'newest',
-        label: 'Newest',
+        value: 'date',
+        label: 'date'
     },
     {
         value: 'random',
-        label: 'Random',
+        label: 'random',
     },
 ];
+const directions = [
+    {
+        value: 'decreasing',
+        label: 'decreasing'
+    },
+    {
+        value: 'increasing',
+        label: 'increasing'
+    }
+]
 const RecipeCategory = () => {
     const [recipes, setRecipes] = useState([]);
     const { cat } = useParams();
+    const [order, setOrder] = useState('random');
     const history = useHistory();
-    const [order, setOrder] = useState('');
+    const [direction, setDirection] = useState('decreasing')
     const [error, setError] = useState(false);
 
-    const handleChange = (e) => {
+    const handleOrderChange = (e) => {
         setOrder(e.target.value);
     };
-    useEffect(() => {
-        history.push(`/category/${cat}${order ? `?order=${order}` : ''}`);
-    }, [order, cat, history]);
+    const handleDirectionChange = e => {
+        setDirection(e.target.value);
+    }
     useEffect(() => {
         (async () => {
             try {
                 const { status, json } = await fetchRecipesByCategory(
                     cat,
-                    order
+                    `?orderby=${order}&direction=${direction}`
                 );
                 if (status === 200) {
                     setRecipes(json.recipes);
@@ -47,7 +59,7 @@ const RecipeCategory = () => {
                 setError(true);
             }
         })();
-    }, [cat, order]);
+    }, [cat, order, direction]);
 
     return (
         <>
@@ -64,11 +76,15 @@ const RecipeCategory = () => {
                             {cat} recipes:
                         </Typography>
                         <Box
-                            sx={{ ml: 'auto' }}
+                            sx={{ ml: 'auto', display: 'flex', alignItems: 'center' }}
                         >
+                            <Typography color='info'>
+                                Sort:
+                            </Typography> 
                             <Select
+                                sx={{mx: 2}}
                                 defaultValue="random"
-                                onChange={handleChange}
+                                onChange={handleOrderChange}
                                 variant="standard"
                                 color="info"
                             >
@@ -81,6 +97,26 @@ const RecipeCategory = () => {
                                     </MenuItem>
                                 ))}
                             </Select>
+                            { order !== 'random' ? 
+                            <Select
+                                defaultValue="decreasing"
+                                onChange={handleDirectionChange}
+                                variant="standard"
+                                color="info"
+                            >
+                                {directions.map((option) => (
+                                    <MenuItem
+                                        key={option.value}
+                                        value={option.value}
+                                    >
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                            :
+                            <>
+                            </>
+                            }
                         </Box>
                         <RecipeCardArea>
                             {recipes.map((recipe) => (

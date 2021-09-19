@@ -7,7 +7,6 @@ import RecipeCards from "./RecipeCards";
 import RecipeCreate from "./RecipeCreate";
 
 const RecipeIndex = (props) => {
-  const unmounted = useRef(false);
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
@@ -25,35 +24,38 @@ const RecipeIndex = (props) => {
   }
 
   useEffect(() => {
-    unmounted.current = false;
+    let mounted = true;
     (async () => {
       try {
         const { status, json } = await fetchPublicRecipes(sessionToken);
         if (status === 200) {
-          if (unmounted.current) return;
-          setRecipes(json);
-          setMessage("");
-          setError(false);
+          if (mounted){
+            setRecipes(json);
+            setMessage("");
+            setError(false);
+          } 
         }
-        if (status === 403) {
-          if (unmounted.current) return;
+        else if (status === 403) {
+          if (mounted) return;
           setMessage(json.message);
           setError(true);
         }
         if (status === 404) {
-          if (unmounted.current) return;
-          setMessage(json.message);
-          setError(true);
+          if (mounted) {
+            setMessage(json.message);
+            setError(true);
+          }
         }
       } catch (err) {
-        if (unmounted.current) return;
-        setMessage(
-          "Uh-oh something on our end went wrong. Try refreshing to view this page"
-        );
-        setError(true);
+        if (mounted) {
+          setMessage(
+            "Uh-oh something on our end went wrong. Try refreshing to view this page"
+          );
+          setError(true);
+          }
       }
-      return () => unmounted.current = true;
     })();
+    return () => mounted = false;
   }, [sessionToken]);
 
   return (
