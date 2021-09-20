@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import globalTheme from './assets/styles/globalStyles';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -16,8 +17,11 @@ import NavBar from './components/recipes/NavBar';
 import { Redirect } from 'react-router-dom';
 import AppContainer from './components/common/AppContainer';
 // import seed from './requests/seeding'
+import AboutUs from "./components/home/AboutUs";
+import ContactUs from "./components/home/ContactUs";
+
 function App() {
-    const [sessionToken, setSessionToken] = useState(undefined);
+  const [sessionToken, setSessionToken] = useState(undefined);
 
     useEffect(() => {
         document.title = 'ClickNCook';
@@ -70,6 +74,12 @@ function App() {
                             <Route exact path="/profile">
                                 <Profile />
                             </Route>
+  <Route exact path="/aboutus">
+                <AboutUs />
+              </Route>
+              <Route exact path="/contactus">
+                <ContactUs />
+              </Route
                             <Route>
                                 <Redirect to="/" />
                             </Route>
@@ -80,6 +90,7 @@ function App() {
             </SessionProvider>
         </ThemeProvider>
     );
+
 }
 
 export default App;
