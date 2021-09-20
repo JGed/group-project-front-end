@@ -6,15 +6,15 @@ import Login from '../auth/Login';
 import Register from '../auth/Register';
 import { Link, useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
-import Mascot from '../../assets/images/clickncook_mascot.png';
 import Avatar from '@material-ui/core/Avatar';
+import Mascot from '../../assets/images/clickncook_logomark.svg';
 
 const NavBar = () => {
     const { sessionToken, setSessionToken } = useSession();
 
     const history = useHistory();
     const handleLogout = (e) => {
-        setSessionToken(undefined);
+        setSessionToken();
         history.push('/');
     };
 
@@ -24,7 +24,10 @@ const NavBar = () => {
 
 
     const openModal = () => setModalIsOpen(true);
-    const closeModal = () => setModalIsOpen(false);
+    const closeModal = () => {
+        setModalIsOpen(false) ; 
+        setModalComponent('');
+    }
     const handleClick = (name) => (e) => {
         setModalComponent(name);
         openModal();
@@ -140,9 +143,8 @@ const NavBar = () => {
                             <IconButton 
                             //accept="image/*" id="contained-button-file" multiple type="file"
                             onClick={() =>console.log("Hi!")}
-                            
+
                             >
-                             
                           <Avatar src="https://www.publicdomainpictures.net/pictures/90000/nahled/red-pot.jpg" />
                           </IconButton>
                             {sessionToken ? (
