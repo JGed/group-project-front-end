@@ -5,7 +5,8 @@ import { useSession } from '../../context/sessionContext';
 import Login from '../auth/Login';
 import Register from '../auth/Register';
 import { Link, useHistory } from 'react-router-dom';
-
+import IconButton from '@material-ui/core/IconButton';
+import Avatar from '@material-ui/core/Avatar';
 import Mascot from '../../assets/images/clickncook_logomark.svg';
 
 const NavBar = () => {
@@ -72,7 +73,7 @@ const NavBar = () => {
                                         maxWidth: { xs: 350, md: 250 },
                                     }}
                                     alt="Clickin the Chicken"
-                                    src={`${Mascot}`}
+                                    src={Mascot}
                                 />
                             </Link>
                         </Box>
@@ -139,6 +140,14 @@ const NavBar = () => {
                         }}
                     >
                         <Grid item>
+                            <IconButton 
+                            //accept="image/*" id="contained-button-file" multiple type="file"
+                            onClick={() =>console.log("Hi!")}
+                            
+                            >
+                             
+                          <Link to='/profile'><Avatar src="https://www.publicdomainpictures.net/pictures/90000/nahled/red-pot.jpg" /></Link>
+                          </IconButton>
                             {sessionToken ? (
                                 <Button
                                     color="secondary"
