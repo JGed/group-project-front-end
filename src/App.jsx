@@ -17,6 +17,7 @@ import { Redirect } from "react-router-dom";
 import AppContainer from "./components/common/AppContainer";
 import seed from "./requests/seeding";
 import AboutUs from "./components/home/AboutUs";
+import ContactUs from "./components/home/ContactUs";
 const shouldSeed = false;
 function App() {
   const [sessionToken, setSessionToken] = useState(undefined);
@@ -76,6 +77,9 @@ function App() {
               </Route>
               <Route exact path="/aboutus">
                 <AboutUs />
+              </Route>
+              <Route exact path="/contactus">
+                <ContactUs />
               </Route>
               <Route>
                 <Redirect to="/" />

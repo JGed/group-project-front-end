@@ -33,6 +33,7 @@ const Footer = (props) => {
               spacing={2}
             >
               <Link to="/aboutus">About Us</Link>
+              <Link to="/contactus">Contact Us</Link>
             </Stack>
           </Box>
         </Grid>

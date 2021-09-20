@@ -11,6 +11,9 @@ import {
 import { styled } from "@mui/material/styles";
 
 import auImage from "../../assets/images/About_Us.jpg";
+import Laura from "../../assets/images/Laura.jpg";
+import Paul from "../../assets/images/Paul.jpg";
+import Krystle from "../../assets/images/Krystle.jpg";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -18,6 +21,13 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
+
+const Img = styled("img")({
+  margin: "auto",
+  display: "block",
+  maxWidth: "100%",
+  maxHeight: "",
+});
 
 const AboutUs = () => {
   return (
@@ -64,29 +74,39 @@ const AboutUs = () => {
 
           <h4>The Web Design Team</h4>
           <Grid container spacing={4} wrap="nowrap">
-            <Grid item xs={6}>
+            <Grid item xs={6} md={4}>
               <Item>
+                <Img
+                  src="https://cdn.notonthehighstreet.com/system/product_images/images/002/357/630/original_inky-chicken-apron.jpg"
+                  alt="Josh"
+                />
                 <Avatar>JG</Avatar>
+
                 <p>A Microwaver</p>
               </Item>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={6} md={4}>
               <Item>
+                <Img src={`${Paul}`} alt="Paul" />
                 <Avatar>PR</Avatar>
+
                 <p>A Griller</p>
               </Item>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={6} md={4}>
               <Item>
+                <Img src={`${Krystle}`} alt="Krystle" />
+
                 <Avatar>KM</Avatar>
                 <p>A Foodie</p>
               </Item>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={6} md={4}>
               <Item>
+                <Img src={`${Laura}`} alt="Laura" />
                 <Avatar>LS</Avatar>
                 <p>A Home Cook</p>
               </Item>
