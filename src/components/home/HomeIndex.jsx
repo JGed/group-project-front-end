@@ -13,6 +13,9 @@ const HomeIndex = (props) => {
     useEffect(() => {
         let mounted = true;
         (async () => {
+            if(sessionToken) {
+
+            }
             try {
                 const { status, json } = await fetchPublicRecipes(sessionToken);
                 if (status === 200) {
@@ -42,8 +45,8 @@ const HomeIndex = (props) => {
                     setError(true);
                 }
             }
-            return () => { mounted = false };
         })();
+        return () => { mounted = false };
     }, [sessionToken]);
     return (
         <MainContentContainer noPadding>

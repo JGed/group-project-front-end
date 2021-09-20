@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSession } from '../../context/sessionContext';
-import { Grid, Typography, Box, Divider } from '@material-ui/core';
+import { Grid, Typography, Box } from '@material-ui/core';
 import fetchRecipeById from '../../requests/fetchRecipeById';
 import { useParams, Link } from 'react-router-dom';
 import MainContentContainer from '../common/MainContentContainer';
@@ -70,15 +70,16 @@ const RecipeDetails = () => {
                             lg={5}
                             sx={{
                                 display: 'flex',
-                                justifyContent: 'center',
+                                justifyContent: 'flex-start',
                                 alignItems: 'center',
-                                padding: 5,
+                                py: 5,
+                                px: 1
                             }}
                         >
                             <img
                                 style={
                                     loaded
-                                        ? { maxWidth: '100%' }
+                                        ? { maxWidth: '100%', border: '2px solid black' }
                                         : { display: 'none' }
                                 }
                                 src={recipe.photoURL}
@@ -127,9 +128,6 @@ const RecipeDetails = () => {
                                 Directions: {recipe.directions}
                             </Typography>
                             <br />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Divider />
                         </Grid>
                         <Grid item xs={12} sx={{}}>
                             <Timer recipe={recipe} />

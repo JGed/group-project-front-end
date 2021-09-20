@@ -73,7 +73,7 @@ const NavBar = () => {
                                         maxWidth: { xs: 350, md: 250 },
                                     }}
                                     alt="Clickin the Chicken"
-                                    src={`${Mascot}`}
+                                    src={Mascot}
                                 />
                             </Link>
                         </Box>
@@ -145,7 +145,8 @@ const NavBar = () => {
                             onClick={() =>console.log("Hi!")}
 
                             >
-                          <Avatar src="https://www.publicdomainpictures.net/pictures/90000/nahled/red-pot.jpg" />
+                             
+                          <Link to='/profile'><Avatar src="https://www.publicdomainpictures.net/pictures/90000/nahled/red-pot.jpg" /></Link>
                           </IconButton>
                             {sessionToken ? (
                                 <Button
