@@ -1,12 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Typography, Box, Select, MenuItem } from '@material-ui/core';
-import { useParams, useHistory, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import fetchRecipesByCategory from '../../requests/fetchRecipesByCategory';
 import RecipeCardArea from '../common/RecipeCardArea';
 import RecipeCardContainer from '../common/RecipeCardContainer';
 import RecipeCard from '../common/RecipeCard';
 import MainContentContainer from '../common/MainContentContainer';
-import queryString from 'query-string';
 const orders = [
     {
         value: 'views',
@@ -35,7 +34,6 @@ const RecipeCategory = () => {
     const [recipes, setRecipes] = useState([]);
     const { cat } = useParams();
     const [order, setOrder] = useState('random');
-    const history = useHistory();
     const [direction, setDirection] = useState('decreasing')
     const [error, setError] = useState(false);
 
