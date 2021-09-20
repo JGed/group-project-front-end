@@ -146,7 +146,7 @@ const NavBar = () => {
                             
                             >
                              
-                          <Avatar src="https://www.publicdomainpictures.net/pictures/90000/nahled/red-pot.jpg" />
+                          <Link to='/profile'><Avatar src="https://www.publicdomainpictures.net/pictures/90000/nahled/red-pot.jpg" /></Link>
                           </IconButton>
                             {sessionToken ? (
                                 <Button
