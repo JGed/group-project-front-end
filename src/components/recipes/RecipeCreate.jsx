@@ -8,6 +8,7 @@ import {
   Box,
   FormControlLabel,
   MenuItem,
+  Snackbar,
 } from "@material-ui/core";
 import { useSession } from "../../context/sessionContext";
 import createMyRecipe from "../../requests/createMyRecipe";
@@ -21,14 +22,28 @@ const RecipeCreate = (props) => {
   const [photoURL, setPhotoURL] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const { sessionToken } = useSession();
+  const [messageInfo, setMessageInfo] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [snackBarPosition, setSnackBarPosition] = React.useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+  const [userErrorMessage, setUserErrorMessage] = useState("");
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
+  const { setSessionToken } = useSession();
   const foodCategories = [
     { value: "breakfast", label: "Breakfast" },
     { value: "lunch", label: "Lunch" },
     { value: "dinner", label: "Dinner" },
-    { value: 'dessert', label: 'Dessert'}
+    { value: "dessert", label: "Dessert" },
   ];
 
   const handleClose = () => {
@@ -50,13 +65,17 @@ const RecipeCreate = (props) => {
         },
         sessionToken
       );
-      if(status === 200) {
+      if (status === 200) {
+        setSuccessMessage("Recipe Successfully Created");
         handleClose();
       }
-      if(status === 500) {
-        console.log(json);
+
+      if (status === 500) {
+        setUserErrorMessage("User Permission Error. Log back in.");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Modal
@@ -93,6 +112,7 @@ const RecipeCreate = (props) => {
           variant="filled"
           label="Enter name of recipe"
           required
+          value={name}
         ></TextField>
         <TextField
           sx={{ m: 1, width: "25ch" }}
@@ -115,6 +135,7 @@ const RecipeCreate = (props) => {
           onChange={(e) => setDirections(e.target.value)}
           variant="filled"
           label="Enter directions"
+          value={directions}
           multiline
           rows={10}
           required
@@ -157,7 +178,7 @@ const RecipeCreate = (props) => {
             type="submit"
             onClick={handleCreateRecipeClick}
           >
-            Make Recipe
+            Post My Recipe
           </Button>
 
           <Button
