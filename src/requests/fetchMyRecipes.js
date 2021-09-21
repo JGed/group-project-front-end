@@ -1,5 +1,6 @@
+import APIURL from '../helpers/environment';
 const fetchMyRecipes = async (token) => {
-    const response = await fetch('http://localhost:3000/recipe/mine', {
+    const response = await fetch(`${APIURL}/recipe/mine`, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json',

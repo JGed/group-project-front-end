@@ -1,5 +1,6 @@
+import APIURL from '../helpers/environment';
 const fetchPublicRecipesByUsername = async (username) => {
-    const response = await fetch(`http://localhost:3000/recipe/owner/${username}`, {
+    const response = await fetch(`${APIURL}/recipe/owner/${username}`, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json',
