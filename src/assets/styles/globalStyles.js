@@ -60,8 +60,19 @@ const globalTheme = createTheme({
     fontFamily: pageFont,
     h1: {
       fontFamily: pageFont,
-      fontSize: 70,
+      fontSize: 30,
       fontWeight: 800,
+      paddingTop: 0,
+      paddingBottom: 20,
+      '@media (min-width:600px)': {
+        fontSize: 48,
+        paddingTop: 0,
+      },
+      '@media (min-width:1200px)': {
+        fontSize: 60,
+        paddingTop: 40,
+      },
+      
     },
     h2: {
       fontFamily: pageFont,
