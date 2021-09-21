@@ -22,11 +22,11 @@ const RecipeCard = ({ recipe }) => {
                     />
                     <CardContent>
                         <Grid container>
-                            <Grid item xs={9}>
+                            <Grid item xs={10}>
                                 <Typography variant="h6" component="div" noWrap>
                                     {recipe.name}
                                 </Typography>
-                                <Divider />
+                                <Divider sx={{mb: 1}} />
                                 <Typography
                                     variant="subtitle1"
                                     color="text.secondary"
@@ -37,9 +37,9 @@ const RecipeCard = ({ recipe }) => {
                             </Grid>
                             <Grid
                                 item
-                                xs={3}
-                                container
+                                xs={2}
                                 sx={{
+                                    display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                 }}

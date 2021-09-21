@@ -8,6 +8,7 @@ import {
     DialogTitle,
     IconButton,
     DialogContent,
+    
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import userLogin from '../../requests/userLogin';
@@ -38,10 +39,10 @@ const Login = ({ closeModal, setModalComponent }) => {
                 setPasswordError(undefined);
 
                 // set the session token, clear the form fields and then close the modal
-                setSessionToken(json.sessionToken);
                 setEmail('');
                 setPassword('');
-                closeModal();
+                onClose();
+                setSessionToken(json.sessionToken);
             }
             // failed login
             if (status === 409) {
@@ -107,7 +108,7 @@ const Login = ({ closeModal, setModalComponent }) => {
                                 id="modal-description"
                                 variant="contained"
                                 color="secondary"
-                                onClick={handleLogin}
+                                onClick={async (e) => {await handleLogin()}}
                             >
                                 Login
                             </Button>
