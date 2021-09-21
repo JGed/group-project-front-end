@@ -1,4 +1,4 @@
-import { createTheme } from "@material-ui/core/styles";
+import { createTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
 const pageFont = "'Archivo', sans-serif";
 
@@ -60,23 +60,44 @@ const globalTheme = createTheme({
     fontFamily: pageFont,
     h1: {
       fontFamily: pageFont,
-      fontSize: 70,
+      fontSize: 30,
       fontWeight: 800,
+      paddingTop: 0,
+      paddingBottom: 20,
+      '@media (min-width:600px)': {
+        fontSize: 48,
+        paddingTop: 0,
+      },
+      '@media (min-width:1200px)': {
+        fontSize: 60,
+        paddingTop: 40,
+      },
+      
     },
     h2: {
       fontFamily: pageFont,
-      fontSize: 40,
+      fontSize: 25,
+      '@media (min-width:600px)': {
+        fontSize: 40,
+      },
       fontWeight: 400,
       marginBottom: 20,
     },
     h3: {
       fontFamily: pageFont,
-      fontSize: 25,
+      fontSize: 20,
+      '@media (min-width:600px)': {
+        fontSize: 26,
+      },
+      '@media (min-width:900px)': {
+        fontSize: 32,
+      },
       fontWeight: 800,
       marginBottom: 20,
       // color: "white",
     },
   },
 });
+// globalTheme = responsiveFontSizes(globalTheme)
 
 export default globalTheme;
