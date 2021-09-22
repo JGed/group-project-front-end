@@ -1,8 +1,19 @@
-import { Typography, Button, Container, Divider } from "@material-ui/core";
+import {
+  Typography,
+  Button,
+  Box,
+  Select,
+  MenuItem,
+  Container,
+  Divider,
+} from "@material-ui/core";
 import React, { useState, useEffect, useRef } from "react";
 import { useSession } from "../../context/sessionContext";
 import fetchPublicRecipes from "../../requests/fetchPublicRecipes";
 import MainContentContainer from "../common/MainContentContainer";
+import RecipeCardArea from "../common/RecipeCardArea";
+import RecipeCardContainer from "../common/RecipeCardContainer";
+import RecipeCard from "../common/RecipeCard";
 import RecipeCards from "./RecipeCards";
 import RecipeCreate from "./RecipeCreate";
 
@@ -13,15 +24,14 @@ const RecipeIndex = (props) => {
   const [open, setOpen] = useState(false);
   const { sessionToken } = useSession();
 
-
   const greeting = () => {
     const hours = new Date().getHours();
     return hours < 12
       ? "Good morning!"
       : hours >= 12 && hours <= 18
       ? "Good afternoon!"
-      : "Good evening!"
-  }
+      : "Good evening!";
+  };
 
   useEffect(() => {
     let mounted = true;
@@ -29,13 +39,12 @@ const RecipeIndex = (props) => {
       try {
         const { status, json } = await fetchPublicRecipes(sessionToken);
         if (status === 200) {
-          if (mounted){
+          if (mounted) {
             setRecipes(json);
             setMessage("");
             setError(false);
-          } 
-        }
-        else if (status === 403) {
+          }
+        } else if (status === 403) {
           if (mounted) return;
           setMessage(json.message);
           setError(true);
@@ -52,16 +61,16 @@ const RecipeIndex = (props) => {
             "Uh-oh something on our end went wrong. Try refreshing to view this page"
           );
           setError(true);
-          }
+        }
       }
     })();
-    return () => mounted = false;
+    return () => (mounted = false);
   }, [sessionToken]);
 
   return (
     <>
       <MainContentContainer>
-        <Container className="homeMain" sx={{pb: 2}}>
+        <Container className="homeMain" sx={{ pb: 2 }}>
           <Typography variant="h2" color="textPrimary" sx={{ mt: 5 }}>
             {greeting()} What are we cooking today?{" "}
           </Typography>
@@ -76,7 +85,14 @@ const RecipeIndex = (props) => {
           <RecipeCreate open={open} setOpen={setOpen} />
         </Container>
         <Divider flexItem />
-        <RecipeCards recipes={recipes} />
+        <RecipeCardArea>
+          {recipes.map((recipe) => (
+            <RecipeCardContainer key={recipe.id}>
+              <RecipeCard recipe={recipe} />
+            </RecipeCardContainer>
+          ))}
+        </RecipeCardArea>
+        {/* <RecipeCards recipes={recipes} /> */}
       </MainContentContainer>
     </>
   );
