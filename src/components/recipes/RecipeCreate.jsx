@@ -8,7 +8,6 @@ import {
   Box,
   FormControlLabel,
   MenuItem,
-  Snackbar,
 } from "@material-ui/core";
 import { useSession } from "../../context/sessionContext";
 import createMyRecipe from "../../requests/createMyRecipe";

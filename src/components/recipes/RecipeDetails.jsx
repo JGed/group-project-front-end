@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "../../context/sessionContext";
-import { Grid, Typography, Box } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import fetchRecipeById from "../../requests/fetchRecipeById";
 import { useParams, Link } from "react-router-dom";
 import MainContentContainer from "../common/MainContentContainer";
@@ -58,7 +58,6 @@ const RecipeDetails = () => {
               backgroundColor: "neutral.light",
               pb: 5,              
               display: "flex",
-              justifyContent: "center",
               flex: "1 1 auto",
             }}
           >
@@ -69,9 +68,9 @@ const RecipeDetails = () => {
               sx={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "flex-start",
+                alignItems: "center",
                 py: 5,
-                px: 1,
+                pl: 3,
               }}
             >
               <img
