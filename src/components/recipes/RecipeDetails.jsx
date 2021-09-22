@@ -43,7 +43,7 @@ const RecipeDetails = () => {
   }, [id, sessionToken]);
 
   return (
-    <MainContentContainer>
+    <MainContentContainer noPadding>
       {error ? (
         <Grid container sx={{ textAlign: "center" }}>
           <Grid item xs={12} sx={{ pt: 5 }}>
