@@ -61,7 +61,6 @@ const RecipeCategory = () => {
                     `?orderby=${order}&direction=${direction}&page=${page}`
                 );
                 if (status === 200) {
-                    console.log('json: ', json)
                     setRecipes(json.recipes);
                     setMaxPage(json.pages);
                 }

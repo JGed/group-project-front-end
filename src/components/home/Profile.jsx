@@ -40,7 +40,6 @@ const Profile = () => {
         setCreateIsOpen(true);
     }
     const handleEditClick = recipe => e => {
-        console.log(recipe)
         setRecipeToEdit({ ...recipe })
         setEditIsOpen(true);
     }
