@@ -1,5 +1,6 @@
+import APIURL from '../helpers/environment';
 const fetchRecipesByCategory = async (category, search) => {
-    const response = await fetch(`http://localhost:3000/recipe/category/${category}${search}`, {
+    const response = await fetch(`${APIURL}/recipe/category/${category}${search}`, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json',
