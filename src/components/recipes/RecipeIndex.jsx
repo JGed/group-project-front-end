@@ -91,8 +91,7 @@ const RecipeIndex = (props) => {
               <RecipeCard recipe={recipe} />
             </RecipeCardContainer>
           ))}
-        </RecipeCardArea>
-        {/* <RecipeCards recipes={recipes} /> */}
+        </RecipeCardArea>        
       </MainContentContainer>
     </>
   );
