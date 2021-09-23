@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Box, Button, Grid, Modal } from '@material-ui/core';
+import React, { useState, useEffect} from 'react';
+import { Box, Button, Grid, Modal, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useSession } from '../../context/sessionContext';
 import Login from '../auth/Login';
 import Register from '../auth/Register';
 import { Link, useHistory } from 'react-router-dom';
-import IconButton from '@material-ui/core/IconButton';
+import IconButton    from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
 import Mascot from '../../assets/images/clickncook_logomark.svg';
+import DrawerComponent from '../DrawerComponent/DrawerComponent';
 
 const NavBar = () => {
     const { sessionToken, setSessionToken } = useSession();
@@ -21,8 +22,6 @@ const NavBar = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalComponent, setModalComponent] = useState();
 
-
-
     const openModal = () => setModalIsOpen(true);
     const closeModal = () => {
         setModalIsOpen(false) ; 
@@ -32,6 +31,15 @@ const NavBar = () => {
         setModalComponent(name);
         openModal();
     };
+
+//Breakpoints
+const theme = useTheme();
+
+console.log(theme);
+
+const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
+
+console.log(isMatch)
 
     const renderModalComponent = (component) => {
         switch (component) {
@@ -61,7 +69,12 @@ const NavBar = () => {
                     minHeight: 100,
                 }}
             >
-                <Grid container spacing={2}>
+
+                {isMatch ? (
+                <DrawerComponent />
+               ) : (
+<>
+<Grid container spacing={2}>
                     <Grid item container xs={6}>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Link to="/">
@@ -143,11 +156,12 @@ const NavBar = () => {
                             <IconButton 
                             //accept="image/*" id="contained-button-file" multiple type="file"
                             onClick={() =>console.log("Hi!")}
-                            
+
                             >
                              
                           <Link to='/profile'><Avatar src="https://www.publicdomainpictures.net/pictures/90000/nahled/red-pot.jpg" /></Link>
                           </IconButton>
+                         
                             {sessionToken ? (
                                 <Button
                                     color="secondary"
@@ -188,13 +202,23 @@ const NavBar = () => {
                                     >
                                         Register
                                     </Button>
+                                  
                                 </>
                             )}
+                             
                         </Grid>
                     </Grid>
                 </Grid>
+</>
+                    
+            
+                
+                )}
+                
+                
             </Toolbar>
         </Box>
+      
     );
 };
 
