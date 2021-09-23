@@ -23,7 +23,7 @@ const DrawerComponent = () => {
             marginLeft: 'auto',
         },
     }));
-    const [openDrawer, setOpenDrawer] = useState(true);
+    const [openDrawer, setOpenDrawer] = useState(false);
 const classes = useStyles()
 
     return (
@@ -61,6 +61,7 @@ const classes = useStyles()
                 <ListItem divider button>
                     <ListItemIcon><Link
                                 to="/category/lunch"
+                                onClick={() => setOpenDrawer(false)}
                             >
                     <ListItemText>Lunch</ListItemText>
                     </Link>
