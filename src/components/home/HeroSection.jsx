@@ -15,7 +15,10 @@ const HeroSection = (props) => {
     >
       <Box
         component="img"
-        sx={{ width: 500 }}
+        sx={{
+          width: 500,
+          maxWidth: { xs: 280, sm: 320, md: 400, lg: 500 },
+        }}
         alt="Clickin the Chicken"
         src={`${LogoType}`}
       />
