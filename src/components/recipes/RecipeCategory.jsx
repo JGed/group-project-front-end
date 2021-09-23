@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Typography, Box, Select, MenuItem, Button } from '@material-ui/core';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import fetchRecipesByCategory from '../../requests/fetchRecipesByCategory';
 import RecipeCardArea from '../common/RecipeCardArea';
 import RecipeCardContainer from '../common/RecipeCardContainer';
