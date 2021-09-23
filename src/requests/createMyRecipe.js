@@ -1,5 +1,6 @@
+import APIURL from '../helpers/environment';
 const createMyRecipe = async (recipe, token) => {
-    const response = await fetch('http://localhost:3000/recipe/', {
+    const response = await fetch(`${APIURL}/recipe/`, {
         method: 'POST',
         body: JSON.stringify({
             recipe: recipe

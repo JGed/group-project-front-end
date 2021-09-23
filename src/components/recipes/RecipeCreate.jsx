@@ -8,10 +8,13 @@ import {
   Box,
   FormControlLabel,
   MenuItem,
+  IconButton,
   Snackbar,
 } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import { useSession } from "../../context/sessionContext";
 import createMyRecipe from "../../requests/createMyRecipe";
+import ImageUpload from "./ImageUpload";
 
 const RecipeCreate = (props) => {
   const [category, setCategory] = React.useState("");
@@ -105,12 +108,25 @@ const RecipeCreate = (props) => {
           onSubmit={handleCreateRecipeClick}
           sx={{ display: "flex", flexWrap: "wrap" }}
         ></Box>
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: "info.main",
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
         <h2>New Recipe</h2>
         <TextField
           sx={{ m: 1, width: "25ch" }}
           onChange={(e) => setName(e.target.value)}
           variant="filled"
           label="Enter name of recipe"
+          color="info"
           required
           value={name}
         ></TextField>
@@ -122,6 +138,7 @@ const RecipeCreate = (props) => {
           onChange={handleChange}
           helperText="Please select your category"
           variant="outlined"
+          color="info"
         >
           {foodCategories.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -139,15 +156,17 @@ const RecipeCreate = (props) => {
           multiline
           rows={10}
           required
+          color="info"
         ></TextField>
         <TextField
           sx={{ m: 1, width: "25ch" }}
           onChange={(e) => setCookTime(e.target.value)}
           label="Cook Time"
           id="Cook Time"
-          inputProps={{
+          inputprops={{
             endAdornment: <InputAdornment position="end">Mins</InputAdornment>,
           }}
+          color="info"
         />
         <TextField
           sx={{ m: 1, width: "25ch" }}
@@ -155,39 +174,27 @@ const RecipeCreate = (props) => {
           label="Serving Size"
           id="ServingSize"
           variant="filled"
+          color="info"
         />
-        <FormControlLabel
-          value=""
-          control={
-            <Checkbox
-              onChange={(e) => setIsPublic(e.target.checked)}
-              checked={isPublic}
-            />
-          }
+        <FormControlLabel value="" control={<Checkbox onChange={(e) => setIsPublic(e.target.checked)} checked={isPublic} color="info"/>}
           label="Make recipe public?"
-          labelPlacement="bottom"
-          sx={{ display: "flex", alignItems: "flex-center" }}
+          sx={{ display: "flex", alignItems: "flex-center", m: 1 }}
           defaultChecked
-          inputProps={{ "aria-label": "secondary checkbox" }}
+          inputprops={{ "aria-label": "secondary checkbox" }}          
         />
+        <ImageUpload/>
         <br />
         <div>
           <Button
-            variant="contained"
+            sx={{ mt: 4 }}
             fullWidth
+            id="modal-description"
+            color="secondary"
+            variant="contained"
             type="submit"
             onClick={handleCreateRecipeClick}
           >
             Post My Recipe
-          </Button>
-
-          <Button
-            variant="contained"
-            fullWidth
-            type="button"
-            onClick={handleClose}
-          >
-            Close
           </Button>
         </div>
       </Box>
