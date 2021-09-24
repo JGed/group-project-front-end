@@ -17,6 +17,7 @@ const NavBar = () => {
     const handleLogout = (e) => {
         setSessionToken();
         history.push('/');
+        
     };
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -152,17 +153,15 @@ console.log(isMatch)
                             alignItems: 'center',
                         }}
                     >
-                        <Grid item>
-                            <IconButton 
-                            //accept="image/*" id="contained-button-file" multiple type="file"
-                            onClick={() =>console.log("Hi!")}
-
-                            >
+                        <Grid item> 
+                           <IconButton>
                              
                           <Link to='/profile'><Avatar src="https://www.publicdomainpictures.net/pictures/90000/nahled/red-pot.jpg" /></Link>
-                          </IconButton>
-                         
+                       </IconButton>
+                       
                             {sessionToken ? (
+                                
+                                 
                                 <Button
                                     color="secondary"
                                     variant="contained"
@@ -171,6 +170,10 @@ console.log(isMatch)
                                 >
                                     Logout
                                 </Button>
+
+
+
+
                             ) : (
                                 <>
                                     <Modal
