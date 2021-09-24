@@ -70,7 +70,7 @@ const RecipeDetails = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 py: 5,
-                pl: 3,
+                px: 3,
               }}
             >
               <img
