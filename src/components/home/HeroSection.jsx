@@ -7,7 +7,7 @@ const HeroSection = (props) => {
     <Container
       maxWidth="false"
       sx={{
-        minHeight: 500,
+        minHeight: 400,
         backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
         backgroundPosition: "50% 50%",

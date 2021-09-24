@@ -21,13 +21,11 @@ const NavBar = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalComponent, setModalComponent] = useState();
 
-
-
     const openModal = () => setModalIsOpen(true);
     const closeModal = () => {
-        setModalIsOpen(false) ; 
+        setModalIsOpen(false);
         setModalComponent('');
-    }
+    };
     const handleClick = (name) => (e) => {
         setModalComponent(name);
         openModal();
@@ -140,23 +138,28 @@ const NavBar = () => {
                         }}
                     >
                         <Grid item>
-                            <IconButton 
-                            //accept="image/*" id="contained-button-file" multiple type="file"
-                            onClick={() =>console.log("Hi!")}
-                            
-                            >
-                             
-                          <Link to='/profile'><Avatar src="https://www.publicdomainpictures.net/pictures/90000/nahled/red-pot.jpg" /></Link>
-                          </IconButton>
                             {sessionToken ? (
-                                <Button
-                                    color="secondary"
-                                    variant="contained"
-                                    sx={{ border: 2, '&:hover': {color: 'secondary.main', backgroundColor: 'white'} }}
-                                    onClick={handleLogout}
-                                >
-                                    Logout
-                                </Button>
+                                <>
+                                    <Button
+                                        color="secondary"
+                                        variant="contained"
+                                        sx={{
+                                            border: 2,
+                                            '&:hover': {
+                                                color: 'secondary.main',
+                                                backgroundColor: 'white',
+                                            },
+                                        }}
+                                        onClick={handleLogout}
+                                    >
+                                        Logout
+                                    </Button>
+                                    <IconButton>
+                                        <Link to="/profile">
+                                            <Avatar src="/broken-image.jpg" />
+                                        </Link>
+                                    </IconButton>
+                                </>
                             ) : (
                                 <>
                                     <Modal
@@ -173,17 +176,29 @@ const NavBar = () => {
                                         }
                                     </Modal>
                                     <Button
-                                    color="secondary"
-                                    variant="contained"
-                                    sx={{ border: 2, '&:hover': {color: 'secondary.main', backgroundColor: 'white'} }}
+                                        color="secondary"
+                                        variant="contained"
+                                        sx={{
+                                            border: 2,
+                                            '&:hover': {
+                                                color: 'secondary.main',
+                                                backgroundColor: 'white',
+                                            },
+                                        }}
                                         onClick={handleClick('Login')}
                                     >
                                         Login
                                     </Button>
                                     <Button
-                                    color="secondary"
-                                    variant="contained"
-                                    sx={{ border: 2, '&:hover': {color: 'secondary.main', backgroundColor: 'white'} }}
+                                        color="secondary"
+                                        variant="contained"
+                                        sx={{
+                                            border: 2,
+                                            '&:hover': {
+                                                color: 'secondary.main',
+                                                backgroundColor: 'white',
+                                            },
+                                        }}
                                         onClick={handleClick('Register')}
                                     >
                                         Register
