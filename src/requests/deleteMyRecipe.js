@@ -1,5 +1,6 @@
+import APIURL from '../helpers/environment';
 const deleteMyRecipe = async (recipe, token) => {
-    const response = await fetch(`http://localhost:3000/recipe/${recipe.id}`, {
+    const response = await fetch(`${APIURL}/recipe/${recipe.id}`, {
         method: 'DELETE',
         headers: new Headers({
             'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
+import APIURL from '../helpers/environment';
 const fetchPublicRecipes = async () => {
-    const response = await fetch('http://localhost:3000/recipe/', {
+    const response = await fetch(`${APIURL}/recipe/`, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json',

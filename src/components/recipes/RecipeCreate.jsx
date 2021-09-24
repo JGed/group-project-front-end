@@ -8,10 +8,13 @@ import {
   Box,
   FormControlLabel,
   MenuItem,
-  Snackbar,
+  IconButton,
+  Grid,
 } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import { useSession } from "../../context/sessionContext";
 import createMyRecipe from "../../requests/createMyRecipe";
+import ImageUpload from "./ImageUpload";
 
 const RecipeCreate = (props) => {
   const [category, setCategory] = React.useState("");
@@ -95,7 +98,7 @@ const RecipeCreate = (props) => {
           maxWidth: "100%",
           maxHeight: "100%",
           bgcolor: "background.paper",
-          border: "2px solid #000",
+          borderRadius: 5,
           boxShadow: 24,
           p: 4,
         }}
@@ -105,23 +108,39 @@ const RecipeCreate = (props) => {
           onSubmit={handleCreateRecipeClick}
           sx={{ display: "flex", flexWrap: "wrap" }}
         ></Box>
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: "info.main",
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+
         <h2>New Recipe</h2>
+
         <TextField
-          sx={{ m: 1, width: "25ch" }}
+          sx={{ my: 1, mr: 2, width: "25ch" }}
           onChange={(e) => setName(e.target.value)}
-          variant="filled"
           label="Enter name of recipe"
+          color="info"
           required
           value={name}
+          variant="filled"
         ></TextField>
         <TextField
-          sx={{ m: 1, width: "25ch" }}
+          sx={{ my: 1, width: "25ch" }}
           select
           label="Select"
           value={category}
           onChange={handleChange}
           helperText="Please select your category"
-          variant="outlined"
+          variant="filled"
+          color="info"
         >
           {foodCategories.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -131,29 +150,35 @@ const RecipeCreate = (props) => {
         </TextField>
         <TextField
           fullWidth
-          sx={{ m: 1 }}
+          sx={{ my: 1 }}
           onChange={(e) => setDirections(e.target.value)}
-          variant="filled"
           label="Enter directions"
           value={directions}
           multiline
           rows={10}
           required
+          color="info"
+          variant="filled"
         ></TextField>
         <TextField
-          sx={{ m: 1, width: "25ch" }}
+          sx={{ my: 1, mr: 2, width: "25ch" }}
           onChange={(e) => setCookTime(e.target.value)}
           label="Cook Time"
           id="Cook Time"
-          inputProps={{
-            endAdornment: <InputAdornment position="end">Mins</InputAdornment>,
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">Mins</InputAdornment>
+            ),
           }}
+          color="info"
+          variant="filled"
         />
         <TextField
-          sx={{ m: 1, width: "25ch" }}
+          sx={{ my: 1, width: "25ch" }}
           onChange={(e) => setServings(e.target.value)}
           label="Serving Size"
           id="ServingSize"
+          color="info"
           variant="filled"
         />
         <FormControlLabel
@@ -162,33 +187,51 @@ const RecipeCreate = (props) => {
             <Checkbox
               onChange={(e) => setIsPublic(e.target.checked)}
               checked={isPublic}
+              color="secondary"
             />
           }
           label="Make recipe public?"
-          labelPlacement="bottom"
-          sx={{ display: "flex", alignItems: "flex-center" }}
+          sx={{ display: "flex", alignItems: "flex-center", my: 1 }}
           defaultChecked
-          inputProps={{ "aria-label": "secondary checkbox" }}
+          inputprops={{ "aria-label": "secondary checkbox" }}
         />
+        <TextField
+          sx={{ my: 1 }}
+          fullWidth
+          onChange={(e) => setPhotoURL(e.target.value)}
+          label="Enter a url for your photo"
+          id="PhotoURL"
+          color="info"
+          variant="filled"
+        />
+        {/* <ImageUpload /> */}
         <br />
         <div>
-          <Button
-            variant="contained"
-            fullWidth
-            type="submit"
-            onClick={handleCreateRecipeClick}
-          >
-            Post My Recipe
-          </Button>
-
-          <Button
-            variant="contained"
-            fullWidth
-            type="button"
-            onClick={handleClose}
-          >
-            Close
-          </Button>
+          <Grid container spacing={2} sx={{ mt: 1 }}>
+            <Grid item xs={6}>
+              <Button                
+                fullWidth
+                id="modal-description"
+                color="secondary"
+                variant="contained"
+                type="submit"
+                onClick={handleCreateRecipeClick}
+              >
+                Post My Recipe
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button                
+                fullWidth
+                id="modal-description"
+                color="secondary"
+                variant="outlined"
+                onClick={handleClose}
+              >
+                Cancel
+              </Button>
+            </Grid>
+          </Grid>
         </div>
       </Box>
     </Modal>

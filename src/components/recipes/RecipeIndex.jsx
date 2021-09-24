@@ -1,9 +1,6 @@
 import {
   Typography,
   Button,
-  Box,
-  Select,
-  MenuItem,
   Container,
   Divider,
 } from "@material-ui/core";
@@ -14,7 +11,6 @@ import MainContentContainer from "../common/MainContentContainer";
 import RecipeCardArea from "../common/RecipeCardArea";
 import RecipeCardContainer from "../common/RecipeCardContainer";
 import RecipeCard from "../common/RecipeCard";
-import RecipeCards from "./RecipeCards";
 import RecipeCreate from "./RecipeCreate";
 
 const RecipeIndex = (props) => {
@@ -26,6 +22,7 @@ const RecipeIndex = (props) => {
 
   const greeting = () => {
     const hours = new Date().getHours();
+    console.log(hours)
     return hours < 12
       ? "Good morning!"
       : hours >= 12 && hours <= 18
@@ -91,8 +88,7 @@ const RecipeIndex = (props) => {
               <RecipeCard recipe={recipe} />
             </RecipeCardContainer>
           ))}
-        </RecipeCardArea>
-        {/* <RecipeCards recipes={recipes} /> */}
+        </RecipeCardArea>        
       </MainContentContainer>
     </>
   );

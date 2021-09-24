@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Typography, Box, Select, MenuItem } from '@material-ui/core';
+import { Typography, Box, Select, MenuItem, Button } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import fetchRecipesByCategory from '../../requests/fetchRecipesByCategory';
 import RecipeCardArea from '../common/RecipeCardArea';
@@ -15,10 +15,6 @@ const orders = [
         value: 'date',
         label: 'date'
     },
-    {
-        value: 'random',
-        label: 'random',
-    },
 ];
 const directions = [
     {
@@ -33,7 +29,9 @@ const directions = [
 const RecipeCategory = () => {
     const [recipes, setRecipes] = useState([]);
     const { cat } = useParams();
-    const [order, setOrder] = useState('random');
+    const [order, setOrder] = useState('views');
+    const [page, setPage] = useState(1);
+    const [maxPage, setMaxPage] = useState(50);
     const [direction, setDirection] = useState('decreasing')
     const [error, setError] = useState(false);
 
@@ -43,21 +41,35 @@ const RecipeCategory = () => {
     const handleDirectionChange = e => {
         setDirection(e.target.value);
     }
+    const handlePageChange = direction => e => {
+        switch(direction) {
+            case 'increase':
+                setPage(curr => curr < maxPage ? curr + 1 : curr);
+                break;
+            case 'decrease':
+                setPage(curr => curr > 1 ? curr  - 1 : curr);
+                break;
+            default:
+                break;
+        }
+    }
     useEffect(() => {
         (async () => {
             try {
                 const { status, json } = await fetchRecipesByCategory(
                     cat,
-                    `?orderby=${order}&direction=${direction}`
+                    `?orderby=${order}&direction=${direction}&page=${page}`
                 );
                 if (status === 200) {
+                    console.log('json: ', json)
                     setRecipes(json.recipes);
+                    setMaxPage(json.pages);
                 }
             } catch (err) {
                 setError(true);
             }
         })();
-    }, [cat, order, direction]);
+    }, [cat, order, direction, page]);
 
     return (
         <>
@@ -81,7 +93,7 @@ const RecipeCategory = () => {
                             </Typography> 
                             <Select
                                 sx={{mx: 2}}
-                                defaultValue="random"
+                                defaultValue="views"
                                 onChange={handleOrderChange}
                                 variant="standard"
                                 color="info"
@@ -95,7 +107,6 @@ const RecipeCategory = () => {
                                     </MenuItem>
                                 ))}
                             </Select>
-                            { order !== 'random' ? 
                             <Select
                                 defaultValue="decreasing"
                                 onChange={handleDirectionChange}
@@ -111,10 +122,6 @@ const RecipeCategory = () => {
                                     </MenuItem>
                                 ))}
                             </Select>
-                            :
-                            <>
-                            </>
-                            }
                         </Box>
                         <RecipeCardArea>
                             {recipes.map((recipe) => (
@@ -123,6 +130,10 @@ const RecipeCategory = () => {
                                 </RecipeCardContainer>
                             ))}
                         </RecipeCardArea>
+                        <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                            {page > 1 ? <Button color='info' onClick={handlePageChange('decrease')}>Previous Page</Button> : <></>}
+                            {page < maxPage ? <Button color='info' onClick={handlePageChange('increase')}>Next Page</Button> : <></>}
+                        </Box>
                     </>
                 )}
             </MainContentContainer>
