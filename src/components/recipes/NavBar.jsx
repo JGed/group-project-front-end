@@ -37,7 +37,7 @@ const theme = useTheme();
 
 console.log(theme);
 
-const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+const isMatch = useMediaQuery('(max-width:1000px)');
 
 console.log(isMatch)
 
@@ -71,7 +71,7 @@ console.log(isMatch)
             >
 
                 {isMatch ? (
-                <DrawerComponent />
+                <DrawerComponent handleClick={handleClick}/>
                ) : (
 <>
 <Grid container spacing={2}>
