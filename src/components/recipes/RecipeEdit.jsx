@@ -14,6 +14,7 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import { useSession } from "../../context/sessionContext";
 import updateMyRecipe from "../../requests/updateMyRecipe";
+import ImageUpload from './ImageUpload';
 
 const RecipeEdit = (props) => {
   const [category, setCategory] = useState(props.recipe.category);
@@ -192,16 +193,7 @@ const RecipeEdit = (props) => {
             defaultChecked
             inputProps={{ "aria-label": "secondary checkbox" }}
           />
-          <TextField
-            sx={{ my: 1 }}
-            value={photoURL}
-            fullWidth
-            onChange={(e) => setPhotoURL(e.target.value)}
-            label="Enter a url for your photo"
-            id="PhotoURL"
-            color="info"
-            variant="filled"
-          />
+          <ImageUpload setPhotoURL={setPhotoURL} />
           <br />
           <div>
             <Grid container spacing={2} sx={{ mt: 1 }}>
@@ -218,7 +210,6 @@ const RecipeEdit = (props) => {
               </Grid>
               <Grid item xs={6}>
                 <Button
-                  variant="contained"
                   fullWidth
                   color="secondary"
                   variant="outlined"

@@ -41,11 +41,10 @@ const ImageUpload = ({setPhotoURL}) => {
                 })
             ).json();
 
-            console.log(results);
             setPhotoURL(results.secure_url);
             setSucess(true);
         } catch (err) {
-            console.log(err);
+
         }
     };
 

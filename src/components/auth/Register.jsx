@@ -108,9 +108,7 @@ const Register = ({ closeModal, setModalComponent }) => {
                         <div>
                             <TextField
                                 label="Email Address"
-                                InputProps={{
-                                    type: 'email'
-                                }}
+                                type='email'
                                 value={email}
                                 color="info"
                                 onFocus={() => setPasswordIsFocused(false)}
