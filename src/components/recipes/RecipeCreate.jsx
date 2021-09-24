@@ -9,7 +9,7 @@ import {
   FormControlLabel,
   MenuItem,
   IconButton,
-  Snackbar,
+  Grid,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { useSession } from "../../context/sessionContext";
@@ -98,7 +98,7 @@ const RecipeCreate = (props) => {
           maxWidth: "100%",
           maxHeight: "100%",
           bgcolor: "background.paper",
-          border: "2px solid #000",
+          borderRadius: 5,
           boxShadow: 24,
           p: 4,
         }}
@@ -120,24 +120,26 @@ const RecipeCreate = (props) => {
         >
           <CloseIcon />
         </IconButton>
+
         <h2>New Recipe</h2>
+
         <TextField
-          sx={{ m: 1, width: "25ch" }}
+          sx={{ my: 1, mr: 2, width: "25ch" }}
           onChange={(e) => setName(e.target.value)}
-          variant="filled"
           label="Enter name of recipe"
           color="info"
           required
           value={name}
+          variant="filled"
         ></TextField>
         <TextField
-          sx={{ m: 1, width: "25ch" }}
+          sx={{ my: 1, width: "25ch" }}
           select
           label="Select"
           value={category}
           onChange={handleChange}
           helperText="Please select your category"
-          variant="outlined"
+          variant="filled"
           color="info"
         >
           {foodCategories.map((option) => (
@@ -148,54 +150,88 @@ const RecipeCreate = (props) => {
         </TextField>
         <TextField
           fullWidth
-          sx={{ m: 1 }}
+          sx={{ my: 1 }}
           onChange={(e) => setDirections(e.target.value)}
-          variant="filled"
           label="Enter directions"
           value={directions}
           multiline
           rows={10}
           required
           color="info"
+          variant="filled"
         ></TextField>
         <TextField
-          sx={{ m: 1, width: "25ch" }}
+          sx={{ my: 1, mr: 2, width: "25ch" }}
           onChange={(e) => setCookTime(e.target.value)}
           label="Cook Time"
           id="Cook Time"
-          inputprops={{
-            endAdornment: <InputAdornment position="end">Mins</InputAdornment>,
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">Mins</InputAdornment>
+            ),
           }}
           color="info"
+          variant="filled"
         />
         <TextField
-          sx={{ m: 1, width: "25ch" }}
+          sx={{ my: 1, width: "25ch" }}
           onChange={(e) => setServings(e.target.value)}
           label="Serving Size"
           id="ServingSize"
-          variant="filled"
           color="info"
+          variant="filled"
         />
-        <FormControlLabel value="" control={<Checkbox onChange={(e) => setIsPublic(e.target.checked)} checked={isPublic} color="info"/>}
+        <FormControlLabel
+          value=""
+          control={
+            <Checkbox
+              onChange={(e) => setIsPublic(e.target.checked)}
+              checked={isPublic}
+              color="secondary"
+            />
+          }
           label="Make recipe public?"
-          sx={{ display: "flex", alignItems: "flex-center", m: 1 }}
+          sx={{ display: "flex", alignItems: "flex-center", my: 1 }}
           defaultChecked
-          inputprops={{ "aria-label": "secondary checkbox" }}          
+          inputprops={{ "aria-label": "secondary checkbox" }}
         />
-        <ImageUpload/>
+        <TextField
+          sx={{ my: 1 }}
+          fullWidth
+          onChange={(e) => setPhotoURL(e.target.value)}
+          label="Enter a url for your photo"
+          id="PhotoURL"
+          color="info"
+          variant="filled"
+        />
+        {/* <ImageUpload /> */}
         <br />
         <div>
-          <Button
-            sx={{ mt: 4 }}
-            fullWidth
-            id="modal-description"
-            color="secondary"
-            variant="contained"
-            type="submit"
-            onClick={handleCreateRecipeClick}
-          >
-            Post My Recipe
-          </Button>
+          <Grid container spacing={2} sx={{ mt: 1 }}>
+            <Grid item xs={6}>
+              <Button                
+                fullWidth
+                id="modal-description"
+                color="secondary"
+                variant="contained"
+                type="submit"
+                onClick={handleCreateRecipeClick}
+              >
+                Post My Recipe
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button                
+                fullWidth
+                id="modal-description"
+                color="secondary"
+                variant="outlined"
+                onClick={handleClose}
+              >
+                Cancel
+              </Button>
+            </Grid>
+          </Grid>
         </div>
       </Box>
     </Modal>

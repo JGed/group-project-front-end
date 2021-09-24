@@ -30,6 +30,9 @@ const DrawerComponent = () => {
     const useStyles = makeStyles((theme) => ({
         menuIconContainer: {
             marginLeft: 'auto',
+            MuiDrawer: {
+                backgroundColor: "#f50505"
+            }
         },
     }));
     const [openDrawer, setOpenDrawer] = useState(false);
@@ -81,9 +84,10 @@ const DrawerComponent = () => {
                             <Box
                                 component="img"
                                 sx={{
-                                    width: 50,
+                                    width: 100,
                                     maxHeight: { xs: 233, md: 167 },
                                     maxWidth: { xs: 350, md: 250 },
+                                    backgroundColor: "#C20000",
                                 }}
                                 alt="Clickin the Chicken"
                                 src={Mascot}

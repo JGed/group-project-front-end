@@ -6,7 +6,7 @@ export const BoxContainerSx = {
     maxWidth: '100%',
     maxHeight: '100%',
     bgcolor: 'neutral.light',
-    border: '2px solid #000',
+    borderRadius: 5,
     boxShadow: 24,
     p: 4,
 };
