@@ -148,15 +148,13 @@ const NavBar = () => {
                 }}
               >
                 <Grid item>
-                  <IconButton
-                    //accept="image/*" id="contained-button-file" multiple type="file"
-                    onClick={() => console.log("Hi!")}
-                  >
+                    
+                  <IconButton>
                     <Link to="/profile">
                       <Avatar src="https://www.publicdomainpictures.net/pictures/90000/nahled/red-pot.jpg" />
                     </Link>
-                  </IconButton>
-
+                  </IconButton> 
+                  
                   {sessionToken ? (
                     <Button
                       color="secondary"
@@ -172,6 +170,10 @@ const NavBar = () => {
                     >
                       Logout
                     </Button>
+                   
+                  
+                    
+                   
                   ) : (
                     <>
                       <Modal
