@@ -1,3 +1,4 @@
+import APIURL from '../../helpers/environment';
 import { useState } from 'react';
 import { Input, Button } from '@material-ui/core';
 import { useSession } from '../../context/sessionContext';
@@ -11,7 +12,7 @@ const ImageUpload = ({setPhotoURL}) => {
         e.preventDefault();
         try {
             const response = await fetch(
-                'http://localhost:3000/recipe/photo/cloudsign',
+              `${APIURL}/recipe/photo/cloudsign`,
                 {
                     method: 'GET',
                     headers: new Headers({
