@@ -30,6 +30,9 @@ const DrawerComponent = () => {
     const useStyles = makeStyles((theme) => ({
         menuIconContainer: {
             marginLeft: 'auto',
+            MuiDrawer: {
+                backgroundColor: "#f50505"
+            }
         },
     }));
     const [openDrawer, setOpenDrawer] = useState(false);
