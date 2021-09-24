@@ -52,8 +52,6 @@ const RecipeCreate = (props) => {
         },
         sessionToken
       );
-      console.log(status);
-      console.log(json);
       if (status === 200) {
         handleClose();
       }
