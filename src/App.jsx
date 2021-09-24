@@ -17,7 +17,6 @@ import { Redirect } from "react-router-dom";
 import AppContainer from "./components/common/AppContainer";
 import AboutUs from "./components/home/AboutUs";
 import ContactUs from "./components/home/ContactUs";
-
 function App() {
   const [sessionToken, setSessionToken] = useState(undefined);
 
