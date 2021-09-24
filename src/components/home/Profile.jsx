@@ -30,7 +30,6 @@ const Profile = () => {
 
   const greeting = () => {
     const hours = new Date().getHours();
-    console.log(hours);
     return hours < 12
       ? "Good morning!"
       : hours >= 12 && hours <= 18
@@ -51,7 +50,6 @@ const Profile = () => {
     setCreateIsOpen(true);
   };
   const handleEditClick = (recipe) => (e) => {
-    console.log(recipe);
     setRecipeToEdit({ ...recipe });
     setEditIsOpen(true);
   };

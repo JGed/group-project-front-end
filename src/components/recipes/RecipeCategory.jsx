@@ -9,21 +9,21 @@ import MainContentContainer from '../common/MainContentContainer';
 const orders = [
     {
         value: 'views',
-        label: 'views',
+        label: 'Views',
     },
     {
         value: 'date',
-        label: 'date'
+        label: 'Date'
     },
 ];
 const directions = [
     {
         value: 'decreasing',
-        label: 'decreasing'
+        label: 'Descending'
     },
     {
         value: 'increasing',
-        label: 'increasing'
+        label: 'Ascending'
     }
 ]
 const RecipeCategory = () => {
@@ -52,6 +52,7 @@ const RecipeCategory = () => {
             default:
                 break;
         }
+        window.scrollTo(0,0);
     }
     useEffect(() => {
         (async () => {
@@ -61,7 +62,6 @@ const RecipeCategory = () => {
                     `?orderby=${order}&direction=${direction}&page=${page}`
                 );
                 if (status === 200) {
-                    console.log('json: ', json)
                     setRecipes(json.recipes);
                     setMaxPage(json.pages);
                 }
@@ -79,11 +79,12 @@ const RecipeCategory = () => {
                 ) : (
                     <>
                         <Typography
-                            variant="h2"
+                            variant="h1"
                             align="center"
                             color="secondary.dark"
+                            sx={{textTransform: 'capitalize'}}
                         >
-                            {cat} recipes:
+                            {cat} Recipes:
                         </Typography>
                         <Box
                             sx={{ ml: 'auto', display: 'flex', alignItems: 'center' }}

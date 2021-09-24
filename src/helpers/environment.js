@@ -4,7 +4,7 @@ switch(window.location.hostname) {
     case '127.0.0.1':
         APIURL = 'http://localhost:3000';
         break;
-    case 'jklp-click-n-cook-front.herokuapp.com':
+    case 'jklp-clickncook.herokuapp.com':
         APIURL = 'https://jklp-click-n-cook.herokuapp.com';
         break;
     default:

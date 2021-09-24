@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
   Grid,
   Modal,
-  makeStyles,
   useMediaQuery,
-  useTheme,
 } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import { useSession } from "../../context/sessionContext";
@@ -40,15 +38,11 @@ const NavBar = () => {
     openModal();
   };
 
-  //Breakpoints
-  const theme = useTheme();
 
-  console.log(theme);
 
 const isMatch = useMediaQuery('(max-width:1000px)');
 
 
-  console.log(isMatch);
 
   const renderModalComponent = (component) => {
     switch (component) {
@@ -149,30 +143,31 @@ const isMatch = useMediaQuery('(max-width:1000px)');
                 }}
               >
                 <Grid item>
-                  <IconButton
-                    //accept="image/*" id="contained-button-file" multiple type="file"
-                    onClick={() => console.log("Hi!")}
-                  >
-                    <Link to="/profile">
-                      <Avatar src="https://www.publicdomainpictures.net/pictures/90000/nahled/red-pot.jpg" />
-                    </Link>
-                  </IconButton>
-
                   {sessionToken ? (
-                    <Button
-                      color="secondary"
-                      variant="contained"
-                      sx={{
-                        border: 2,
-                        "&:hover": {
-                          color: "secondary.main",
-                          backgroundColor: "white",
-                        },
-                      }}
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </Button>
+                    <>
+                        <Button
+                        color="secondary"
+                        variant="contained"
+                        sx={{
+                            border: 2,
+                            "&:hover": {
+                            color: "secondary.main",
+                            backgroundColor: "white",
+                            },
+                        }}
+                        onClick={handleLogout}
+                        >
+                        Logout
+                        </Button>
+                        <IconButton
+                            //accept="image/*" id="contained-button-file" multiple type="file"
+                            onClick={() => console.log("Hi!")}
+                        >
+                            <Link to="/profile">
+                            <Avatar src="" />
+                            </Link>
+                        </IconButton>
+                    </>
                   ) : (
                     <>
                       <Modal

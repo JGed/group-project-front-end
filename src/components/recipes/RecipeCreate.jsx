@@ -25,23 +25,6 @@ const RecipeCreate = (props) => {
   const [photoURL, setPhotoURL] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const { sessionToken } = useSession();
-  const [messageInfo, setMessageInfo] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const [snackBarPosition, setSnackBarPosition] = React.useState({
-    open: false,
-    vertical: "top",
-    horizontal: "center",
-  });
-  const [state, setState] = React.useState({
-    open: false,
-    vertical: "top",
-    horizontal: "center",
-  });
-  const [userErrorMessage, setUserErrorMessage] = useState("");
-  const handleChange = (event) => {
-    setCategory(event.target.value);
-  };
-  const { setSessionToken } = useSession();
   const foodCategories = [
     { value: "breakfast", label: "Breakfast" },
     { value: "lunch", label: "Lunch" },
@@ -52,7 +35,9 @@ const RecipeCreate = (props) => {
   const handleClose = () => {
     props.setOpen(false);
   };
-
+  const handleChange = e => {
+    setCategory(e.target.value);
+  }
   const handleCreateRecipeClick = async (e) => {
     e.preventDefault();
     try {
@@ -69,12 +54,10 @@ const RecipeCreate = (props) => {
         sessionToken
       );
       if (status === 200) {
-        setSuccessMessage("Recipe Successfully Created");
         handleClose();
       }
 
-      if (status === 500) {
-        setUserErrorMessage("User Permission Error. Log back in.");
+      else if (status === 500) {
       }
     } catch (error) {
       console.log(error);
@@ -195,15 +178,7 @@ const RecipeCreate = (props) => {
           defaultChecked
           inputprops={{ "aria-label": "secondary checkbox" }}
         />
-        <TextField
-          sx={{ my: 1 }}
-          fullWidth
-          onChange={(e) => setPhotoURL(e.target.value)}
-          label="Enter a url for your photo"
-          id="PhotoURL"
-          color="info"
-          variant="filled"
-        />
+        <ImageUpload setPhotoURL={setPhotoURL} />
         {/* <ImageUpload /> */}
         <br />
         <div>

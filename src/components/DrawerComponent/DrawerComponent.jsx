@@ -8,7 +8,7 @@ import {
     IconButton,
     Grid,
     Box,
-    Modal
+    Modal,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/styles';
@@ -31,8 +31,8 @@ const DrawerComponent = () => {
         menuIconContainer: {
             marginLeft: 'auto',
             MuiDrawer: {
-                backgroundColor: "#f50505"
-            }
+                backgroundColor: '#f50505',
+            },
         },
     }));
     const [openDrawer, setOpenDrawer] = useState(false);
@@ -43,9 +43,9 @@ const DrawerComponent = () => {
 
     const openModal = () => setModalIsOpen(true);
     const closeModal = () => {
-        setModalIsOpen(false) ; 
+        setModalIsOpen(false);
         setModalComponent('');
-    }
+    };
     const handleClick = (name) => (e) => {
         setModalComponent(name);
         openModal();
@@ -80,14 +80,18 @@ const DrawerComponent = () => {
             >
                 <Grid>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Link to="/" onClick={closeDrawer}>
+                        <Link
+                            className="router-card"
+                            to="/"
+                            onClick={closeDrawer}
+                        >
                             <Box
                                 component="img"
                                 sx={{
                                     width: 100,
                                     maxHeight: { xs: 233, md: 167 },
                                     maxWidth: { xs: 350, md: 250 },
-                                    backgroundColor: "#C20000",
+                                    backgroundColor: '#C20000',
                                 }}
                                 alt="Clickin the Chicken"
                                 src={Mascot}
@@ -99,6 +103,7 @@ const DrawerComponent = () => {
                     <ListItem divider button>
                         <ListItemIcon>
                             <Link
+                                className="router-link"
                                 to="/category/breakfast"
                                 onClick={closeDrawer}
                             >
@@ -109,7 +114,11 @@ const DrawerComponent = () => {
 
                     <ListItem divider button>
                         <ListItemIcon>
-                            <Link to="/category/lunch" onClick={closeDrawer}>
+                            <Link
+                                className="router-link"
+                                to="/category/lunch"
+                                onClick={closeDrawer}
+                            >
                                 <ListItemText>Lunch</ListItemText>
                             </Link>
                         </ListItemIcon>
@@ -117,7 +126,11 @@ const DrawerComponent = () => {
 
                     <ListItem divider button>
                         <ListItemIcon>
-                            <Link to="/category/dinner" onClick={closeDrawer}>
+                            <Link
+                                className="router-link"
+                                to="/category/dinner"
+                                onClick={closeDrawer}
+                            >
                                 <ListItemText>Dinner</ListItemText>
                             </Link>
                         </ListItemIcon>
@@ -125,44 +138,80 @@ const DrawerComponent = () => {
 
                     <ListItem divider button>
                         <ListItemIcon>
-                            <Link to="/category/dessert" onClick={closeDrawer}>
+                            <Link
+                                className="router-link"
+                                to="/category/dessert"
+                                onClick={closeDrawer}
+                            >
                                 <ListItemText>Dessert</ListItemText>
                             </Link>
                         </ListItemIcon>
                     </ListItem>
                     {sessionToken ? (
-                        <ListItem divider button onClick={handleLogout}>
-                            <ListItemIcon>
-                                <ListItemText>Logout</ListItemText>
-                            </ListItemIcon>
-                        </ListItem>
+                        <>
+                            <ListItem divider button>
+                                <ListItemIcon>
+                                    <Link
+                                        className="router-button"
+                                        to="/profile"
+                                        onClick={closeDrawer}
+                                    >
+                                        <ListItemText
+                                            sx={{ color: 'tertiary.light' }}
+                                        >
+                                            Profile
+                                        </ListItemText>
+                                    </Link>
+                                </ListItemIcon>
+                            </ListItem>
+                            <ListItem divider button onClick={handleLogout}>
+                                <ListItemIcon>
+                                    <ListItemText
+                                        sx={{ color: 'secondary.dark' }}
+                                    >
+                                        Logout
+                                    </ListItemText>
+                                </ListItemIcon>
+                            </ListItem>
+                        </>
                     ) : (
                         <>
-                        <ListItem divider button onClick={handleClick('Register')}>
-                            <ListItemText>Register</ListItemText>
-                        </ListItem>
-                        <ListItem divider button onClick={handleClick('Login')}>
-                            <ListItemText>Login</ListItemText>
-                        </ListItem>
-                        <Modal
-                            open={modalIsOpen}
-                            aria-labelledby="modal-title"
-                            aria-describedby="modal-description"
-                        >
-                            {
-                                <div>
-                                    {renderModalComponent(
-                                        modalComponent
-                                    )}
-                                </div>
-                            }
-                        </Modal>
+                            <ListItem
+                                divider
+                                button
+                                onClick={handleClick('Register')}
+                            >
+                                <ListItemText sx={{ color: 'secondary.dark' }}>
+                                    Register
+                                </ListItemText>
+                            </ListItem>
+                            <ListItem
+                                divider
+                                button
+                                onClick={handleClick('Login')}
+                            >
+                                <ListItemText sx={{ color: 'secondary.dark' }}>
+                                    Login
+                                </ListItemText>
+                            </ListItem>
+                            <Modal
+                                open={modalIsOpen}
+                                aria-labelledby="modal-title"
+                                aria-describedby="modal-description"
+                            >
+                                {
+                                    <div>
+                                        {renderModalComponent(modalComponent)}
+                                    </div>
+                                }
+                            </Modal>
                         </>
                     )}
                 </List>
             </Drawer>
             <IconButton
                 className={classes.menuIconContainer}
+                sx={{color: 'white'}}
                 onClick={() => setOpenDrawer(!openDrawer)}
             >
                 <MenuIcon />
