@@ -179,7 +179,6 @@ const RecipeCreate = (props) => {
           inputprops={{ "aria-label": "secondary checkbox" }}
         />
         <ImageUpload setPhotoURL={setPhotoURL} />
-        {/* <ImageUpload /> */}
         <br />
         <div>
           <Grid container spacing={2} sx={{ mt: 1 }}>
