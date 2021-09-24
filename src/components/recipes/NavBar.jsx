@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Box, Button, Grid, Modal } from '@material-ui/core';
+import React, { useState, useEffect} from 'react';
+import { Box, Button, Grid, Modal, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useSession } from '../../context/sessionContext';
 import Login from '../auth/Login';
 import Register from '../auth/Register';
 import { Link, useHistory } from 'react-router-dom';
-import IconButton from '@material-ui/core/IconButton';
+import IconButton    from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
 import Mascot from '../../assets/images/clickncook_logomark.svg';
+import DrawerComponent from '../DrawerComponent/DrawerComponent';
 
 const NavBar = () => {
     const { sessionToken, setSessionToken } = useSession();
@@ -30,6 +31,15 @@ const NavBar = () => {
         setModalComponent(name);
         openModal();
     };
+
+//Breakpoints
+const theme = useTheme();
+
+console.log(theme);
+
+const isMatch = useMediaQuery('(max-width:1000px)');
+
+console.log(isMatch)
 
     const renderModalComponent = (component) => {
         switch (component) {
@@ -59,7 +69,12 @@ const NavBar = () => {
                     minHeight: 100,
                 }}
             >
-                <Grid container spacing={2}>
+
+                {isMatch ? (
+                <DrawerComponent handleClick={handleClick}/>
+               ) : (
+<>
+<Grid container spacing={2}>
                     <Grid item container xs={6}>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Link to="/">
@@ -203,13 +218,23 @@ const NavBar = () => {
                                     >
                                         Register
                                     </Button>
+                                  
                                 </>
                             )}
+                             
                         </Grid>
                     </Grid>
                 </Grid>
+</>
+                    
+            
+                
+                )}
+                
+                
             </Toolbar>
         </Box>
+      
     );
 };
 
