@@ -1,12 +1,13 @@
 import APIURL from '../../helpers/environment';
 import { useState } from 'react';
-import { Input, Button } from '@material-ui/core';
+import { Input, Button, Typography } from '@material-ui/core';
 import { useSession } from '../../context/sessionContext';
 
 const imageUploadURL = 'https://api.cloudinary.com/v1_1/pripley/image/upload';
 
 const ImageUpload = ({setPhotoURL}) => {
     const { sessionToken } = useSession();
+    const [success, setSucess] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,6 +43,7 @@ const ImageUpload = ({setPhotoURL}) => {
 
             console.log(results);
             setPhotoURL(results.secure_url);
+            setSucess(true);
         } catch (err) {
             console.log(err);
         }
@@ -66,6 +68,7 @@ const ImageUpload = ({setPhotoURL}) => {
                 >
                     Upload Image
                 </Button>
+                {success && <Typography color='tertiary.light'>Photo Uploaded</Typography>}
             </label>
         </>
     );
