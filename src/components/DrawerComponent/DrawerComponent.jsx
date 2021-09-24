@@ -31,8 +31,8 @@ const DrawerComponent = () => {
         menuIconContainer: {
             marginLeft: 'auto',
             MuiDrawer: {
-                backgroundColor: "#f50505"
-            }
+                backgroundColor: '#f50505',
+            },
         },
     }));
     const [openDrawer, setOpenDrawer] = useState(false);
@@ -88,9 +88,10 @@ const DrawerComponent = () => {
                             <Box
                                 component="img"
                                 sx={{
-                                    width: 50,
+                                    width: 100,
                                     maxHeight: { xs: 233, md: 167 },
                                     maxWidth: { xs: 350, md: 250 },
+                                    backgroundColor: '#C20000',
                                 }}
                                 alt="Clickin the Chicken"
                                 src={Mascot}
@@ -125,7 +126,11 @@ const DrawerComponent = () => {
 
                     <ListItem divider button>
                         <ListItemIcon>
-                            <Link className='router-link' to="/category/dinner" onClick={closeDrawer}>
+                            <Link
+                                className="router-link"
+                                to="/category/dinner"
+                                onClick={closeDrawer}
+                            >
                                 <ListItemText>Dinner</ListItemText>
                             </Link>
                         </ListItemIcon>
@@ -133,17 +138,42 @@ const DrawerComponent = () => {
 
                     <ListItem divider button>
                         <ListItemIcon>
-                            <Link className='router-link' to="/category/dessert" onClick={closeDrawer}>
+                            <Link
+                                className="router-link"
+                                to="/category/dessert"
+                                onClick={closeDrawer}
+                            >
                                 <ListItemText>Dessert</ListItemText>
                             </Link>
                         </ListItemIcon>
                     </ListItem>
                     {sessionToken ? (
-                        <ListItem divider button onClick={handleLogout}>
-                            <ListItemIcon>
-                                <ListItemText sx={{ color: 'secondary.dark' }}>Logout</ListItemText>
-                            </ListItemIcon>
-                        </ListItem>
+                        <>
+                            <ListItem divider button>
+                                <ListItemIcon>
+                                    <Link
+                                        className="router-button"
+                                        to="/profile"
+                                        onClick={closeDrawer}
+                                    >
+                                        <ListItemText
+                                            sx={{ color: 'tertiary.light' }}
+                                        >
+                                            Profile
+                                        </ListItemText>
+                                    </Link>
+                                </ListItemIcon>
+                            </ListItem>
+                            <ListItem divider button onClick={handleLogout}>
+                                <ListItemIcon>
+                                    <ListItemText
+                                        sx={{ color: 'secondary.dark' }}
+                                    >
+                                        Logout
+                                    </ListItemText>
+                                </ListItemIcon>
+                            </ListItem>
+                        </>
                     ) : (
                         <>
                             <ListItem
@@ -151,7 +181,9 @@ const DrawerComponent = () => {
                                 button
                                 onClick={handleClick('Register')}
                             >
-                                <ListItemText sx={{ color: 'secondary.dark' }}>Register</ListItemText>
+                                <ListItemText sx={{ color: 'secondary.dark' }}>
+                                    Register
+                                </ListItemText>
                             </ListItem>
                             <ListItem
                                 divider
@@ -179,6 +211,7 @@ const DrawerComponent = () => {
             </Drawer>
             <IconButton
                 className={classes.menuIconContainer}
+                sx={{color: 'white'}}
                 onClick={() => setOpenDrawer(!openDrawer)}
             >
                 <MenuIcon />

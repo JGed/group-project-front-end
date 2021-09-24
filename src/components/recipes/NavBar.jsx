@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
   Grid,
   Modal,
-  makeStyles,
   useMediaQuery,
-  useTheme,
 } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import { useSession } from "../../context/sessionContext";
@@ -40,14 +38,11 @@ const NavBar = () => {
     openModal();
   };
 
-  //Breakpoints
-  const theme = useTheme();
 
-  console.log(theme);
 
-  const isMatch = useMediaQuery('(max-width: 1000px)');
+const isMatch = useMediaQuery('(max-width:1000px)');
 
-  console.log(isMatch);
+
 
   const renderModalComponent = (component) => {
     switch (component) {
