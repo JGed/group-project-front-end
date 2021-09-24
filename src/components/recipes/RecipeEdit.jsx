@@ -8,7 +8,10 @@ import {
   Box,
   FormControlLabel,
   MenuItem,
+  IconButton,
+  Grid,
 } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import { useSession } from "../../context/sessionContext";
 import updateMyRecipe from "../../requests/updateMyRecipe";
 
@@ -92,7 +95,7 @@ const RecipeEdit = (props) => {
             maxWidth: "100%",
             maxHeight: "100%",
             bgcolor: "background.paper",
-            border: "2px solid #000",
+            borderRadius: 5,
             boxShadow: 24,
             p: 4,
           }}
@@ -101,24 +104,38 @@ const RecipeEdit = (props) => {
             component="form"
             sx={{ display: "flex", flexWrap: "wrap" }}
           ></Box>
-          <h2>New Recipe</h2>
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: "absolute",
+              right: 8,
+              top: 8,
+              color: "info.main",
+            }}
+          >
+            <CloseIcon />
+          </IconButton>          
+            <h2>Update Recipe</h2>          
           <TextField
-            sx={{ m: 1, width: "25ch" }}
+            sx={{ my: 1, mr: 2, width: "25ch" }}
             value={name}
             onChange={(e) => setName(e.target.value)}
             variant="filled"
             label="Enter name of recipe"
+            color="info"
             required
           ></TextField>
           <TextField
-            sx={{ m: 1, width: "25ch" }}
+            sx={{ my: 1, width: "25ch" }}
             select
             label="Select"
             defaultValue={category}
             value={category}
             onChange={handleChange}
             helperText="Please select your category"
-            variant="outlined"
+            variant="filled"
+            color="info"
           >
             {foodCategories.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -128,21 +145,24 @@ const RecipeEdit = (props) => {
           </TextField>
           <TextField
             fullWidth
-            sx={{ m: 1 }}
+            sx={{ my: 1 }}
             value={directions}
             onChange={(e) => setDirections(e.target.value)}
             variant="filled"
             label="Enter directions"
             multiline
             rows={10}
+            color="info"
             required
           ></TextField>
           <TextField
-            sx={{ m: 1, width: "25ch" }}
+            sx={{ my: 1, mr: 2, width: "25ch" }}
             value={cookTime}
             onChange={(e) => setCookTime(e.target.value)}
             label="Cook Time"
             id="Cook Time"
+            color="info"
+            variant="filled"
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">Mins</InputAdornment>
@@ -150,12 +170,13 @@ const RecipeEdit = (props) => {
             }}
           />
           <TextField
-            sx={{ m: 1, width: "25ch" }}
+            sx={{ my: 1, width: "25ch" }}
             value={servings}
             onChange={(e) => setServings(e.target.value)}
             label="Serving Size"
             id="ServingSize"
             variant="filled"
+            color="info"
           />
           <FormControlLabel
             control={
@@ -163,33 +184,51 @@ const RecipeEdit = (props) => {
                 value={isPublic}
                 onChange={(e) => setIsPublic(e.target.checked)}
                 checked={isPublic}
+                color="secondary"
               />
             }
             label="Make recipe public?"
-            labelPlacement="bottom"
-            sx={{ display: "flex", alignItems: "flex-center" }}
+            sx={{ display: "flex", alignItems: "flex-center", m: 1 }}
             defaultChecked
             inputProps={{ "aria-label": "secondary checkbox" }}
           />
+          <TextField
+            sx={{ my: 1 }}
+            value={photoURL}
+            fullWidth
+            onChange={(e) => setPhotoURL(e.target.value)}
+            label="Enter a url for your photo"
+            id="PhotoURL"
+            color="info"
+            variant="filled"
+          />
           <br />
           <div>
-            <Button
-              variant="contained"
-              fullWidth
-              type="submit"
-              onClick={handleUpdateRecipe}
-            >
-              Update Recipe
-            </Button>
-
-            <Button
-              variant="contained"
-              fullWidth
-              type="button"
-              onClick={handleClose}
-            >
-              Close
-            </Button>
+            <Grid container spacing={2} sx={{ mt: 1 }}>
+              <Grid item xs={6}>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  color="secondary"
+                  type="submit"
+                  onClick={handleUpdateRecipe}
+                >
+                  Update Recipe
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  color="secondary"
+                  variant="outlined"
+                  type="button"
+                  onClick={handleClose}
+                >
+                  Cancel
+                </Button>
+              </Grid>
+            </Grid>
           </div>
         </Box>
       )}
