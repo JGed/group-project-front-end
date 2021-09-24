@@ -39,7 +39,6 @@ const RecipeCreate = (props) => {
     setCategory(e.target.value);
   }
   const handleCreateRecipeClick = async (e) => {
-    e.preventDefault();
     try {
       const { status, json } = await createMyRecipe(
         {
@@ -53,14 +52,17 @@ const RecipeCreate = (props) => {
         },
         sessionToken
       );
+      console.log(status);
+      console.log(json);
       if (status === 200) {
         handleClose();
       }
 
       else if (status === 500) {
+        e.preventDefault();
       }
     } catch (error) {
-      console.log(error);
+      e.preventDefault();
     }
   };
   return (
@@ -71,6 +73,8 @@ const RecipeCreate = (props) => {
       aria-describedby="simple-modal-description"
     >
       <Box
+        component="form"
+        onSubmit={handleCreateRecipeClick}
         sx={{
           position: "absolute",
           top: "50%",
@@ -86,13 +90,9 @@ const RecipeCreate = (props) => {
           p: 4,
         }}
       >
-        <Box
-          component="form"
-          onSubmit={handleCreateRecipeClick}
-          sx={{ display: "flex", flexWrap: "wrap" }}
-        ></Box>
         <IconButton
           aria-label="close"
+          type='button'
           onClick={handleClose}
           sx={{
             position: "absolute",
@@ -189,7 +189,6 @@ const RecipeCreate = (props) => {
                 color="secondary"
                 variant="contained"
                 type="submit"
-                onClick={handleCreateRecipeClick}
               >
                 Post My Recipe
               </Button>
@@ -200,6 +199,7 @@ const RecipeCreate = (props) => {
                 id="modal-description"
                 color="secondary"
                 variant="outlined"
+                type='button'
                 onClick={handleClose}
               >
                 Cancel
