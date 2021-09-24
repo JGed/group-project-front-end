@@ -9,21 +9,21 @@ import MainContentContainer from '../common/MainContentContainer';
 const orders = [
     {
         value: 'views',
-        label: 'views',
+        label: 'Views',
     },
     {
         value: 'date',
-        label: 'date'
+        label: 'Date'
     },
 ];
 const directions = [
     {
         value: 'decreasing',
-        label: 'decreasing'
+        label: 'Descending'
     },
     {
         value: 'increasing',
-        label: 'increasing'
+        label: 'Ascending'
     }
 ]
 const RecipeCategory = () => {
@@ -83,7 +83,7 @@ const RecipeCategory = () => {
                             align="center"
                             color="secondary.dark"
                         >
-                            {cat} recipes:
+                            {cat[0].toUpperCase() + cat.slice(1)} Recipes:
                         </Typography>
                         <Box
                             sx={{ ml: 'auto', display: 'flex', alignItems: 'center' }}
