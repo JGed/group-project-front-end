@@ -25,23 +25,6 @@ const RecipeCreate = (props) => {
   const [photoURL, setPhotoURL] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const { sessionToken } = useSession();
-  const [messageInfo, setMessageInfo] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const [snackBarPosition, setSnackBarPosition] = React.useState({
-    open: false,
-    vertical: "top",
-    horizontal: "center",
-  });
-  const [state, setState] = React.useState({
-    open: false,
-    vertical: "top",
-    horizontal: "center",
-  });
-  const [userErrorMessage, setUserErrorMessage] = useState("");
-  const handleChange = (event) => {
-    setCategory(event.target.value);
-  };
-  const { setSessionToken } = useSession();
   const foodCategories = [
     { value: "breakfast", label: "Breakfast" },
     { value: "lunch", label: "Lunch" },
@@ -52,9 +35,10 @@ const RecipeCreate = (props) => {
   const handleClose = () => {
     props.setOpen(false);
   };
-
+  const handleChange = e => {
+    setCategory(e.target.value);
+  }
   const handleCreateRecipeClick = async (e) => {
-    e.preventDefault();
     try {
       const { status, json } = await createMyRecipe(
         {
@@ -69,15 +53,14 @@ const RecipeCreate = (props) => {
         sessionToken
       );
       if (status === 200) {
-        setSuccessMessage("Recipe Successfully Created");
         handleClose();
       }
 
-      if (status === 500) {
-        setUserErrorMessage("User Permission Error. Log back in.");
+      else if (status === 500) {
+        e.preventDefault();
       }
     } catch (error) {
-      console.log(error);
+      e.preventDefault();
     }
   };
   return (
@@ -88,6 +71,8 @@ const RecipeCreate = (props) => {
       aria-describedby="simple-modal-description"
     >
       <Box
+        component="form"
+        onSubmit={handleCreateRecipeClick}
         sx={{
           position: "absolute",
           top: "50%",
@@ -103,13 +88,9 @@ const RecipeCreate = (props) => {
           p: 4,
         }}
       >
-        <Box
-          component="form"
-          onSubmit={handleCreateRecipeClick}
-          sx={{ display: "flex", flexWrap: "wrap" }}
-        ></Box>
         <IconButton
           aria-label="close"
+          type='button'
           onClick={handleClose}
           sx={{
             position: "absolute",
@@ -195,16 +176,7 @@ const RecipeCreate = (props) => {
           defaultChecked
           inputprops={{ "aria-label": "secondary checkbox" }}
         />
-        <TextField
-          sx={{ my: 1 }}
-          fullWidth
-          onChange={(e) => setPhotoURL(e.target.value)}
-          label="Enter a url for your photo"
-          id="PhotoURL"
-          color="info"
-          variant="filled"
-        />
-        {/* <ImageUpload /> */}
+        <ImageUpload setPhotoURL={setPhotoURL} />
         <br />
         <div>
           <Grid container spacing={2} sx={{ mt: 1 }}>
@@ -215,7 +187,6 @@ const RecipeCreate = (props) => {
                 color="secondary"
                 variant="contained"
                 type="submit"
-                onClick={handleCreateRecipeClick}
               >
                 Post My Recipe
               </Button>
@@ -226,6 +197,7 @@ const RecipeCreate = (props) => {
                 id="modal-description"
                 color="secondary"
                 variant="outlined"
+                type='button'
                 onClick={handleClose}
               >
                 Cancel

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { TextField, Button, Container } from "@material-ui/core";
 import SendIcon from "@mui/icons-material/Send";
-
+import MainContentContainer from '../common/MainContentContainer';
 const ContactUs = () => {
   const [loading, setLoading] = React.useState(false);
   function handleClick() {
     setLoading(true);
   }
   return (
-    <container>
+    <MainContentContainer noPadding>
       <Container>
         <h2>We appreciate your feedback and comments!</h2>
         <p>
@@ -53,7 +53,7 @@ const ContactUs = () => {
           </Button>
         </Container>
       </form>
-    </container>
+    </MainContentContainer>
   );
 };
 

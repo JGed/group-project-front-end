@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "../../context/sessionContext";
-import { Grid, Typography, Box } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import fetchRecipeById from "../../requests/fetchRecipeById";
 import { useParams, Link } from "react-router-dom";
 import MainContentContainer from "../common/MainContentContainer";
@@ -43,7 +43,7 @@ const RecipeDetails = () => {
   }, [id, sessionToken]);
 
   return (
-    <MainContentContainer>
+    <MainContentContainer noPadding>
       {error ? (
         <Grid container sx={{ textAlign: "center" }}>
           <Grid item xs={12} sx={{ pt: 5 }}>
@@ -58,7 +58,6 @@ const RecipeDetails = () => {
               backgroundColor: "neutral.light",
               pb: 5,              
               display: "flex",
-              justifyContent: "center",
               flex: "1 1 auto",
             }}
           >
@@ -69,9 +68,9 @@ const RecipeDetails = () => {
               sx={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "flex-start",
+                alignItems: "center",
                 py: 5,
-                px: 1,
+                px: 3,
               }}
             >
               <img

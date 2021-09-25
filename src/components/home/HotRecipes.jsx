@@ -25,7 +25,7 @@ const HotRecipes = (props) => {
       <Grid container spacing={4} sx={{ mt: 0 }}>
         {recipes.map((recipe) => {
           return (
-            <Grid item xs={12} sm={6} md={3} sx={{ mb: { md: 10 } }}>
+            <Grid key={recipe.id} item xs={12} sm={6} md={3} sx={{ mb: { md: 10 } }}>
               <Card>
                 <CardActionArea>
                   <Link to={`/recipe/${recipe.id}`}>

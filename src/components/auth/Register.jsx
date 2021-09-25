@@ -14,7 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import userRegister from '../../requests/userRegister';
 import { useSession } from '../../context/sessionContext';
 import { BoxContainerSx, BoxFormSx } from './componentSx';
-import  { useTheme } from '@material-ui/core/styles'
+import { useTheme } from '@material-ui/core/styles';
 import { useMediaQuery } from '@material-ui/core';
 import PasswordRequirements from './PasswordRequirements';
 export const hasCapital = (str) => {
@@ -55,6 +55,7 @@ const Register = ({ closeModal, setModalComponent }) => {
     };
 
     const handleRegister = async (e) => {
+        e.preventDefault();
         try {
             const { status, json } = await userRegister({
                 email: email,
@@ -80,20 +81,12 @@ const Register = ({ closeModal, setModalComponent }) => {
                 setEmailError(json.emailMessage);
                 setUsernameError(json.usernameMessage);
             }
-        } catch (error) {
-
-        }
+        } catch (error) {}
     };
 
     return (
-        <Box
-            sx={BoxContainerSx}>
-            <Box
-                component="form"
-                sx={BoxFormSx}
-                noValidate
-                autocomplete="off"
-            >
+        <Box sx={BoxContainerSx}>
+            <Box component="form" onSubmit={handleRegister} sx={BoxFormSx} noValidate autocomplete="off">
                 <DialogTitle id="modal-title" variant="h2">
                     Register
                     <IconButton
@@ -115,6 +108,7 @@ const Register = ({ closeModal, setModalComponent }) => {
                         <div>
                             <TextField
                                 label="Email Address"
+                                type='email'
                                 value={email}
                                 color="info"
                                 onFocus={() => setPasswordIsFocused(false)}
@@ -148,12 +142,12 @@ const Register = ({ closeModal, setModalComponent }) => {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             <Popper
-                                open={
-                                    passwordIsFocused
-                                }
+                                open={passwordIsFocused}
                                 anchorEl={inputRef.current}
                                 placement={isSmallScreen ? 'top' : 'right'}
-                                modifiers={[{name: 'preventOverflow', enabled: false}]}
+                                modifiers={[
+                                    { name: 'preventOverflow', enabled: false },
+                                ]}
                                 disablePortal
                             >
                                 <PasswordRequirements password={password} />
@@ -163,6 +157,7 @@ const Register = ({ closeModal, setModalComponent }) => {
                             <Button
                                 variant="contained"
                                 color="secondary"
+                                type='submit'
                                 disabled={isDisabled}
                                 sx={{ width: '40ch' }}
                                 onFocus={() => setPasswordIsFocused(false)}
@@ -176,6 +171,7 @@ const Register = ({ closeModal, setModalComponent }) => {
                                 Already have an account?{' '}
                                 <Button
                                     color="secondary"
+                                    type='button'
                                     onFocus={() => setPasswordIsFocused(false)}
                                     onClick={() => setModalComponent('Login')}
                                 >
