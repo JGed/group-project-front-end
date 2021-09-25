@@ -79,11 +79,12 @@ const RecipeCategory = () => {
                 ) : (
                     <>
                         <Typography
-                            variant="h2"
-                            align="center"
+                            variant="h1"
+                            align="left"
                             color="secondary.dark"
+                            sx={{textTransform: 'capitalize'}}
                         >
-                            {cat} recipes:
+                            {cat} 
                         </Typography>
                         <Box
                             sx={{ ml: 'auto', display: 'flex', alignItems: 'center' }}

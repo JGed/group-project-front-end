@@ -67,7 +67,7 @@ const RecipeIndex = (props) => {
   return (
     <>
       <MainContentContainer>
-        <Container className="homeMain" sx={{ pb: 2 }}>
+        <Container className="homeMain" sx={{ pb: 4 }}>
           <Typography variant="h2" color="textPrimary" sx={{ mt: 5 }}>
             {greeting()} What are we cooking today?{" "}
           </Typography>
@@ -80,8 +80,7 @@ const RecipeIndex = (props) => {
             Add a recipe
           </Button>
           <RecipeCreate open={open} setOpen={setOpen} />
-        </Container>
-        <Divider flexItem />
+        </Container>        
         <RecipeCardArea>
           {recipes.map((recipe) => (
             <RecipeCardContainer key={recipe.id}>

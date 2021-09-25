@@ -20,22 +20,22 @@ const Footer = (props) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        flexDirection: "column",
+        flexDirection: "column",        
       }}
     >
-      <Grid container spacing={2} maxWidth="xl" alignItems="center">
-        <Grid item xs={12}>
-          <Box>
-            <Typography>© 2021 ClickNCook, LLC</Typography>
-            <Stack
-              direction="row-reverse"
-              divider={<Divider orientation="vertical" flexItem />}
-              spacing={2}
-            >
-              <Link to="/aboutus">About Us</Link>
-              <Link to="/contactus">Contact Us</Link>
-            </Stack>
-          </Box>
+      <Grid container spacing={2} maxWidth="xl" alignItems="center" sx={{ px: 2 }}>
+        <Grid item xs={6}>
+          <Typography>© 2021 ClickNCook, LLC</Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Stack
+            direction="row-reverse"
+            divider={<Divider orientation="vertical" flexItem />}
+            spacing={2}
+          >
+            <Link to="/aboutus">About Us</Link>
+            <Link to="/contactus">Contact Us</Link>
+          </Stack>
         </Grid>
       </Grid>
     </Container>

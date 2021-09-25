@@ -70,21 +70,12 @@ const Profile = () => {
       <Typography variant="h2" color="textPrimary" sx={{ mt: 5 }}>
         {greeting()} What are we cooking today?{" "}
       </Typography>
-      <Box sx={{ display: "flex", justifyContent: "center", pb: 2  }}>
+      <Box sx={{ display: "flex", justifyContent: "center", pb: 4  }}>
         <Button variant="contained" color="secondary" onClick={handleAddClick}>
           Add A Recipe
         </Button>
         <RecipeCreate open={createIsOpen} setOpen={setCreateIsOpen} />
-      </Box>
-      <Divider flexItem />
-      <Typography
-        variant="h3"
-        color="secondary.dark"
-        align="center"
-        sx={{ pt: 2 }}
-      >
-        Your Recipes:
-      </Typography>
+      </Box>    
       <RecipeCardArea>
         {recipes.map((recipe) => (
           <RecipeCardContainer key={recipe.id}>
