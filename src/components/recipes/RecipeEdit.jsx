@@ -90,8 +90,6 @@ const RecipeEdit = (props) => {
         >
             {props.open && (
                 <Box
-                    component="form"
-                    onSubmit={handleUpdateRecipe}
                     sx={{
                         position: 'absolute',
                         top: '50%',

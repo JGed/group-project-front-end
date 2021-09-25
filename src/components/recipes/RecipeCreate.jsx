@@ -71,8 +71,6 @@ const RecipeCreate = (props) => {
       aria-describedby="simple-modal-description"
     >
       <Box
-        component="form"
-        onSubmit={handleCreateRecipeClick}
         sx={{
           position: "absolute",
           top: "50%",
@@ -186,7 +184,7 @@ const RecipeCreate = (props) => {
                 id="modal-description"
                 color="secondary"
                 variant="contained"
-                type="submit"
+                onClick={handleCreateRecipeClick}
               >
                 Post My Recipe
               </Button>
