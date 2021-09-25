@@ -211,6 +211,7 @@ const RecipeEdit = (props) => {
                                     fullWidth
                                     color="secondary"
                                     type="submit"
+                                    onClick={handleUpdateRecipe}
                                 >
                                     Update Recipe
                                 </Button>
